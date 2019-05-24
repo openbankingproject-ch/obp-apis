@@ -4200,7 +4200,7 @@ components:
           description: A collection of strings as challenge data
         imageLink:
           type: string
-          format: url
+#          format: url
           description: A link where the ASPSP will provides the challenge image for the TPP.
         otpMaxLength:
           type: integer
@@ -10271,7 +10271,7 @@ components:
       example: "99391c7e-ad88-49ec-a2ad-99ddcb1f7721"
       schema:
         type: string
-        format: uuid
+#        format: uuid
 
 
     Digest:
@@ -10612,7 +10612,7 @@ components:
         In case of an installation identification this ID need to be unaltered until removal from device.
       schema:
         type: string
-        format: uuid
+#        format: uuid
       required: false
       example: "99435c7e-ad88-49ec-a2ad-99ddcb1f5555"
 
@@ -10742,7 +10742,7 @@ components:
       example: "99391c7e-ad88-49ec-a2ad-99ddcb1f7721"
       schema:
         type: string
-        format: uuid
+#        format: uuid
 
     ASPSP-SCA-Approach:
       description: |
@@ -10766,7 +10766,7 @@ components:
         Location of the created resource.
       schema:
         type: string
-        format: url
+#        format: url
       required: false
 
   responses:
