@@ -115,8 +115,8 @@ paths:
             - ***instant-sepa-credit-transfers***
             - ***target-2-payments***
             - ***cross-border-credit-transfers***
-            - ***domestic-credit-transfers-ch***
-            - ***domestic-credit-transfers-isr-ch***
+            - ***domestic-swiss-credit-transfers***
+            - ***domestic-swiss-credit-transfers-isr***
           - Payment products with payment information in *pain.001* XML format:
             - ***pain.001-sepa-credit-transfers***
             - ***pain.001-instant-sepa-credit-transfers***
@@ -10675,6 +10675,10 @@ components:
               
               
           examples:
+            "Swiss ESR: 'payments' - 'domestic-swiss-credit-transfers-isr'":
+              $ref: "#/components/examples/paymentInitiationSwissIsrBody_payments_json"
+            "Swiss ES: 'payments' - 'domestic-swiss-credit-transfers'":
+              $ref: "#/components/examples/paymentInitiationSwissBody_payments_json"
             "Example 1: 'payments' - 'sepa-credit-transfers'":
               $ref: "#/components/examples/paymentInitiationSctBody_payments_json"
             "Example 2: 'periodic-payments' - 'sepa-credit-transfers'":
@@ -12188,6 +12192,25 @@ components:
           "remittanceInformationUnstructured": "Ref Number Merchant"
         }
 
+    paymentInitiationSwissIsrBody_payments_json:
+      value:
+        {    
+          "instructedAmount": {"currency": "CHF", "amount": "123.50"},
+          "debtorAccount": {"iban": "CH40100100103307118608"},
+          "creditorName": "Merchant123",
+          "creditorAccount": {"iban": "CH02100100109307118603"},
+          "remittanceInformationStructured": "Ref Number Merchant"
+        }
+
+    paymentInitiationSwissBody_payments_json:
+      value:
+        {    
+          "instructedAmount": {"currency": "CHF", "amount": "123.50"},
+          "debtorAccount": {"iban": "CH40100100103307118608"},
+          "creditorName": "Merchant123",
+          "creditorAccount": {"iban": "CH02100100109307118603"},
+          "remittanceInformationUnstructured": "Ref Number Merchant"
+        }
 
     paymentInitiationSctBody_periodic-payments_json:
       value:

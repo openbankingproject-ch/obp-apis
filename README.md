@@ -5,7 +5,7 @@
 Dieses Repository enthält eine helvetisierte Version der Banking API der
 [Berlin Group](https://www.berlin-group.org/). Die API
 liegt als [OpenAPI 3.0](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md)
-Version vor:
+Spezifikation vor:
 
 * Die API als HTML-Dokumenent: [/docs](https://openbankingproject-ch.github.io/obp-apis)
 * Die API als YAML-Datei: [/swiss-ng-api.yaml](https://github.com/openbankingproject-ch/obp-apis/raw/master/swiss-ng-api.yaml)
