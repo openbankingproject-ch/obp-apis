@@ -40,9 +40,3 @@ Ergänzungen:
 | remittanceInformation   Structured        | Remittance            | **mandatory (ESR-Ref)** |
 | requestedExecution   Date                 | ISODate               | **mandatory**           |
 | requestedExecution   Time                 | ISODateTime           | n.a.                    |
-
-[//]: #  (## Quellen)
-[//]: #  ()
-[//]: #  (tbd:)
-[//]: #  (- SIX-Payment Standard, ggf. Corporate API)
-[//]: #  (- SFTI Typisierung (ISR u.ä.)
