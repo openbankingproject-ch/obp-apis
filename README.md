@@ -1,6 +1,16 @@
 # OpenBankingPropject.ch
 
-## Swiss Domestic Definition
+## Schweizer Ausgabe der Berlin Group NextGen API
+
+Dieses Repository enthält eine helvetisierte Version der Banking API der
+[Berlin Group](https://www.berlin-group.org/). Die API
+liegt als [OpenAPI 3.0](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md)
+Version vor:
+
+* Die API als HTML-Dokumenent: [/docs](https://openbankingproject-ch.github.io/obp-apis)
+* Die API als YAML-Datei: [/swiss-ng-api.yaml](https://github.com/openbankingproject-ch/obp-apis/raw/master/swiss-ng-api.yaml)
+
+## Anhang 1 - Swiss Domestic Definition
 
 Die Schweiz spezifischen Definition umfassen die ESR-Zahlungen, sowie falls nötig weiter
 Ergänzungen:
