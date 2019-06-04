@@ -11022,7 +11022,7 @@ components:
               $ref: "#/components/examples/transactionsExample2_Download_json"
             "Example 3":
               $ref: "#/components/examples/transactionsExample3_MulticurrencyAccount_json"
-            "Example Swiss":
+            "Swiss Example":
               $ref: "#/components/examples/transactionsExampleCH_MulticurrencyAccount_json"
         
         application/xml:
@@ -12989,6 +12989,22 @@ components:
          "transactions":
            {"booked": 
              [{
+               "transactionId": "1234571",
+               "debtorName": "Glückskette",
+               "debtorAccount": {"iban": "CH9109000000400018554"},
+               "transactionAmount": {"currency": "CHF", "amount": "123.45"},
+               "bookingDate": "2019-05-29",
+               "valueDate": "2019-05-30",
+               "remittanceInformationStructured": "12 34567 89012 34567 78901 2"
+              },{
+               "transactionId": "1234572",
+               "debtorName": "Stiftung Denk an mich",
+               "debtorAccount": {"iban": "CH8209000000100150006"},
+               "transactionAmount": {"currency": "CHF", "amount": "234.55"},
+               "bookingDate": "2019-05-29",
+               "valueDate": "2019-05-30",
+               "remittanceInformationStructured": "12 34567 89012 34567 78901 2"
+              },{
                "transactionId": "1234567",
                "creditorName": "John Miles",
                "creditorAccount": {"iban": "DE67100100101306118605"},
@@ -13012,22 +13028,6 @@ components:
                "bookingDate": "2017-10-25",
                "valueDate": "2017-10-26", 
                "remittanceInformationUnstructured": "Example 3"
-              },{
-               "transactionId": "1234571",
-               "debtorName": "Glückskette",
-               "debtorAccount": {"iban": "CH9109000000400018554"},
-               "transactionAmount": {"currency": "CHF", "amount": "123.45"},
-               "bookingDate": "2019-05-29",
-               "valueDate": "2019-05-30",
-               "remittanceInformationStructured": "12 34567 89012 34567 78901 2"
-              },{
-               "transactionId": "1234572",
-               "debtorName": "Stiftung Denk an mich",
-               "debtorAccount": {"iban": "CH8209000000100150006"},
-               "transactionAmount": {"currency": "CHF", "amount": "234.55"},
-               "bookingDate": "2019-05-29",
-               "valueDate": "2019-05-30",
-               "remittanceInformationStructured": "12 34567 89012 34567 78901 2"
               }],
            "pending":
              [{
