@@ -1,4 +1,6 @@
-# OpenBankingPropject.ch
+# OpenBankingProject.ch
+
+Mehr zur OpenBankingProject.ch Initiative findet sich auf der [Homepage](https://www.openbankingproject.ch).
 
 ## Schweizer Ausgabe der Berlin Group NextGen API
 
