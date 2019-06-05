@@ -4,7 +4,7 @@ Mehr zur OpenBankingProject.ch Initiative findet sich auf der [Homepage](https:/
 
 ## Schweizer Ausgabe der Berlin Group NextGen API
 
-Dieses Repository enthält eine helvetisierte Version der Banking API der
+Dieses Repository enthält eine helvetisierte Fassung der Banking API der
 [Berlin Group](https://www.berlin-group.org/). Die API
 liegt als [OpenAPI 3.0](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md)
 Spezifikation vor:
