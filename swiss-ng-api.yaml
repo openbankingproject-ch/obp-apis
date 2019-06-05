@@ -10053,6 +10053,8 @@ components:
           - instant-sepa-credit-transfers
           - target-2-payments
           - cross-border-credit-transfers
+          - domestic-swiss-credit-transfers
+          - domestic-swiss-credit-transfers-isr
           - pain.001-sepa-credit-transfers
           - pain.001-instant-sepa-credit-transfers
           - pain.001-target-2-payments
@@ -10074,6 +10076,8 @@ components:
           - "instant-sepa-credit-transfers"
           - "target-2-payments"
           - "cross-border-credit-transfers"
+          - "domestic-swiss-credit-transfers"
+          - "domestic-swiss-credit-transfers-isr"
           - ""
           - "pain.001-sepa-credit-transfers"
           - "pain.001-instant-sepa-credit-transfers"
