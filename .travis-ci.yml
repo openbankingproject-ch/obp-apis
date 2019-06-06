@@ -1,0 +1,9 @@
+language: node_js
+# node_js: '6' # or another
+
+cache: npm
+
+before_script:
+  - npm install -g speccy
+
+script: speccy lint --skip openapi-tags-alphabetical swiss-ng-api.yaml

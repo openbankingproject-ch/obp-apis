@@ -10984,11 +10984,10 @@ components:
           schema:
             $ref: "#/components/schemas/transactionDetails"
           examples:
-            Examples:
-              "Swiss Example: Account with ISR Payment":
-                $ref: "#/components/examples/transactionDetailsExampleCH"
-              "Example 1: Regular Account":
-                $ref: "#/components/examples/transactionDetailsExample"
+            "Swiss Example: Account with ISR Payment":
+              $ref: "#/components/examples/transactionDetailsExampleCH"
+            "Example 1: Regular Account":
+              $ref: "#/components/examples/transactionDetailsExample"
 
 
     OK_200_Balances:
