@@ -5060,7 +5060,7 @@ components:
         reference:
           type: string
           maxLength: 35
-          expample:  "15 00011 23456 78901 23456 78901"
+          example:  "15 00011 23456 78901 23456 78901"
         referenceType:
           type: string
           maxLength: 35
