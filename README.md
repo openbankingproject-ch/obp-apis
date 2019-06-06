@@ -9,6 +9,8 @@ Dieses Repository enthält eine helvetisierte Fassung der Banking API der
 liegt als [OpenAPI 3.0](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md)
 Spezifikation vor:
 
+![Prüfungsstatus der Spezifikation](https://travis-ci.com/openbankingproject-ch/obp-apis.svg?branch=master "Prüfungsstatus der Spezifikation")
+
 * Die API als HTML-Dokumenent: [/docs](https://openbankingproject-ch.github.io/obp-apis)
 * Die API als YAML-Datei: [/swiss-ng-api.yaml](https://github.com/openbankingproject-ch/obp-apis/raw/master/swiss-ng-api.yaml)
 
