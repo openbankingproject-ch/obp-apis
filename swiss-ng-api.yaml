@@ -4887,7 +4887,7 @@ components:
     balanceList:
       description: |
         A list of balances regarding this account, e.g. the current balance, the last booked balance.
-        The list migght be restricted to the current balance.
+        The list might be restricted to the current balance.
       type: array
       items:
         $ref: "#/components/schemas/balance"
@@ -10984,8 +10984,6 @@ components:
           schema:
             $ref: "#/components/schemas/transactionDetails"
           examples:
-            "Swiss Example: Account with ISR Payment":
-              $ref: "#/components/examples/transactionDetailsExampleCH"
             "Example 1: Regular Account":
               $ref: "#/components/examples/transactionDetailsExample"
 
@@ -13109,23 +13107,6 @@ components:
                "remittanceInformationUnstructured": "Example 1",
                "bankTransactionCode": "PMNT-RCVD-ESDD",
              }
-        }
-        
-    transactionDetailsExampleCH:
-      description: Example for transaction details
-      value:
-        {
-             {
-               "transactionId": "1234573",
-               "creditorName": "John Miles",
-               "creditorAccount": {"iban": "DE67100100101306118605"},
-               "mandateId": "Mandate-2018-04-20-1234",
-               "instructedAmount": {"currency": "CHF", "amount": "123.50"},
-               "debtorName": "Ricardo Schweiz",
-               "debtorAccount": {"bban": "01-43884-8"},
-               "remittanceInformationStructured": "15 00011 23456 78901 23456 78901",
-               "bankTransactionCode": "PMNT-RCVD-ESDD"
-              }
         }
         
 
