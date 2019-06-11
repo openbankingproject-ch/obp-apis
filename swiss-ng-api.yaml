@@ -2954,7 +2954,7 @@ paths:
   /v1/funds-confirmations: 
     post:
       summary: Confirmation of Funds Request
-      description: 
+      description: |
         Creates a confirmation of funds request at the ASPSP.
         Checks whether a specific amount is available at point of time 
         of the request on an account linked to a given tuple card issuer(TPP)/card number, 
@@ -4887,7 +4887,7 @@ components:
     balanceList:
       description: |
         A list of balances regarding this account, e.g. the current balance, the last booked balance.
-        The list migght be restricted to the current ballance.
+        The list migght be restricted to the current balance.
       type: array
       items:
         $ref: "#/components/schemas/balance"
