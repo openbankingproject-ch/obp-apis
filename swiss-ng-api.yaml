@@ -5,7 +5,7 @@ info:
   x-logo:
     url: "https://openbankingproject-ch.github.io/obp-apis/swiss-ng-logo.png"
     backgroundColor: "#FFFFFF"
-    altText: "Swiss NextGen Logo"
+    altText: "Swiss OpenBankingProject Logo"
   description: |
     # Summary
     The **NextGen** *Framework Version 1.3.3* offers a modern, open, harmonised and interoperable set of 
@@ -6733,184 +6733,8 @@ components:
       description: |
         camt.053 XML message
       type: string
-      example: |
-        <?xml version="1.0" encoding="UTF-8"?>
-        <!-- 
-          © Copyright 2017  SIX Interbank Clearing AG, CH-8021 Zürich
-          Anregungen und Fragen zu diesem Dokument können an das jeweilige Finanzinstitut gerichtet werden. 
-          Allgemeine Anregungen können auch bei der SIX Interbank Clearing AG unter folgender Adresse angebracht werden: 
-          pm@six-group.com
-
-          Als Typ 1. «camt.053» Kontoauszug mit interner Sammelbuchungs-auflösung
-        -->
-        <Document xsi:schemaLocation="urn:iso:std:iso:20022:tech:xsd:camt.053.001.04 camt.053.001.04.xsd" xmlns="urn:iso:std:iso:20022:tech:xsd:camt.053.001.04" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <BkToCstmrStmt>
-            <GrpHdr>
-              <MsgId>MSGID-C053.01.00.10-110725163809-01</MsgId>
-              <CreDtTm>2017-07-25T19:30:47</CreDtTm>
-              <MsgPgntn>
-                <PgNb>1</PgNb>
-                <LastPgInd>true</LastPgInd>
-              </MsgPgntn>
-            </GrpHdr>
-            <Stmt>
-              <Id>STMID-C053.01.00.10-110725163809-01</Id>
-              <ElctrncSeqNb>147</ElctrncSeqNb>
-              <CreDtTm>2017-07-25T19:30:47</CreDtTm>
-              <Acct>
-                <Id>
-                  <IBAN>CH9581320000001998736</IBAN>
-                </Id>
-              </Acct>
-              <Bal>
-                <Tp>
-                  <CdOrPrtry>
-                    <Cd>OPBD</Cd>
-                  </CdOrPrtry>
-                </Tp>
-                <Amt Ccy="CHF">2501.50</Amt>
-                <CdtDbtInd>CRDT</CdtDbtInd>
-                <Dt>
-                  <Dt>2017-07-24</Dt>
-                </Dt>
-              </Bal>
-              <Bal>
-                <Tp>
-                  <CdOrPrtry>
-                    <Cd>CLBD</Cd>
-                  </CdOrPrtry>
-                </Tp>
-                <Amt Ccy="CHF">2397.2</Amt>
-                <CdtDbtInd>CRDT</CdtDbtInd>
-                <Dt>
-                  <Dt>2017-07-25</Dt>
-                </Dt>
-              </Bal>
-              <Ntry>
-                <NtryRef>010001628</NtryRef>
-                <Amt Ccy="CHF">145.70</Amt>
-                <CdtDbtInd>CRDT</CdtDbtInd>
-                <Sts>BOOK</Sts>
-                <BookgDt>
-                  <Dt>2017-07-25</Dt>
-                </BookgDt>
-                <ValDt>
-                  <Dt>2017-07-25</Dt>
-                </ValDt>
-                <AcctSvcrRef>P001.01.00.01-110718163809</AcctSvcrRef>
-                <BkTxCd>
-                  <Domn>
-                    <Cd>PMNT</Cd>
-                    <Fmly>
-                      <Cd>RCDT</Cd>
-                      <SubFmlyCd>VCOM</SubFmlyCd>
-                    </Fmly>
-                  </Domn>
-                </BkTxCd>
-                <NtryDtls>
-                  <Btch>
-                    <NbOfTxs>2</NbOfTxs>
-                  </Btch>
-                  <TxDtls>
-                    <Refs>
-                      <AcctSvcrRef>P001.01.00.01-110718163809-01</AcctSvcrRef>
-                    </Refs>
-                    <Amt Ccy="CHF">100</Amt>
-                    <CdtDbtInd>CRDT</CdtDbtInd>
-                    <BkTxCd>
-                      <Domn>
-                        <Cd>PMNT</Cd>
-                        <Fmly>
-                          <Cd>RCDT</Cd>
-                          <SubFmlyCd>VCOM</SubFmlyCd>
-                        </Fmly>
-                      </Domn>
-                    </BkTxCd>
-                    <RmtInf>
-                      <Strd>
-                        <CdtrRefInf>
-                          <Tp>
-                            <CdOrPrtry>
-                              <Prtry>ISR Reference</Prtry>
-                            </CdOrPrtry>
-                          </Tp>
-                          <Ref>123456789012345678901234567</Ref>
-                        </CdtrRefInf>
-                      </Strd>
-                    </RmtInf>
-                  </TxDtls>
-                  <TxDtls>
-                    <Refs>
-                      <AcctSvcrRef>P001.01.00.01-110718163809-02</AcctSvcrRef>
-                    </Refs>
-                    <Amt Ccy="CHF">45.70</Amt>
-                    <CdtDbtInd>CRDT</CdtDbtInd>
-                    <BkTxCd>
-                      <Domn>
-                        <Cd>PMNT</Cd>
-                        <Fmly>
-                          <Cd>RCDT</Cd>
-                          <SubFmlyCd>VCOM</SubFmlyCd>
-                        </Fmly>
-                      </Domn>
-                    </BkTxCd>
-                    <RmtInf>
-                      <Strd>
-                        <CdtrRefInf>
-                          <Tp>
-                            <CdOrPrtry>
-                              <Prtry>ISR Reference</Prtry>
-                            </CdOrPrtry>
-                          </Tp>
-                          <Ref>123456000012345678901234567</Ref>
-                        </CdtrRefInf>
-                      </Strd>
-                    </RmtInf>
-                  </TxDtls>
-                </NtryDtls>
-              </Ntry>
-              <Ntry>
-                <Amt Ccy="CHF">250.00</Amt>
-                <CdtDbtInd>DBIT</CdtDbtInd>
-                <Sts>BOOK</Sts>
-                <BookgDt>
-                  <Dt>2017-07-25</Dt>
-                </BookgDt>
-                <ValDt>
-                  <Dt>2017-07-25</Dt>
-                </ValDt>
-                <AcctSvcrRef>P001.01.00.02-110718163809</AcctSvcrRef>
-                <BkTxCd>
-                  <Domn>
-                    <Cd>PMNT</Cd>
-                    <Fmly>
-                      <Cd>ICDT</Cd>
-                      <SubFmlyCd>AUTT</SubFmlyCd>
-                    </Fmly>
-                  </Domn>
-                </BkTxCd>
-                <NtryDtls>
-                  <TxDtls>
-                    <Refs>
-                    <AcctSvcrRef>P001.01.00.02-110718163809-01</AcctSvcrRef>
-                    </Refs>
-                    <Amt Ccy="CHF">250.00</Amt>
-                    <CdtDbtInd>DBIT</CdtDbtInd>
-                    <BkTxCd>
-                      <Domn>
-                        <Cd>PMNT</Cd>
-                        <Fmly>
-                          <Cd>ICDT</Cd>
-                          <SubFmlyCd>AUTT</SubFmlyCd>
-                        </Fmly>
-                      </Domn>
-                    </BkTxCd>
-                  </TxDtls>
-                </NtryDtls>
-              </Ntry>
-            </Stmt>
-          </BkToCstmrStmt>
-        </Document>
+      example:
+        $ref: "#/components/examples/camt.053_simple_xml"
 
     camt.054: 
       description: |
@@ -10262,7 +10086,6 @@ components:
           - "cross-border-credit-transfers"
           - "domestic-swiss-credit-transfers"
           - "domestic-swiss-credit-transfers-isr"
-          - ""
           - "pain.001-sepa-credit-transfers"
           - "pain.001-instant-sepa-credit-transfers"
           - "pain.001-target-2-payments"
@@ -11234,6 +11057,9 @@ components:
               - $ref: "#/components/schemas/camt.052"
               - $ref: "#/components/schemas/camt.053"
               - $ref: "#/components/schemas/camt.054"
+          examples:
+            "Example camt.053":
+              $ref: "#/components/examples/camt.053_simple_xml"
         
         application/text:
           schema:
@@ -12377,6 +12203,179 @@ components:
           </CstmrPmtStsRpt>
         </Document>
 
+
+    camt.053_simple_xml:
+      description: A pain.002.001.03 message in case of SCT
+      value: >
+        <?xml version="1.0" encoding="UTF-8"?>
+        <Document xsi:schemaLocation="urn:iso:std:iso:20022:tech:xsd:camt.053.001.04 camt.053.001.04.xsd" xmlns="urn:iso:std:iso:20022:tech:xsd:camt.053.001.04" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <BkToCstmrStmt>
+            <GrpHdr>
+              <MsgId>MSGID-C053.01.00.10-110725163809-01</MsgId>
+              <CreDtTm>2017-07-25T19:30:47</CreDtTm>
+              <MsgPgntn>
+                <PgNb>1</PgNb>
+                <LastPgInd>true</LastPgInd>
+              </MsgPgntn>
+            </GrpHdr>
+            <Stmt>
+              <Id>STMID-C053.01.00.10-110725163809-01</Id>
+              <ElctrncSeqNb>147</ElctrncSeqNb>
+              <CreDtTm>2017-07-25T19:30:47</CreDtTm>
+              <Acct>
+                <Id>
+                  <IBAN>CH9581320000001998736</IBAN>
+                </Id>
+              </Acct>
+              <Bal>
+                <Tp>
+                  <CdOrPrtry>
+                    <Cd>OPBD</Cd>
+                  </CdOrPrtry>
+                </Tp>
+                <Amt Ccy="CHF">2501.50</Amt>
+                <CdtDbtInd>CRDT</CdtDbtInd>
+                <Dt>
+                  <Dt>2017-07-24</Dt>
+                </Dt>
+              </Bal>
+              <Bal>
+                <Tp>
+                  <CdOrPrtry>
+                    <Cd>CLBD</Cd>
+                  </CdOrPrtry>
+                </Tp>
+                <Amt Ccy="CHF">2397.2</Amt>
+                <CdtDbtInd>CRDT</CdtDbtInd>
+                <Dt>
+                  <Dt>2017-07-25</Dt>
+                </Dt>
+              </Bal>
+              <Ntry>
+                <NtryRef>010001628</NtryRef>
+                <Amt Ccy="CHF">145.70</Amt>
+                <CdtDbtInd>CRDT</CdtDbtInd>
+                <Sts>BOOK</Sts>
+                <BookgDt>
+                  <Dt>2017-07-25</Dt>
+                </BookgDt>
+                <ValDt>
+                  <Dt>2017-07-25</Dt>
+                </ValDt>
+                <AcctSvcrRef>P001.01.00.01-110718163809</AcctSvcrRef>
+                <BkTxCd>
+                  <Domn>
+                    <Cd>PMNT</Cd>
+                    <Fmly>
+                      <Cd>RCDT</Cd>
+                      <SubFmlyCd>VCOM</SubFmlyCd>
+                    </Fmly>
+                  </Domn>
+                </BkTxCd>
+                <NtryDtls>
+                  <Btch>
+                    <NbOfTxs>2</NbOfTxs>
+                  </Btch>
+                  <TxDtls>
+                    <Refs>
+                      <AcctSvcrRef>P001.01.00.01-110718163809-01</AcctSvcrRef>
+                    </Refs>
+                    <Amt Ccy="CHF">100</Amt>
+                    <CdtDbtInd>CRDT</CdtDbtInd>
+                    <BkTxCd>
+                      <Domn>
+                        <Cd>PMNT</Cd>
+                        <Fmly>
+                          <Cd>RCDT</Cd>
+                          <SubFmlyCd>VCOM</SubFmlyCd>
+                        </Fmly>
+                      </Domn>
+                    </BkTxCd>
+                    <RmtInf>
+                      <Strd>
+                        <CdtrRefInf>
+                          <Tp>
+                            <CdOrPrtry>
+                              <Prtry>ISR Reference</Prtry>
+                            </CdOrPrtry>
+                          </Tp>
+                          <Ref>123456789012345678901234567</Ref>
+                        </CdtrRefInf>
+                      </Strd>
+                    </RmtInf>
+                  </TxDtls>
+                  <TxDtls>
+                    <Refs>
+                      <AcctSvcrRef>P001.01.00.01-110718163809-02</AcctSvcrRef>
+                    </Refs>
+                    <Amt Ccy="CHF">45.70</Amt>
+                    <CdtDbtInd>CRDT</CdtDbtInd>
+                    <BkTxCd>
+                      <Domn>
+                        <Cd>PMNT</Cd>
+                        <Fmly>
+                          <Cd>RCDT</Cd>
+                          <SubFmlyCd>VCOM</SubFmlyCd>
+                        </Fmly>
+                      </Domn>
+                    </BkTxCd>
+                    <RmtInf>
+                      <Strd>
+                        <CdtrRefInf>
+                          <Tp>
+                            <CdOrPrtry>
+                              <Prtry>ISR Reference</Prtry>
+                            </CdOrPrtry>
+                          </Tp>
+                          <Ref>123456000012345678901234567</Ref>
+                        </CdtrRefInf>
+                      </Strd>
+                    </RmtInf>
+                  </TxDtls>
+                </NtryDtls>
+              </Ntry>
+              <Ntry>
+                <Amt Ccy="CHF">250.00</Amt>
+                <CdtDbtInd>DBIT</CdtDbtInd>
+                <Sts>BOOK</Sts>
+                <BookgDt>
+                  <Dt>2017-07-25</Dt>
+                </BookgDt>
+                <ValDt>
+                  <Dt>2017-07-25</Dt>
+                </ValDt>
+                <AcctSvcrRef>P001.01.00.02-110718163809</AcctSvcrRef>
+                <BkTxCd>
+                  <Domn>
+                    <Cd>PMNT</Cd>
+                    <Fmly>
+                      <Cd>ICDT</Cd>
+                      <SubFmlyCd>AUTT</SubFmlyCd>
+                    </Fmly>
+                  </Domn>
+                </BkTxCd>
+                <NtryDtls>
+                  <TxDtls>
+                    <Refs>
+                    <AcctSvcrRef>P001.01.00.02-110718163809-01</AcctSvcrRef>
+                    </Refs>
+                    <Amt Ccy="CHF">250.00</Amt>
+                    <CdtDbtInd>DBIT</CdtDbtInd>
+                    <BkTxCd>
+                      <Domn>
+                        <Cd>PMNT</Cd>
+                        <Fmly>
+                          <Cd>ICDT</Cd>
+                          <SubFmlyCd>AUTT</SubFmlyCd>
+                        </Fmly>
+                      </Domn>
+                    </BkTxCd>
+                  </TxDtls>
+                </NtryDtls>
+              </Ntry>
+            </Stmt>
+          </BkToCstmrStmt>
+        </Document>
 
     paymentInitiationSctBody_payments_json:
       value:
