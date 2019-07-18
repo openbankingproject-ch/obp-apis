@@ -4,27 +4,46 @@
 
 | Abkrz. |                Begriff (en)                 |                Begriff (de)                 |
 | ------ | ------------------------------------------- | ------------------------------------------- |
-| AIS    | Account Information Service                 | Konto Auskunftsdienst, siehe auch XS2A      |
+| AIS    | Account Information Service, article 4 (16) of [PSD2] according article 67 of [PSD2] | Konto Auskunftsdienst, siehe auch XS2A      |
 | ASPS   | Account Servicing Payment Service           |                                             |
-| ASPSP  | Account Servicing Payment Service Providers |                                             |
-| AISP   | Account Information Service Providers       |                                             |
+| ASPSP  | Account Servicing Payment Service Providers, article 4 (17) of [PSD2]  |                  |
+| AISP   | Account Information Service Providers, article 4 (19) of [PSD2]       |                      |
 | PIS    | Payment Initiation Service                  | Kanal für Zahlungsauftrag                   |
-| PISP   | Payment Initiation Service Providers        |                                             |
+| PISP   | Payment Initiation Service Providers, article 4 (18) of [PSD2]        |                  |
 | PIISP  | Payment Instrument Issuer Service Providers |                                             |
-| PSU    | The Payment Service User                    | Der Bankkunde                               |
+| PSP    | Payment Service Provider, article 4 (11) of [PSD2]                     |    |
+| PSU    | The Payment Service User, article 4 (10) of [PSD2]                    | Der Bankkunde                               |
 | SCA    | Strong Customer Authentication              | Sichere Identifikation des Kundens          |
 | TPP    | Third Party (Payment Service) Providers     | Drittparteien für den Kunden, oft "FinTech" |
 | XS2A   | Access to Accounts                          | Lesende Zugriffe auf Kontos (Inkl. Karten)  |
 
-
+## Allgemeinere Begriffe
 
 |  Abkrz.  |               Begriff (en)                | Begriff (de) |
 | -------- | ----------------------------------------- | ------------ |
-| eIDAS    |                                           |              |
+| EBA      | European Banking Authority                |              |
 | PSD2     | Payment services Directive (EU) 2015/2366 |              |
 | QTSP     | Qualified Trust Service Provider          |              |
+| RTS | EBA Regulatory Standards on strong customer authentication and common and secure communication. | |
+| SEPA  | Single Euro Payment Area            |              |
+| SCT  | SEPA Credit Transfer            |              |
 | SCT Inst | SEPA Credit Transfer (Instant)            |              |
 | SDD      | SEPA Direct Debit                         |              |
+
+
+## Techniscche Begriffe
+
+|  Abkrz.  |               Begriff (en)                | Begriff (de) |
+| -------- | ----------------------------------------- | ------------ |
+| eIDAS    | Electronic Identification, Authentication and Trust Services  |              |
+| IAM      | Global architectural component that Manage the Identity & Access |              |
+| OAuth2   | Protocal allowing to grant limited access for third-party applications |   |
+
+## Nationale Begriffe
+
+|  Abkrz.  |               Begriff (en)                | Begriff (de) |
+| -------- | ----------------------------------------- | ------------ |
+| CBA      | Croatian Banking Association              |              |
 
 
 he EPC Register of Participants shows continent-wide adoption rates so far for payment service providers (PSPs) like banks, to clearing and settlement mechanisms (CSMs), which can be domestic automated clearing houses (ACHs).
