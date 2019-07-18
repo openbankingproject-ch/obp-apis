@@ -21,7 +21,10 @@
 
 |  Abkrz.  |               Begriff (en)                | Begriff (de) |
 | -------- | ----------------------------------------- | ------------ |
+| ACH | Automated clearing houses | |
+| CSM | clearing and settlement mechanisms | |
 | EBA      | European Banking Authority                |              |
+|  | EPC Register of Participants | |
 | PSD2     | Payment services Directive (EU) 2015/2366 |              |
 | QTSP     | Qualified Trust Service Provider          |              |
 | RTS | EBA Regulatory Standards on strong customer authentication and common and secure communication. | |
@@ -46,4 +49,4 @@
 | CBA      | Croatian Banking Association              |              |
 
 
-he EPC Register of Participants shows continent-wide adoption rates so far for payment service providers (PSPs) like banks, to clearing and settlement mechanisms (CSMs), which can be domestic automated clearing houses (ACHs).
+he  shows continent-wide adoption rates so far for payment service providers (PSPs) like banks, to  (CSMs), which can be domestic  ().
