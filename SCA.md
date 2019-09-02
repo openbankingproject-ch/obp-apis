@@ -1,6 +1,6 @@
 # Technical security matrix
 
-## Element in der Antwort der "Payment Initiation"
+## Elemente in der Antwort der "Payment Initiation"
 
 |              Element                      | Ort der Daten          |   Relevante Inhalte  |
 | ----------------------------------------- | --------------------- | ----------------------- |
