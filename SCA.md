@@ -1,4 +1,7 @@
 # Technical security matrix
+Elementare übersicht zu den drei Ansätzen:
+- https://blog.entiros.se/en/blog-media/strong-customer-authentication-sca-for-psd2-apis
+
 
 ## Elemente in der Antwort der "Payment Initiation"
 
