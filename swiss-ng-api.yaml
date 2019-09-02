@@ -5728,8 +5728,8 @@ components:
 #          $ref: "#/components/schemas/creditorNameAndAddress"
 #        ultimateCreditor: # N.A. for all, but can be used by ASPSP if needed
 #          $ref: "#/components/schemas/ultimateCreditor"
-#        purposeCode: # N.A. for all, but can be used by ASPSP if needed
-#          $ref: "#/components/schemas/purposeCode"
+        purposeCode: # N.A. for all, but can be used by ASPSP if needed
+          $ref: "#/components/schemas/purposeCode"
 #        chargeBearer: #In some payment product N.A. in some Optional in some conditional
 #          $ref: "#/components/schemas/chargeBearer"
         remittanceInformationUnstructured:
