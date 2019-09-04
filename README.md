@@ -36,7 +36,7 @@ Ergänzungen:
 | creditorAddress                           | Address               | mandatory               |
 | creditorNameAndAddress                    | Max140Text            | n.a.                    |
 | ultimateCreditor                          | Max70Text             | optional                |
-| purposeCode (SALA / PENS)                 | Purpose Code          | optional (Salärzahlung) |
+| purposeCode (SALA / PENS)                 | Purpose Code          | **optional (Salärzahlung)** |
 | chargeBearer                              | Charge Bearer         | n.a.                    |
 | serviceLevel                              | Service Level Code    | n.a.                    |
 | remittanceInformation   Unstructured      | Max140Text            | n.a.                    |
