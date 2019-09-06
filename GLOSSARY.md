@@ -8,6 +8,7 @@
 | ASPS   | **Account Servicing Payment Service**           |                                             |
 | ASPSP  | **Account Servicing Payment Service Providers**, article 4 (17) of [PSD2]  |                  |
 | AISP   | **Account Information Service Providers**, article 4 (19) of [PSD2]       |                      |
+| CAF    | **Confirmation Availability of Funds** |
 | PIS    | **Payment Initiation Service**                  | Kanal für Zahlungsauftrag                   |
 | PISP   | **Payment Initiation Service Providers**, article 4 (18) of [PSD2]        |                  |
 | PIISP  | **Payment Instrument Issuer Service Providers** |                                             |
