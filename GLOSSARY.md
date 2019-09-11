@@ -46,6 +46,9 @@
 | OAuth2   | Protocal allowing to grant limited access for third-party applications |   |
 | CRL  | Certificate Revocation List | |
 | OCSP | Online Certificate Status Protocol | |
+| SSL | Secure Socket Layer version 1.0 to 3.0, superseded by TLS >1.0
+| TLS | Transport Layer Security
+| Mutual TLS | Mutual Transport Layer Security with Client Certificats
 
 
 ## Nationale Begriffe
