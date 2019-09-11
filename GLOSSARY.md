@@ -58,6 +58,3 @@
 | NCA | National Competent Authority, e.g.: BaFin & Bundesbank | Nationale Regulierungsbehörde |
 | BaFin | Bundesanstalt für Finanzdienstleistungsaufsicht  | 
 | CBA      | Croatian Banking Association              |              |
-
-
-he  shows continent-wide adoption rates so far for payment service providers (PSPs) like banks, to  (CSMs), which can be domestic.
