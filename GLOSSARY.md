@@ -27,7 +27,7 @@
 | EBA      | European Banking Authority                |              |
 |  | EPC Register of Participants | |
 | PSD2     | Payment services Directive (EU) 2015/2366 |              |
-| QTSP     | Qualified Trust Service Provider          |              |
+| QTSP     | Qualified Trust Service Provider          | Vertrauenswürdiger Zertifikate Aussteller & Prüfer |
 | RTS | EBA Regulatory Standards on strong customer authentication and common and secure communication. | |
 | SEPA  | Single Euro Payment Area            |              |
 | SCT  | SEPA Credit Transfer            |              |
