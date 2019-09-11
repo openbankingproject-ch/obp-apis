@@ -23,9 +23,9 @@
 |  Abkrz.  |               Begriff (en)                | Begriff (de) |
 | -------- | ----------------------------------------- | ------------ |
 | ACH | Automated clearing houses | |
-| CSM | clearing and settlement mechanisms | |
+| CSM | Clearing and settlement mechanisms | |
 | EBA      | European Banking Authority                |              |
-|  | EPC Register of Participants | |
+|  EPC |  Register of Participants | |
 | PSD2     | Payment services Directive (EU) 2015/2366 |              |
 | QTSP     | Qualified Trust Service Provider          | Vertrauenswürdiger Zertifikate Aussteller & Prüfer |
 | RTS | EBA Regulatory Standards on strong customer authentication and common and secure communication. | |
@@ -35,7 +35,7 @@
 | SDD      | SEPA Direct Debit                         |              |
 
 
-## Techniscche Begriffe
+## Technische Begriffe
 
 |  Abkrz.  |               Begriff (en)                | Begriff (de) |
 | -------- | ----------------------------------------- | ------------ |
@@ -44,12 +44,15 @@
 | QSealC | Qualified eSeal Certificate  |              |
 | IAM      | Global architectural component that Manage the Identity & Access |              |
 | OAuth2   | Protocal allowing to grant limited access for third-party applications |   |
+| CRL  | Certificate Revocation List | |
+| OCSP | Online Certificate Status Protocol | |
 
 
 ## Nationale Begriffe
 
 |  Abkrz.  |               Begriff (en)                | Begriff (de) |
 | -------- | ----------------------------------------- | ------------ |
+| NCA | National Competent Authority
 | CBA      | Croatian Banking Association              |              |
 
 
