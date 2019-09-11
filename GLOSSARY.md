@@ -14,7 +14,7 @@
 | PIISP  | **Payment Instrument Issuer Service Providers** |                                             |
 | PSP    | **Payment Service Provider**, article 4 (11) of [PSD2]                     |    |
 | PSU    | **Payment Service User**, article 4 (10) of [PSD2]                    | Der Bankkunde / e-Banking Benutzer |
-| SCA    | **Strong Customer Authentication**              | Sichere Identifikation des Kundens          |
+| SCA    | **Strong Customer Authentication**              | Sichere Identifizierung des Kundens          |
 | TPP    | **Third Party** (Payment Service) **Providers**     | Drittparteien für den Kunden, oft "FinTech" |
 | XS2A   | **Access to Accounts**                          | Lesende Zugriffe auf Kontos (Inkl. Karten)  |
 
