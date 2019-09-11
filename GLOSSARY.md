@@ -42,7 +42,7 @@
 | eIDAS    | Electronic Identification, Authentication and Trust Services  |              |
 | QWAC | Qualified Web Authentication Certificate  |              |
 | QSealC | Qualified eSeal Certificate  |              |
-| IAM      | Global architectural component that Manage the Identity & Access |              |
+| IAM      | Software component that manages Identity & Access of users |              |
 | OAuth2   | Protocal allowing to grant limited access for third-party applications |   |
 | CRL  | Certificate Revocation List | |
 | OCSP | Online Certificate Status Protocol | |
