@@ -22,6 +22,14 @@
 
 |  Abkrz.  |               Begriff (en)                | Begriff (de) |
 | -------- | ----------------------------------------- | ------------ |
+| Embedded  | The user authentication is embedded in the REST-Call | |
+| Redirect  | The user authentication is redirected to the e-Banking | |
+| Decoupled | The user authentication is requested over a decoupled channel | |
+
+## Allgemeinere Begriffe
+
+|  Abkrz.  |               Begriff (en)                | Begriff (de) |
+| -------- | ----------------------------------------- | ------------ |
 | ACH | Automated clearing houses | |
 | CSM | Clearing and settlement mechanisms | |
 | EBA      | European Banking Authority                |              |
