@@ -52,7 +52,8 @@
 
 |  Abkrz.  |               Begriff (en)                | Begriff (de) |
 | -------- | ----------------------------------------- | ------------ |
-| NCA | National Competent Authority
+| NCA | National Competent Authority, e.g.: BaFin & Bundesbank | Nationale Regulierungsbehörde |
+| BaFin | Bundesanstalt für Finanzdienstleistungsaufsicht  | 
 | CBA      | Croatian Banking Association              |              |
 
 
