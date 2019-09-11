@@ -13,7 +13,7 @@
 | PISP   | **Payment Initiation Service Providers**, article 4 (18) of [PSD2]        |                  |
 | PIISP  | **Payment Instrument Issuer Service Providers** |                                             |
 | PSP    | **Payment Service Provider**, article 4 (11) of [PSD2]                     |    |
-| PSU    | **Payment Service User**, article 4 (10) of [PSD2]                    | Der Bankkunde                               |
+| PSU    | **Payment Service User**, article 4 (10) of [PSD2]                    | Der Bankkunde / e-Banking Nutzer |
 | SCA    | **Strong Customer Authentication**              | Sichere Identifikation des Kundens          |
 | TPP    | **Third Party** (Payment Service) **Providers**     | Drittparteien für den Kunden, oft "FinTech" |
 | XS2A   | **Access to Accounts**                          | Lesende Zugriffe auf Kontos (Inkl. Karten)  |
