@@ -48,6 +48,7 @@
 |  Abkrz.  |               Begriff (en)                | Begriff (de) |
 | -------- | ----------------------------------------- | ------------ |
 | eIDAS    | Electronic Identification, Authentication and Trust Services  |              |
+| ETSI | European Telecommunications Standards Institute |
 | QWAC | Qualified Web Authentication Certificate  |              |
 | QSealC | Qualified eSeal Certificate  |              |
 | IAM      | Software component that manages Identity & Access of users |              |
