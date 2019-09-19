@@ -1,0 +1,111 @@
+{
+    "account": {
+        "iban": "CH2808397020020195606"
+    },
+    "transactions": {
+        "booked": [
+            {
+                "transactionId": "1234573",
+                "instructedAmount": {
+                    "currency": "CHF",
+                    "amount": "123.50"
+                },
+                "debtorName": "Ricardo Schweiz",
+                "debtorAccount": {
+                    "bban": "01-43884-8"
+                },
+                "remittanceInformationStructured": "15 00011 23456 78901 23456 78901"
+            },
+            {
+                "transactionId": "1234571",
+                "debtorName": "Glückskette",
+                "debtorAccount": {
+                    "iban": "CH9109000000400018554"
+                },
+                "transactionAmount": {
+                    "currency": "CHF",
+                    "amount": "123.45"
+                },
+                "bookingDate": "2019-05-29",
+                "valueDate": "2019-05-30",
+                "remittanceInformationUnstructured": "Für Ferien im Oberland."
+            },
+            {
+                "transactionId": "1234572",
+                "debtorName": "Stiftung Denk an mich",
+                "debtorAccount": {
+                    "iban": "CH8209000000100150006"
+                },
+                "transactionAmount": {
+                    "currency": "CHF",
+                    "amount": "234.55"
+                },
+                "bookingDate": "2019-05-29",
+                "valueDate": "2019-05-30",
+                "remittanceInformationUnstructured": "Für Yemen."
+            },
+            {
+                "transactionId": "1234567",
+                "creditorName": "John Miles",
+                "creditorAccount": {
+                    "iban": "DE67100100101306118605"
+                },
+                "transactionAmount": {
+                    "currency": "EUR",
+                    "amount": "-256.67"
+                },
+                "bookingDate": "2017-10-25",
+                "valueDate": "2017-10-26",
+                "remittanceInformationUnstructured": "Example 1"
+            },
+            {
+                "transactionId": "1234568",
+                "debtorName": "Paul Simpson",
+                "debtorAccount": {
+                    "iban": "NL76RABO0359400371"
+                },
+                "transactionAmount": {
+                    "currency": "EUR",
+                    "amount": "343.01"
+                },
+                "bookingDate": "2017-10-25",
+                "valueDate": "2017-10-26",
+                "remittanceInformationUnstructured": "Example 2"
+            },
+            {
+                "transactionId": "1234569",
+                "debtorName": "Pepe Martin",
+                "debtorAccount": {
+                    "iban": "SE9412309876543211234567"
+                },
+                "transactionAmount": {
+                    "currency": "USD",
+                    "amount": "100"
+                },
+                "bookingDate": "2017-10-25",
+                "valueDate": "2017-10-26",
+                "remittanceInformationUnstructured": "Example 3"
+            }
+        ],
+        "pending": [
+            {
+                "transactionId": "1234570",
+                "creditorName": "Claude Renault",
+                "creditorAccount": {
+                    "iban": "FR7612345987650123456789014"
+                },
+                "transactionAmount": {
+                    "currency": "EUR",
+                    "amount": "-100.03"
+                },
+                "valueDate": "2017-10-26",
+                "remittanceInformationUnstructured": "Example 4"
+            }
+        ],
+        "_links": {
+            "account": {
+                "href": "/v1/accounts/3dc3d5b3-7023-4848-9853-f5400a64e80f"
+            }
+        }
+    }
+}
