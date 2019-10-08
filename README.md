@@ -16,7 +16,7 @@ Spezifikation vor:
 
 ## Anhang 1 - Swiss Domestic Definition
 
-Die Schweiz spezifischen Definition umfassen die ESR-Zahlungen, sowie falls nötig weiter
+Die Schweiz spezifischen Definitionen umfassen die ESR-Zahlungen, sowie falls nötig weitere
 Ergänzungen:
 
 |              Element   Type               |         Type          |   Oranger EZS   (ISR)   |
