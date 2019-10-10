@@ -19,28 +19,28 @@ Spezifikation vor:
 Die Schweiz spezifischen Definitionen umfassen die ESR-Zahlungen, sowie falls nötig weitere
 Ergänzungen:
 
-|              Element   Type               |         Type          |   Oranger EZS   (ISR)   |
-| ----------------------------------------- | --------------------- | ----------------------- |
-| endToEnd   Identification                 | Max35Text             | optional                |
-| debtorAccount   (incl. type)              | Account Reference     | mandatory               |
-| debtorId                                  | Max35Text             | n.a.                    |
-| ultimateDebtor                            | Max70Text             | optional                |
-| instructedAmount   (inc. Curr.)           | Amount                | mandatory               |
-| currencyOfTransfer                        | Currency Code         | n.a.                    |
-| exchangeRateInformation                   | Payment Exchange Rate | n.a.                    |
-| creditorAccount                           | Account Reference     | mandatory               |
-| creditorAgent                             | BICFI                 | optional                |
-| creditorAgentName                         | Max70Text             | n.a.                    |
-| creditorName                              | Max70Text             | mandatory               |
-| creditorId                                | Max35Text             | optional                |
-| creditorAddress                           | Address               | mandatory               |
-| creditorNameAndAddress                    | Max140Text            | n.a.                    |
-| ultimateCreditor                          | Max70Text             | optional                |
+|              Element   Type               |         Type          |     Oranger EZS   (ISR)     |
+| ----------------------------------------- | --------------------- | --------------------------- |
+| endToEnd   Identification                 | Max35Text             | optional                    |
+| debtorAccount   (incl. type)              | Account Reference     | mandatory                   |
+| debtorId                                  | Max35Text             | n.a.                        |
+| ultimateDebtor                            | Max70Text             | optional                    |
+| instructedAmount   (inc. Curr.)           | Amount                | mandatory                   |
+| currencyOfTransfer                        | Currency Code         | n.a.                        |
+| exchangeRateInformation                   | Payment Exchange Rate | n.a.                        |
+| creditorAccount                           | Account Reference     | mandatory                   |
+| creditorAgent                             | BICFI                 | optional                    |
+| creditorAgentName                         | Max70Text             | n.a.                        |
+| creditorName                              | Max70Text             | mandatory                   |
+| creditorId                                | Max35Text             | optional                    |
+| creditorAddress                           | Address               | mandatory                   |
+| creditorNameAndAddress                    | Max140Text            | n.a.                        |
+| ultimateCreditor                          | Max70Text             | optional                    |
 | purposeCode (SALA / PENS)                 | Purpose Code          | **optional (Salärzahlung)** |
-| chargeBearer                              | Charge Bearer         | n.a.                    |
-| serviceLevel                              | Service Level Code    | n.a.                    |
-| remittanceInformation   Unstructured      | Max140Text            | n.a.                    |
-| remittanceInformation   UnstructuredArray | Array of Max140Text   | n.a.                    |
-| remittanceInformation   Structured        | Remittance            | **mandatory (ESR-Ref)** |
-| requestedExecution   Date                 | ISODate               | **mandatory**           |
-| requestedExecution   Time                 | ISODateTime           | n.a.                    |
+| chargeBearer                              | Charge Bearer         | n.a.                        |
+| serviceLevel                              | Service Level Code    | n.a.                        |
+| remittanceInformation   Unstructured      | Max140Text            | n.a.                        |
+| remittanceInformation   UnstructuredArray | Array of Max140Text   | n.a.                        |
+| remittanceInformation   Structured        | Remittance            | **mandatory (ESR-Ref)**     |
+| requestedExecutionDate                    | ISODate               | **mandatory**               |
+| requestedExecutionTime                    | ISODateTime           | n.a.                        |
