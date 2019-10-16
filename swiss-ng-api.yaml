@@ -112,15 +112,11 @@ paths:
 
           - Payment products with payment information in *JSON* format:
             - ***sepa-credit-transfers***
-            - ***instant-sepa-credit-transfers***
-            - ***target-2-payments***
             - ***cross-border-credit-transfers***
             - ***domestic-swiss-credit-transfers***
             - ***domestic-swiss-credit-transfers-isr***
           - Payment products with payment information in *pain.001* XML format:
             - ***pain.001-sepa-credit-transfers***
-            - ***pain.001-instant-sepa-credit-transfers***
-            - ***pain.001-target-2-payments***
             - ***pain.001-cross-border-credit-transfers***
             - ***pain.001-swiss-six-credit-transfers***
 
@@ -5652,8 +5648,6 @@ components:
         which where defined in the Implementation Guidelines:
 
           * sepa-credit-transfers
-          * instant-sepa-credit-transfers
-          * target-2-payments
           * cross-border-credit-transfers
           * domestic-swiss-credit-transfers
           * domestic-swiss-credit-transfers-isr
@@ -5777,8 +5771,6 @@ components:
         which where defined in the Implementation Guidelines:
 
           * sepa-credit-transfers
-          * instant-sepa-credit-transfers
-          * target-2-payments
           * cross-border-credit-transfers
           * domestic-swiss-credit-transfers
           * domestic-swiss-credit-transfers-isr
@@ -5881,8 +5873,6 @@ components:
         which where defined in the Implementation Guidelines:
 
           * sepa-credit-transfers
-          * instant-sepa-credit-transfers
-          * target-2-payments
           * cross-border-credit-transfers
           * domestic-swiss-credit-transfers
           * domestic-swiss-credit-transfers-isr
@@ -10078,14 +10068,10 @@ components:
 
         The following payment products are supported:
           - sepa-credit-transfers
-          - instant-sepa-credit-transfers
-          - target-2-payments
           - cross-border-credit-transfers
           - domestic-swiss-credit-transfers
           - domestic-swiss-credit-transfers-isr
           - pain.001-sepa-credit-transfers
-          - pain.001-instant-sepa-credit-transfers
-          - pain.001-target-2-payments
           - pain.001-cross-border-credit-transfers
 
         **Remark:** For all SEPA Credit Transfer based endpoints which accept XML encoding,
@@ -10101,14 +10087,10 @@ components:
         type: string
         enum:
           - "sepa-credit-transfers"
-          - "instant-sepa-credit-transfers"
-          - "target-2-payments"
           - "cross-border-credit-transfers"
           - "domestic-swiss-credit-transfers"
           - "domestic-swiss-credit-transfers-isr"
           - "pain.001-sepa-credit-transfers"
-          - "pain.001-instant-sepa-credit-transfers"
-          - "pain.001-target-2-payments"
           - "pain.001-cross-border-credit-transfers"
 
 
@@ -10695,14 +10677,10 @@ components:
 
         There are the following payment-products supported:
           * "sepa-credit-transfers" with JSON-Body
-          * "instant-sepa-credit-transfers" with JSON-Body
-          * "target-2-payments" with JSON-Body
           * "cross-border-credit-transfers" with JSON-Body
           * "domestic-swiss-credit-transfers"
           * "domestic-swiss-credit-transfers-isr"
           * "pain.001-sepa-credit-transfers" with XML pain.001.001.03 body for SCT scheme
-          * "pain.001-instant-sepa-credit-transfers" with XML pain.001.001.03 body for SCT INST scheme
-          * "pain.001-target-2-payments" with pain.001 body.
             Only country specific schemes are currently available
           * "pain.001-cross-border-credit-transfers" with pain.001 body.
             Only country specific schemes are currently available
