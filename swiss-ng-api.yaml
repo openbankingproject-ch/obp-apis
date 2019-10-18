@@ -6227,7 +6227,7 @@ components:
             - $ref: "#/components/schemas/paymentInitiationSctInst_pain.001"
             - $ref: "#/components/schemas/paymentInitiationTarget2_pain.001"
             - $ref: "#/components/schemas/paymentInitiationCrossBorder_pain.001"
-            - $ref: "#/components/schemas/paymentInitiationSwiss_pain.001"
+            - $ref: "#/components/schemas/paymentInitiationSwissSix_pain.001"
         json_standingorderType: #PART 2
           $ref: "#/components/schemas/periodicPaymentInitiation_xml-Part2-standingorderType_json"
 
