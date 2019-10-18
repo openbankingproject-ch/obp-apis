@@ -21,9 +21,9 @@ info:
       * Redirect SCA Approach
       * OAuth SCA Approach
       * Decoupled SCA Approach
-      * Embedded SCA Approach without SCA method
-      * Embedded SCA Approach with only one SCA method available
-      * Embedded SCA Approach with Selection of a SCA method
+      * *(Discouraged by OBP.ch security group) Embedded SCA Approach without SCA method*
+      * *(Discouraged by OBP.ch security group) Embedded SCA Approach with only one SCA method available*
+      * *(Discouraged by OBP.ch security group) Embedded SCA Approach with Selection of a SCA method*
 
       Not every message defined in this API definition is necessary for all approaches.
       Furthermore this API definition does not differ between methods which are mandatory, conditional, or optional
@@ -6205,6 +6205,11 @@ components:
         For cross-border payments only community wide pain.001 schemes do exist.
       type: string
 
+    paymentInitiationSwissSix_pain.001: #The same schemas are use for single an bulk payment in case of a pain.001
+      description: |
+        A pain.001 structure corresponding to the swiss schema pain.001.001.03.ch.02.xsd
+      type: string
+
       #####################################################
       # Content of Request Bodies - XML -Multipart
       #####################################################
@@ -6222,6 +6227,7 @@ components:
             - $ref: "#/components/schemas/paymentInitiationSctInst_pain.001"
             - $ref: "#/components/schemas/paymentInitiationTarget2_pain.001"
             - $ref: "#/components/schemas/paymentInitiationCrossBorder_pain.001"
+            - $ref: "#/components/schemas/paymentInitiationSwissSix_pain.001"
         json_standingorderType: #PART 2
           $ref: "#/components/schemas/periodicPaymentInitiation_xml-Part2-standingorderType_json"
 
@@ -10073,6 +10079,7 @@ components:
           - domestic-swiss-credit-transfers-isr
           - pain.001-sepa-credit-transfers
           - pain.001-cross-border-credit-transfers
+          - pain.001-swiss-six-credit-transfers
 
         **Remark:** For all SEPA Credit Transfer based endpoints which accept XML encoding,
         the XML pain.001 schemes provided by EPC are supported by the ASPSP as a minimum for the body content.
@@ -10092,6 +10099,7 @@ components:
           - "domestic-swiss-credit-transfers-isr"
           - "pain.001-sepa-credit-transfers"
           - "pain.001-cross-border-credit-transfers"
+          - "pain.001-swiss-six-credit-transfers"
 
 
     paymentId:
@@ -10684,6 +10692,7 @@ components:
             Only country specific schemes are currently available
           * "pain.001-cross-border-credit-transfers" with pain.001 body.
             Only country specific schemes are currently available
+          * pain.001-swiss-six-credit-transfers
 
         There are the following payment-services supported:
           * "payments"
@@ -10720,6 +10729,8 @@ components:
               - $ref: "#/components/schemas/paymentInitiationSctInst_pain.001"
               - $ref: "#/components/schemas/paymentInitiationTarget2_pain.001"
               - $ref: "#/components/schemas/paymentInitiationCrossBorder_pain.001"
+              - $ref: "#/components/schemas/paymentInitiationSwissSix_pain.001"              
+
           examples:
             "Example 1: 'payments' - 'pain.001-sepa-credit-transfers'":
               $ref: "#/components/examples/pain.001.001_SCT_singleTransaction"
@@ -10863,6 +10874,7 @@ components:
               - $ref: "#/components/schemas/paymentInitiationSctInst_pain.001"
               - $ref: "#/components/schemas/paymentInitiationTarget2_pain.001"
               - $ref: "#/components/schemas/paymentInitiationCrossBorder_pain.001"
+              - $ref: "#/components/schemas/paymentInitiationSwissSix_pain.001"              
           examples:
             "Example 1: 'payments' - 'pain.001-sepa-credit-transfers'":
               $ref: "#/components/examples/pain.001.001_SCT_singleTransaction"
