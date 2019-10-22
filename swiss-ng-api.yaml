@@ -10835,7 +10835,7 @@ components:
     ASPSP-Notification-Content:
       description: |
         The string has the form
-        status=X1, b &, Xn
+        status=X1, …, Xn
         where Xi is one of the constants SCA, PROCESS, LAST and where constants are not repeated.
         The usage of the constants supports the following semantics
         SCA - Notification on every change of the scaStatus attribute for all related authorisation processes is provided by the ASPSP for the related resource.
