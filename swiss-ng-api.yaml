@@ -21,9 +21,9 @@ info:
       * Redirect SCA Approach
       * OAuth SCA Approach
       * Decoupled SCA Approach
-      * *(Discouraged by OBP.ch security group) Embedded SCA Approach without SCA method*
-      * *(Discouraged by OBP.ch security group) Embedded SCA Approach with only one SCA method available*
-      * *(Discouraged by OBP.ch security group) Embedded SCA Approach with Selection of a SCA method*
+      * *(Not supported by OBP.ch security group) Embedded SCA Approach without SCA method*
+      * *(Not supported by OBP.ch security group) Embedded SCA Approach with only one SCA method available*
+      * *(Not supported by OBP.ch security group) Embedded SCA Approach with Selection of a SCA method*
 
       Not every message defined in this API definition is necessary for all approaches.
       Furthermore this API definition does not differ between methods which are mandatory, conditional, or optional
