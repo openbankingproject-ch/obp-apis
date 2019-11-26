@@ -53,6 +53,7 @@
 | QSealC     | Qualified eSeal Certificate                                            |              |
 | IAM        | Software component that manages Identity & Access of users             |              |
 | OAuth2     | Protocal allowing to grant limited access for third-party applications |              |
+| NPR        | National Public Register                                               |              |
 | CRL        | Certificate Revocation List                                            |              |
 | OCSP       | Online Certificate Status Protocol                                     |              |
 | SSL        | Secure Socket Layer version 1.0 to 3.0, superseded by TLS >1.0         |              |
