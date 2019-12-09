@@ -18,15 +18,16 @@
 | TPP    | **Third Party** (Payment Service) **Providers**                                          | Drittparteien für den Kunden, oft "FinTech" |
 | XS2A   | **Access to Accounts**                                                                   | Lesende Zugriffe auf Kontos (Inkl. Karten)  |
 
-## Allgemeinere Begriffe
+## Allgemeine SCA egriffe
 
-|  Abkrz.   |                               Begriff (en)                               | Begriff (de) |
-| --------- | ------------------------------------------------------------------------ | ------------ |
-| Embedded  | The user authentication is embedded in the REST-Call over the TPP-Server |              |
-| Redirect  | The user authentication is redirected to the e-Banking Weblogin          |              |
-| Decoupled | The user authentication is requested over a decoupled device             |              |
+|   Abkrz.   |                               Begriff (en)                               | Begriff (de) |
+| ---------- | ------------------------------------------------------------------------ | ------------ |
+| Embedded   | The user authentication is embedded in the REST-Call over the TPP-Server |              |
+| Redirect   | The user authentication is redirected to the e-Banking Weblogin          |              |
+| Decoupled  | The user authentication is requested over a decoupled device             |              |
+| Multilevel | More than one users has to authorize an action                           |              |
 
-## Allgemeinere Begriffe
+## Allgemeine Begriffe
 
 |  Abkrz.  |                                          Begriff (en)                                           |                    Begriff (de)                    |
 | -------- | ----------------------------------------------------------------------------------------------- | -------------------------------------------------- |
