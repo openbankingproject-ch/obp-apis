@@ -1,6 +1,7 @@
+site_name: Open Banking Project Switzerland - API-Documentation
 site_url: https://example.com/foo/
 
 nav:
     - Home: README.md
-    - Glossary: GLOSSARY.MD
+    - Glossary: GLOSSARY.md
     - Bug Tracker: /issues/
