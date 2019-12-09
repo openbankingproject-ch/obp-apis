@@ -1,8 +1,8 @@
 site_name: Open Banking Project Switzerland - API-Documentation
 
 nav:
-    - Home: ../README.md
-    - Glossary: ../GLOSSARY.md
+    - Home: /README.md
+    - Glossary: /GLOSSARY.md
     - Bug Tracker: /issues/
 
 theme: readthedocs
