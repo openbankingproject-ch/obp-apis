@@ -4,3 +4,5 @@ nav:
     - Home: README.md
     - Glossary: GLOSSARY.md
     - Bug Tracker: /issues/
+
+theme: readthedocs
