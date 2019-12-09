@@ -2,17 +2,17 @@
 
 # Important technichal identifications
 
-|      HEADER      |          JSON          | Description |
-| ---------------- | ---------------------- | ----------- |
-| -                | authorisationId        | -           |
-| -                | authenticationMethodId | -           |
-| Consent-ID       | -                      | -           |
-| -                | paymentId              | -           |
-| PSU-ID           | -                      | -           |
-| PSU-Corporate-ID | -                      | -           |
-| PSU-Device-ID    | -                      | -           |
-resourceId
-| X-Request-ID     | -                      | -           |
+|      HEADER      |          JSON          |              Description              |
+| ---------------- | ---------------------- | ------------------------------------- |
+| -                | authorisationId        | -                                     |
+| -                | authenticationMethodId | -                                     |
+| Consent-ID       | -                      | -                                     |
+| -                | paymentId              | -                                     |
+| PSU-ID           | -                      | -                                     |
+| PSU-Corporate-ID | -                      | -                                     |
+| PSU-Device-ID    | -                      | -                                     |
+| -                | resourceId             | Anonymous alias to the account number |
+| X-Request-ID     | -                      | -                                     |
 
 
 # Important business identifications
