@@ -19,11 +19,11 @@ info:
 
     The possible Approaches are:
       * Redirect SCA Approach
-      * OAuth SCA Approach
-      * Decoupled SCA Approach
-      * *(Not supported by OBP.ch security group) Embedded SCA Approach without SCA method*
-      * *(Not supported by OBP.ch security group) Embedded SCA Approach with only one SCA method available*
-      * *(Not supported by OBP.ch security group) Embedded SCA Approach with Selection of a SCA method*
+      * *(Not recommended by obp.ch community) OAuth SCA Approach*
+      * *(Not recommended by obp.ch community) Decoupled SCA Approach*
+      * *(Not recommended by obp.ch community) Embedded SCA Approach without SCA method*
+      * *(Not recommended by obp.ch community) Embedded SCA Approach with only one SCA method available*
+      * *(Not recommended by obp.ch community) Embedded SCA Approach with Selection of a SCA method*
 
       Not every message defined in this API definition is necessary for all approaches.
       Furthermore this API definition does not differ between methods which are mandatory, conditional, or optional
@@ -77,7 +77,7 @@ info:
     name: Creative Commons Attribution 4.0 International Public License
     url: https://creativecommons.org/licenses/by/4.0/
   contact:
-    name: Open Banking Project Switzerland, based on Berlin Group
+    name: Open Banking Project Switzerland
     url: https://www.openbankingproject.ch
     email: info@openbankingproject.ch
 
@@ -88,8 +88,8 @@ externalDocs:
   url: https://github.com/openbankingproject-ch/obp-apis
 
 servers:
-  - url: https://api.openbankingproject.ch
-    description: XS-CH sandbox server
+  - url: https://api.dev.openbankingproject.ch
+    description: Open Banking Project Switzerland Developer Portal
 
 paths:
 
@@ -111,14 +111,17 @@ paths:
         There are the following **payment products**:
 
           - Payment products with payment information in *JSON* format:
+            - ***domestic-swiss-credit-transfers-ISR***
+            - ***domestic-swiss-credit-transfers***
+            - ***domestic-swiss-foreign-credit-transfers***
             - ***sepa-credit-transfers***
             - ***cross-border-credit-transfers***
+          - Payment products with payment information in *SIX pain.001* XML format:
+            - ***domestic-swiss-credit-transfers-ISR***
             - ***domestic-swiss-credit-transfers***
-            - ***domestic-swiss-credit-transfers-isr***
-          - Payment products with payment information in *pain.001* XML format:
-            - ***pain.001-sepa-credit-transfers***
-            - ***pain.001-cross-border-credit-transfers***
-            - ***pain.001-swiss-six-credit-transfers***
+            - ***domestic-swiss-foreign-credit-transfers***
+            - ***sepa-credit-transfers***
+            - ***cross-border-credit-transfers***
 
         Furthermore the request body depends on the **payment-service**
           * ***payments***: A single payment initiation request.
@@ -1809,354 +1812,354 @@ paths:
           $ref: "#/components/responses/SERVICE_UNAVAILABLE_503_AIS"
 
 
-      #####################################################
-      # Card Accounts
-      #####################################################
+  #     #####################################################
+  #     # Card Accounts
+  #     #####################################################
 
-  /v1/card-accounts:
+  # /v1/card-accounts:
 
-    get:
-      summary: Reads a list of card accounts
-      description: |
-        Reads a list of card accounts with additional information, e.g. balance information.
-        It is assumed that a consent of the PSU to this access is already given and stored on the ASPSP system.
-        The addressed list of card accounts depends then on the PSU ID and the stored consent addressed by consentId,
-        respectively the OAuth2 access token.
-      operationId: getCardAccount
-      tags:
-        - Account Information Service (AIS)
+  #   get:
+  #     summary: Reads a list of card accounts
+  #     description: |
+  #       Reads a list of card accounts with additional information, e.g. balance information.
+  #       It is assumed that a consent of the PSU to this access is already given and stored on the ASPSP system.
+  #       The addressed list of card accounts depends then on the PSU ID and the stored consent addressed by consentId,
+  #       respectively the OAuth2 access token.
+  #     operationId: getCardAccount
+  #     tags:
+  #       - Account Information Service (AIS)
 
-      security:
-      #####################################################
-      # REMARKS ON SECURITY IN THIS OPENAPI FILE
-      #In this file only the basic security element to transport
-      # the bearer token of an an OAuth2 process, which has to
-      # be included inthe HTTP header ist described.
-      #
-      # WARNING:
-      # If you want to use this file for a productive implementation,
-      # it is recommandes to adjust the security schemes according to
-      # your system enviroments and security policies.
-      #####################################################
-        - {}
-        - BearerAuthOAuth: []
+  #     security:
+  #     #####################################################
+  #     # REMARKS ON SECURITY IN THIS OPENAPI FILE
+  #     #In this file only the basic security element to transport
+  #     # the bearer token of an an OAuth2 process, which has to
+  #     # be included inthe HTTP header ist described.
+  #     #
+  #     # WARNING:
+  #     # If you want to use this file for a productive implementation,
+  #     # it is recommandes to adjust the security schemes according to
+  #     # your system enviroments and security policies.
+  #     #####################################################
+  #       - {}
+  #       - BearerAuthOAuth: []
 
-      parameters:
-      #path # NO PATH PARAMETER
-      #query # NO QUERY PARAMETER
-      #header
-          #common header parameter
-        - $ref: "#/components/parameters/X-Request-ID"
-          #header to support the signature function
-        - $ref: "#/components/parameters/Digest"
-        - $ref: "#/components/parameters/Signature"
-        - $ref: "#/components/parameters/TPP-Signature-Certificate"
-          #method specific header elements
-        - $ref: "#/components/parameters/consentId_HEADER_mandatory"
-          #conditional elemention for AIS
-        - $ref: "#/components/parameters/PSU-IP-Address_conditionalForAis"
-          #optional additional PSU Information in header
-        - $ref: "#/components/parameters/PSU-IP-Port"
-        - $ref: "#/components/parameters/PSU-Accept"
-        - $ref: "#/components/parameters/PSU-Accept-Charset"
-        - $ref: "#/components/parameters/PSU-Accept-Encoding"
-        - $ref: "#/components/parameters/PSU-Accept-Language"
-        - $ref: "#/components/parameters/PSU-User-Agent"
-        - $ref: "#/components/parameters/PSU-Http-Method"
-        - $ref: "#/components/parameters/PSU-Device-ID"
-        - $ref: "#/components/parameters/PSU-Geo-Location"
-      #NO REQUEST BODDY
+  #     parameters:
+  #     #path # NO PATH PARAMETER
+  #     #query # NO QUERY PARAMETER
+  #     #header
+  #         #common header parameter
+  #       - $ref: "#/components/parameters/X-Request-ID"
+  #         #header to support the signature function
+  #       - $ref: "#/components/parameters/Digest"
+  #       - $ref: "#/components/parameters/Signature"
+  #       - $ref: "#/components/parameters/TPP-Signature-Certificate"
+  #         #method specific header elements
+  #       - $ref: "#/components/parameters/consentId_HEADER_mandatory"
+  #         #conditional elemention for AIS
+  #       - $ref: "#/components/parameters/PSU-IP-Address_conditionalForAis"
+  #         #optional additional PSU Information in header
+  #       - $ref: "#/components/parameters/PSU-IP-Port"
+  #       - $ref: "#/components/parameters/PSU-Accept"
+  #       - $ref: "#/components/parameters/PSU-Accept-Charset"
+  #       - $ref: "#/components/parameters/PSU-Accept-Encoding"
+  #       - $ref: "#/components/parameters/PSU-Accept-Language"
+  #       - $ref: "#/components/parameters/PSU-User-Agent"
+  #       - $ref: "#/components/parameters/PSU-Http-Method"
+  #       - $ref: "#/components/parameters/PSU-Device-ID"
+  #       - $ref: "#/components/parameters/PSU-Geo-Location"
+  #     #NO REQUEST BODDY
 
-      responses:
-        '200':
-          $ref: "#/components/responses/OK_200_CardAccountList"
+  #     responses:
+  #       '200':
+  #         $ref: "#/components/responses/OK_200_CardAccountList"
 
-        '400':
-          $ref: "#/components/responses/BAD_REQUEST_400_AIS"
-        '401':
-          $ref: "#/components/responses/UNAUTHORIZED_401_AIS"
-        '403':
-          $ref: "#/components/responses/FORBIDDEN_403_AIS"
-        '404':
-          $ref: "#/components/responses/NOT_FOUND_404_AIS"
-        '405':
-          $ref: "#/components/responses/METHOD_NOT_ALLOWED_405_AIS"
-        '406':
-          $ref: "#/components/responses/NOT_ACCEPTABLE_406_AIS"
-        '408':
-          $ref: "#/components/responses/REQUEST_TIMEOUT_408_AIS"
-        '409':
-          $ref: "#/components/responses/CONFLICT_409_AIS"
-        '415':
-          $ref: "#/components/responses/UNSUPPORTED_MEDIA_TYPE_415_AIS"
-        '429':
-          $ref: "#/components/responses/TOO_MANY_REQUESTS_429_AIS"
-        '500':
-          $ref: "#/components/responses/INTERNAL_SERVER_ERROR_500_AIS"
-        '503':
-          $ref: "#/components/responses/SERVICE_UNAVAILABLE_503_AIS"
+  #       '400':
+  #         $ref: "#/components/responses/BAD_REQUEST_400_AIS"
+  #       '401':
+  #         $ref: "#/components/responses/UNAUTHORIZED_401_AIS"
+  #       '403':
+  #         $ref: "#/components/responses/FORBIDDEN_403_AIS"
+  #       '404':
+  #         $ref: "#/components/responses/NOT_FOUND_404_AIS"
+  #       '405':
+  #         $ref: "#/components/responses/METHOD_NOT_ALLOWED_405_AIS"
+  #       '406':
+  #         $ref: "#/components/responses/NOT_ACCEPTABLE_406_AIS"
+  #       '408':
+  #         $ref: "#/components/responses/REQUEST_TIMEOUT_408_AIS"
+  #       '409':
+  #         $ref: "#/components/responses/CONFLICT_409_AIS"
+  #       '415':
+  #         $ref: "#/components/responses/UNSUPPORTED_MEDIA_TYPE_415_AIS"
+  #       '429':
+  #         $ref: "#/components/responses/TOO_MANY_REQUESTS_429_AIS"
+  #       '500':
+  #         $ref: "#/components/responses/INTERNAL_SERVER_ERROR_500_AIS"
+  #       '503':
+  #         $ref: "#/components/responses/SERVICE_UNAVAILABLE_503_AIS"
 
-  /v1/card-accounts/{account-id}:
-    get:
-      summary: Reads details about a card account
-      description: |
-        Reads details about a card account.
-        It is assumed that a consent of the PSU to this access is already given
-        and stored on the ASPSP system. The addressed details of this account depends
-        then on the stored consent addressed by consentId, respectively the OAuth2
-        access token.
-      operationId: ReadCardAccount
-      tags:
-        - Account Information Service (AIS)
+  # /v1/card-accounts/{account-id}:
+  #   get:
+  #     summary: Reads details about a card account
+  #     description: |
+  #       Reads details about a card account.
+  #       It is assumed that a consent of the PSU to this access is already given
+  #       and stored on the ASPSP system. The addressed details of this account depends
+  #       then on the stored consent addressed by consentId, respectively the OAuth2
+  #       access token.
+  #     operationId: ReadCardAccount
+  #     tags:
+  #       - Account Information Service (AIS)
 
-      security:
-      #####################################################
-      # REMARKS ON SECURITY IN THIS OPENAPI FILE
-      #In this file only the basic security element to transport
-      # the bearer token of an an OAuth2 process, which has to
-      # be included inthe HTTP header ist described.
-      #
-      # WARNING:
-      # If you want to use this file for a productive implementation,
-      # it is recommandes to adjust the security schemes according to
-      # your system enviroments and security policies.
-      #####################################################
-        - {}
-        - BearerAuthOAuth: []
+  #     security:
+  #     #####################################################
+  #     # REMARKS ON SECURITY IN THIS OPENAPI FILE
+  #     #In this file only the basic security element to transport
+  #     # the bearer token of an an OAuth2 process, which has to
+  #     # be included inthe HTTP header ist described.
+  #     #
+  #     # WARNING:
+  #     # If you want to use this file for a productive implementation,
+  #     # it is recommandes to adjust the security schemes according to
+  #     # your system enviroments and security policies.
+  #     #####################################################
+  #       - {}
+  #       - BearerAuthOAuth: []
 
-      parameters:
-      #path
-        - $ref: "#/components/parameters/accountId"
-      #query # NO QUERY PARAMETER
-      #header
-          #common header parameter
-        - $ref: "#/components/parameters/X-Request-ID"
-          #header to support the signature function
-        - $ref: "#/components/parameters/Digest"
-        - $ref: "#/components/parameters/Signature"
-        - $ref: "#/components/parameters/TPP-Signature-Certificate"
-          #method specific header elements
-        - $ref: "#/components/parameters/consentId_HEADER_mandatory"
-          #conditional elemention for AIS
-        - $ref: "#/components/parameters/PSU-IP-Address_conditionalForAis"
-          #optional additional PSU Information in header
-        - $ref: "#/components/parameters/PSU-IP-Port"
-        - $ref: "#/components/parameters/PSU-Accept"
-        - $ref: "#/components/parameters/PSU-Accept-Charset"
-        - $ref: "#/components/parameters/PSU-Accept-Encoding"
-        - $ref: "#/components/parameters/PSU-Accept-Language"
-        - $ref: "#/components/parameters/PSU-User-Agent"
-        - $ref: "#/components/parameters/PSU-Http-Method"
-        - $ref: "#/components/parameters/PSU-Device-ID"
-        - $ref: "#/components/parameters/PSU-Geo-Location"
-      #NO REQUEST BODDY
+  #     parameters:
+  #     #path
+  #       - $ref: "#/components/parameters/accountId"
+  #     #query # NO QUERY PARAMETER
+  #     #header
+  #         #common header parameter
+  #       - $ref: "#/components/parameters/X-Request-ID"
+  #         #header to support the signature function
+  #       - $ref: "#/components/parameters/Digest"
+  #       - $ref: "#/components/parameters/Signature"
+  #       - $ref: "#/components/parameters/TPP-Signature-Certificate"
+  #         #method specific header elements
+  #       - $ref: "#/components/parameters/consentId_HEADER_mandatory"
+  #         #conditional elemention for AIS
+  #       - $ref: "#/components/parameters/PSU-IP-Address_conditionalForAis"
+  #         #optional additional PSU Information in header
+  #       - $ref: "#/components/parameters/PSU-IP-Port"
+  #       - $ref: "#/components/parameters/PSU-Accept"
+  #       - $ref: "#/components/parameters/PSU-Accept-Charset"
+  #       - $ref: "#/components/parameters/PSU-Accept-Encoding"
+  #       - $ref: "#/components/parameters/PSU-Accept-Language"
+  #       - $ref: "#/components/parameters/PSU-User-Agent"
+  #       - $ref: "#/components/parameters/PSU-Http-Method"
+  #       - $ref: "#/components/parameters/PSU-Device-ID"
+  #       - $ref: "#/components/parameters/PSU-Geo-Location"
+  #     #NO REQUEST BODDY
 
-      responses:
-        '200':
-          $ref: "#/components/responses/OK_200_CardAccountDetails"
+  #     responses:
+  #       '200':
+  #         $ref: "#/components/responses/OK_200_CardAccountDetails"
 
-        '400':
-          $ref: "#/components/responses/BAD_REQUEST_400_AIS"
-        '401':
-          $ref: "#/components/responses/UNAUTHORIZED_401_AIS"
-        '403':
-          $ref: "#/components/responses/FORBIDDEN_403_AIS"
-        '404':
-          $ref: "#/components/responses/NOT_FOUND_404_AIS"
-        '405':
-          $ref: "#/components/responses/METHOD_NOT_ALLOWED_405_AIS"
-        '406':
-          $ref: "#/components/responses/NOT_ACCEPTABLE_406_AIS"
-        '408':
-          $ref: "#/components/responses/REQUEST_TIMEOUT_408_AIS"
-        '409':
-          $ref: "#/components/responses/CONFLICT_409_AIS"
-        '415':
-          $ref: "#/components/responses/UNSUPPORTED_MEDIA_TYPE_415_AIS"
-        '429':
-          $ref: "#/components/responses/TOO_MANY_REQUESTS_429_AIS"
-        '500':
-          $ref: "#/components/responses/INTERNAL_SERVER_ERROR_500_AIS"
-        '503':
-          $ref: "#/components/responses/SERVICE_UNAVAILABLE_503_AIS"
-
-
-  /v1/card-accounts/{account-id}/balances:
-    get:
-      summary: Read card account balances
-      description: |
-        Reads balance data from a given card account addressed by
-        "account-id".
-
-        Remark: This account-id can be a tokenised identification due
-        to data protection reason since the path information might be
-        logged on intermediary servers within the ASPSP sphere.
-        This account-id then can be retrieved by the
-        "GET Card Account List" call
-
-      operationId: getCardAccountBalances
-      tags:
-        - Account Information Service (AIS)
-
-      security:
-      #####################################################
-      # REMARKS ON SECURITY IN THIS OPENAPI FILE
-      #In this file only the basic security element to transport
-      # the bearer token of an an OAuth2 process, which has to
-      # be included inthe HTTP header ist described.
-      #
-      # WARNING:
-      # If you want to use this file for a productive implementation,
-      # it is recommandes to adjust the security schemes according to
-      # your system enviroments and security policies.
-      #####################################################
-        - {}
-        - BearerAuthOAuth: []
-
-      parameters:
-      #path
-        - $ref: "#/components/parameters/accountId"
-      #query # NO QUERY PARAMETER
-      #header
-          #common header parameter
-        - $ref: "#/components/parameters/X-Request-ID"
-          #header to support the signature function
-        - $ref: "#/components/parameters/Digest"
-        - $ref: "#/components/parameters/Signature"
-        - $ref: "#/components/parameters/TPP-Signature-Certificate"
-          #method specific header elements
-        - $ref: "#/components/parameters/consentId_HEADER_mandatory"
-          #conditional elemention for AIS
-        - $ref: "#/components/parameters/PSU-IP-Address_conditionalForAis"
-          #optional additional PSU Information in header
-        - $ref: "#/components/parameters/PSU-IP-Port"
-        - $ref: "#/components/parameters/PSU-Accept"
-        - $ref: "#/components/parameters/PSU-Accept-Charset"
-        - $ref: "#/components/parameters/PSU-Accept-Encoding"
-        - $ref: "#/components/parameters/PSU-Accept-Language"
-        - $ref: "#/components/parameters/PSU-User-Agent"
-        - $ref: "#/components/parameters/PSU-Http-Method"
-        - $ref: "#/components/parameters/PSU-Device-ID"
-        - $ref: "#/components/parameters/PSU-Geo-Location"
-      #NO REQUEST BODDY
-
-      responses:
-        '200':
-          $ref: "#/components/responses/OK_200_CardAccountBalances"
-
-        '400':
-          $ref: "#/components/responses/BAD_REQUEST_400_AIS"
-        '401':
-          $ref: "#/components/responses/UNAUTHORIZED_401_AIS"
-        '403':
-          $ref: "#/components/responses/FORBIDDEN_403_AIS"
-        '404':
-          $ref: "#/components/responses/NOT_FOUND_404_AIS"
-        '405':
-          $ref: "#/components/responses/METHOD_NOT_ALLOWED_405_AIS"
-        '406':
-          $ref: "#/components/responses/NOT_ACCEPTABLE_406_AIS"
-        '408':
-          $ref: "#/components/responses/REQUEST_TIMEOUT_408_AIS"
-        '409':
-          $ref: "#/components/responses/CONFLICT_409_AIS"
-        '415':
-          $ref: "#/components/responses/UNSUPPORTED_MEDIA_TYPE_415_AIS"
-        '429':
-          $ref: "#/components/responses/TOO_MANY_REQUESTS_429_AIS"
-        '500':
-          $ref: "#/components/responses/INTERNAL_SERVER_ERROR_500_AIS"
-        '503':
-          $ref: "#/components/responses/SERVICE_UNAVAILABLE_503_AIS"
+  #       '400':
+  #         $ref: "#/components/responses/BAD_REQUEST_400_AIS"
+  #       '401':
+  #         $ref: "#/components/responses/UNAUTHORIZED_401_AIS"
+  #       '403':
+  #         $ref: "#/components/responses/FORBIDDEN_403_AIS"
+  #       '404':
+  #         $ref: "#/components/responses/NOT_FOUND_404_AIS"
+  #       '405':
+  #         $ref: "#/components/responses/METHOD_NOT_ALLOWED_405_AIS"
+  #       '406':
+  #         $ref: "#/components/responses/NOT_ACCEPTABLE_406_AIS"
+  #       '408':
+  #         $ref: "#/components/responses/REQUEST_TIMEOUT_408_AIS"
+  #       '409':
+  #         $ref: "#/components/responses/CONFLICT_409_AIS"
+  #       '415':
+  #         $ref: "#/components/responses/UNSUPPORTED_MEDIA_TYPE_415_AIS"
+  #       '429':
+  #         $ref: "#/components/responses/TOO_MANY_REQUESTS_429_AIS"
+  #       '500':
+  #         $ref: "#/components/responses/INTERNAL_SERVER_ERROR_500_AIS"
+  #       '503':
+  #         $ref: "#/components/responses/SERVICE_UNAVAILABLE_503_AIS"
 
 
+  # /v1/card-accounts/{account-id}/balances:
+  #   get:
+  #     summary: Read card account balances
+  #     description: |
+  #       Reads balance data from a given card account addressed by
+  #       "account-id".
 
-  /v1/card-accounts/{account-id}/transactions:
-    get:
-      summary: Read transaction list of an account
-      description: |
-        Reads account data from a given card account addressed by "account-id".
-      operationId: getCardAccountTransactionList
-      tags:
-        - Account Information Service (AIS)
+  #       Remark: This account-id can be a tokenised identification due
+  #       to data protection reason since the path information might be
+  #       logged on intermediary servers within the ASPSP sphere.
+  #       This account-id then can be retrieved by the
+  #       "GET Card Account List" call
 
-      security:
-      #####################################################
-      # REMARKS ON SECURITY IN THIS OPENAPI FILE
-      #In this file only the basic security element to transport
-      # the bearer token of an an OAuth2 process, which has to
-      # be included inthe HTTP header ist described.
-      #
-      # WARNING:
-      # If you want to use this file for a productive implementation,
-      # it is recommandes to adjust the security schemes according to
-      # your system enviroments and security policies.
-      #####################################################
-        - {}
-        - BearerAuthOAuth: []
+  #     operationId: getCardAccountBalances
+  #     tags:
+  #       - Account Information Service (AIS)
 
-      parameters:
-      #path
-        - $ref: "#/components/parameters/accountId"
-      #query
-        - $ref: "#/components/parameters/dateFrom"
-        - $ref: "#/components/parameters/dateTo"
-        - $ref: "#/components/parameters/entryReferenceFrom"
-        - $ref: "#/components/parameters/bookingStatus"
-        - $ref: "#/components/parameters/deltaList"
-        - $ref: "#/components/parameters/withBalanceQuery"
-      #header
-          #common header parameter
-        - $ref: "#/components/parameters/X-Request-ID"
-          #header to support the signature function
-        - $ref: "#/components/parameters/Digest"
-        - $ref: "#/components/parameters/Signature"
-        - $ref: "#/components/parameters/TPP-Signature-Certificate"
-          #method specific header elements
-        - $ref: "#/components/parameters/consentId_HEADER_mandatory"
-        #- $ref: "#/components/parameters/Accept" #Can not defined in Open API. See general comments in the description attached to the top level of the file.
-          #conditional elemention for AIS
-        - $ref: "#/components/parameters/PSU-IP-Address_conditionalForAis"
-          #optional additional PSU Information in header
-        - $ref: "#/components/parameters/PSU-IP-Port"
-        - $ref: "#/components/parameters/PSU-Accept"
-        - $ref: "#/components/parameters/PSU-Accept-Charset"
-        - $ref: "#/components/parameters/PSU-Accept-Encoding"
-        - $ref: "#/components/parameters/PSU-Accept-Language"
-        - $ref: "#/components/parameters/PSU-User-Agent"
-        - $ref: "#/components/parameters/PSU-Http-Method"
-        - $ref: "#/components/parameters/PSU-Device-ID"
-        - $ref: "#/components/parameters/PSU-Geo-Location"
-      #NO REQUEST BODY
+  #     security:
+  #     #####################################################
+  #     # REMARKS ON SECURITY IN THIS OPENAPI FILE
+  #     #In this file only the basic security element to transport
+  #     # the bearer token of an an OAuth2 process, which has to
+  #     # be included inthe HTTP header ist described.
+  #     #
+  #     # WARNING:
+  #     # If you want to use this file for a productive implementation,
+  #     # it is recommandes to adjust the security schemes according to
+  #     # your system enviroments and security policies.
+  #     #####################################################
+  #       - {}
+  #       - BearerAuthOAuth: []
 
-      responses:
-        '200':
-          $ref: "#/components/responses/OK_200_CardAccountsTransactions"
+  #     parameters:
+  #     #path
+  #       - $ref: "#/components/parameters/accountId"
+  #     #query # NO QUERY PARAMETER
+  #     #header
+  #         #common header parameter
+  #       - $ref: "#/components/parameters/X-Request-ID"
+  #         #header to support the signature function
+  #       - $ref: "#/components/parameters/Digest"
+  #       - $ref: "#/components/parameters/Signature"
+  #       - $ref: "#/components/parameters/TPP-Signature-Certificate"
+  #         #method specific header elements
+  #       - $ref: "#/components/parameters/consentId_HEADER_mandatory"
+  #         #conditional elemention for AIS
+  #       - $ref: "#/components/parameters/PSU-IP-Address_conditionalForAis"
+  #         #optional additional PSU Information in header
+  #       - $ref: "#/components/parameters/PSU-IP-Port"
+  #       - $ref: "#/components/parameters/PSU-Accept"
+  #       - $ref: "#/components/parameters/PSU-Accept-Charset"
+  #       - $ref: "#/components/parameters/PSU-Accept-Encoding"
+  #       - $ref: "#/components/parameters/PSU-Accept-Language"
+  #       - $ref: "#/components/parameters/PSU-User-Agent"
+  #       - $ref: "#/components/parameters/PSU-Http-Method"
+  #       - $ref: "#/components/parameters/PSU-Device-ID"
+  #       - $ref: "#/components/parameters/PSU-Geo-Location"
+  #     #NO REQUEST BODDY
 
-        '400':
-          $ref: "#/components/responses/BAD_REQUEST_400_AIS"
-        '401':
-          $ref: "#/components/responses/UNAUTHORIZED_401_AIS"
-        '403':
-          $ref: "#/components/responses/FORBIDDEN_403_AIS"
-        '404':
-          $ref: "#/components/responses/NOT_FOUND_404_AIS"
-        '405':
-          $ref: "#/components/responses/METHOD_NOT_ALLOWED_405_AIS"
-        '406':
-          $ref: "#/components/responses/NOT_ACCEPTABLE_406_AIS"
-        '408':
-          $ref: "#/components/responses/REQUEST_TIMEOUT_408_AIS"
-        '409':
-          $ref: "#/components/responses/CONFLICT_409_AIS"
-        '415':
-          $ref: "#/components/responses/UNSUPPORTED_MEDIA_TYPE_415_AIS"
-        '429':
-          $ref: "#/components/responses/TOO_MANY_REQUESTS_429_AIS"
-        '500':
-          $ref: "#/components/responses/INTERNAL_SERVER_ERROR_500_AIS"
-        '503':
-          $ref: "#/components/responses/SERVICE_UNAVAILABLE_503_AIS"
+  #     responses:
+  #       '200':
+  #         $ref: "#/components/responses/OK_200_CardAccountBalances"
+
+  #       '400':
+  #         $ref: "#/components/responses/BAD_REQUEST_400_AIS"
+  #       '401':
+  #         $ref: "#/components/responses/UNAUTHORIZED_401_AIS"
+  #       '403':
+  #         $ref: "#/components/responses/FORBIDDEN_403_AIS"
+  #       '404':
+  #         $ref: "#/components/responses/NOT_FOUND_404_AIS"
+  #       '405':
+  #         $ref: "#/components/responses/METHOD_NOT_ALLOWED_405_AIS"
+  #       '406':
+  #         $ref: "#/components/responses/NOT_ACCEPTABLE_406_AIS"
+  #       '408':
+  #         $ref: "#/components/responses/REQUEST_TIMEOUT_408_AIS"
+  #       '409':
+  #         $ref: "#/components/responses/CONFLICT_409_AIS"
+  #       '415':
+  #         $ref: "#/components/responses/UNSUPPORTED_MEDIA_TYPE_415_AIS"
+  #       '429':
+  #         $ref: "#/components/responses/TOO_MANY_REQUESTS_429_AIS"
+  #       '500':
+  #         $ref: "#/components/responses/INTERNAL_SERVER_ERROR_500_AIS"
+  #       '503':
+  #         $ref: "#/components/responses/SERVICE_UNAVAILABLE_503_AIS"
+
+
+
+  # /v1/card-accounts/{account-id}/transactions:
+  #   get:
+  #     summary: Read transaction list of an account
+  #     description: |
+  #       Reads account data from a given card account addressed by "account-id".
+  #     operationId: getCardAccountTransactionList
+  #     tags:
+  #       - Account Information Service (AIS)
+
+  #     security:
+  #     #####################################################
+  #     # REMARKS ON SECURITY IN THIS OPENAPI FILE
+  #     #In this file only the basic security element to transport
+  #     # the bearer token of an an OAuth2 process, which has to
+  #     # be included inthe HTTP header ist described.
+  #     #
+  #     # WARNING:
+  #     # If you want to use this file for a productive implementation,
+  #     # it is recommandes to adjust the security schemes according to
+  #     # your system enviroments and security policies.
+  #     #####################################################
+  #       - {}
+  #       - BearerAuthOAuth: []
+
+  #     parameters:
+  #     #path
+  #       - $ref: "#/components/parameters/accountId"
+  #     #query
+  #       - $ref: "#/components/parameters/dateFrom"
+  #       - $ref: "#/components/parameters/dateTo"
+  #       - $ref: "#/components/parameters/entryReferenceFrom"
+  #       - $ref: "#/components/parameters/bookingStatus"
+  #       - $ref: "#/components/parameters/deltaList"
+  #       - $ref: "#/components/parameters/withBalanceQuery"
+  #     #header
+  #         #common header parameter
+  #       - $ref: "#/components/parameters/X-Request-ID"
+  #         #header to support the signature function
+  #       - $ref: "#/components/parameters/Digest"
+  #       - $ref: "#/components/parameters/Signature"
+  #       - $ref: "#/components/parameters/TPP-Signature-Certificate"
+  #         #method specific header elements
+  #       - $ref: "#/components/parameters/consentId_HEADER_mandatory"
+  #       #- $ref: "#/components/parameters/Accept" #Can not defined in Open API. See general comments in the description attached to the top level of the file.
+  #         #conditional elemention for AIS
+  #       - $ref: "#/components/parameters/PSU-IP-Address_conditionalForAis"
+  #         #optional additional PSU Information in header
+  #       - $ref: "#/components/parameters/PSU-IP-Port"
+  #       - $ref: "#/components/parameters/PSU-Accept"
+  #       - $ref: "#/components/parameters/PSU-Accept-Charset"
+  #       - $ref: "#/components/parameters/PSU-Accept-Encoding"
+  #       - $ref: "#/components/parameters/PSU-Accept-Language"
+  #       - $ref: "#/components/parameters/PSU-User-Agent"
+  #       - $ref: "#/components/parameters/PSU-Http-Method"
+  #       - $ref: "#/components/parameters/PSU-Device-ID"
+  #       - $ref: "#/components/parameters/PSU-Geo-Location"
+  #     #NO REQUEST BODY
+
+  #     responses:
+  #       '200':
+  #         $ref: "#/components/responses/OK_200_CardAccountsTransactions"
+
+  #       '400':
+  #         $ref: "#/components/responses/BAD_REQUEST_400_AIS"
+  #       '401':
+  #         $ref: "#/components/responses/UNAUTHORIZED_401_AIS"
+  #       '403':
+  #         $ref: "#/components/responses/FORBIDDEN_403_AIS"
+  #       '404':
+  #         $ref: "#/components/responses/NOT_FOUND_404_AIS"
+  #       '405':
+  #         $ref: "#/components/responses/METHOD_NOT_ALLOWED_405_AIS"
+  #       '406':
+  #         $ref: "#/components/responses/NOT_ACCEPTABLE_406_AIS"
+  #       '408':
+  #         $ref: "#/components/responses/REQUEST_TIMEOUT_408_AIS"
+  #       '409':
+  #         $ref: "#/components/responses/CONFLICT_409_AIS"
+  #       '415':
+  #         $ref: "#/components/responses/UNSUPPORTED_MEDIA_TYPE_415_AIS"
+  #       '429':
+  #         $ref: "#/components/responses/TOO_MANY_REQUESTS_429_AIS"
+  #       '500':
+  #         $ref: "#/components/responses/INTERNAL_SERVER_ERROR_500_AIS"
+  #       '503':
+  #         $ref: "#/components/responses/SERVICE_UNAVAILABLE_503_AIS"
 
       #####################################################
       # Consents
@@ -4266,78 +4269,130 @@ components:
         authorisationIds:
           $ref: "#/components/schemas/authorisationsList"
 
-    accountReference:
+    accountReference16-CH:
       description: |
         Reference to an account by either
           * IBAN, of a payment accounts, or
-          * BBAN, for payment accounts if there is no IBAN, or
-          * the Primary Account Number (PAN) of a card, can be tokenised by the ASPSP due to PCI DSS requirements, or
-          * the Primary Account Number (PAN) of a card in a masked form, or
-          * an alias to access a payment account via a registered mobile phone number (MSISDN).
+          * othrAccountIdentification, for payment accounts if there is no IBAN
+        adapted from ISO pain.001.001.03.ch.02 CashAccount16-CH_IdTpCcy
       type: object
       properties:
         iban:
           $ref: "#/components/schemas/iban"
-        bban:
-          $ref: "#/components/schemas/bban"
-        pan:
-          $ref: "#/components/schemas/pan"
-        maskedPan:
-          $ref: "#/components/schemas/maskedPan"
-        msisdn:
-          $ref: "#/components/schemas/msisdn"
+        otherAccountIdentification:
+          $ref: "#/components/schemas/otherAccountIdentification1-CH"
         currency:
           $ref: "#/components/schemas/currencyCode"
 
-    accountReduced1:
+    otherAccountIdentification1-CH:
       description: |
-        Reference to an account
-      type: object
-      properties:
-        id:
-          $ref: "#/components/schemas/accountIdentification4Choice"
-        tp:
-          $ref: "#/components/schemas/accountSchemeName1Choice"
-
-    accountIdentification4Choice:
-      description: |
-        Specifies the unique identification of an account as assigned by the account servicer.
-      type: object
-      properties:
-        iban:
-          $ref: "#/components/schemas/iban"
-        othr:
-          $ref: "#/components/schemas/genericAccountIdentification1"
-
-    genericAccountIdentification1:
-      description: |
-        Unique identification of an account, as assigned by the account servicer, using an identification scheme.
-      type: object
-      properties:
-        id:
-          $ref: "#/components/schemas/prtry"
-        schmeNm:
-          $ref: "#/components/schemas/accountSchemeName1Choice"
-
-    prtry:
+        Other payment account Identifier.
+        adapted from ISO pain.001.001.03.ch.02 GenericAccountIdentification1-CH
       type: string
-      description: Unique end to end identity.
-      maxLength: 35
+      maxLength: 34
+#      pattern: "([a-zA-Z0-9.,;:'+-/()?*[]{}\\`ï¿½~ ]|[!\"#%&<>ï¿½=@_$ï¿½]|[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½])*"
+      example: "90-100100-0"
 
-    externalAccountIdentification1Code:
-      type: string
-      description:  Specifies the external account identification scheme name code in the format of character string with a maximum length of 4 characters.
-      maxLength: 4
-
-    accountSchemeName1Choice:
+    deptorAgent7-CH:
       description: |
-         Name of the identification scheme.
+        Reference to an deptorAgent by either
+          * BIC, of the deptor bank, or
+          * IID, of the deptor bank
+        adapted from ISO pain.001.001.03.ch.02 FinancialInstitutionIdentification7-CH_BicOrClrId
       type: object
       properties:
-        cd:
-          $ref: "#/components/schemas/externalAccountIdentification1Code"
-        prtry:
-          $ref: "#/components/schemas/prtry"
+        bic:
+          $ref: "#/components/schemas/bicfi"
+        iid:
+          $ref: "#/components/schemas/institutionalIdentification2"
+
+    institutionalIdentification2:
+      description: |
+        Institiutional identification of a bank (Clearing System Member ID)
+        adapted from ISO pain.001.001.03.ch.02 ClearingSystemMemberIdentification2
+      type: object
+      required:
+        - clearingSystemIdCode
+        - clearingSystemMemberId
+      properties:
+        clearingSystemIdCode:
+            type: string
+            minLength: 1
+            maxLength: 5
+        clearingSystemMemberId:
+            type: string
+            maxLength: 35
+
+    creditorAgent7-CH:
+      description: |
+        Reference to an creditorAgent by either
+          * BIC, of the creditor bank, or
+          * IID, of the creditor bank, or
+          * IID and optional name and address of the creditor bank or
+          * Name and address of the creditor bank
+        adapted from ISO pain.001.001.03.ch.02 FinancialInstitutionIdentification7-CH
+      type: object
+      properties:
+        bic:
+          $ref: "#/components/schemas/bicfi"
+        iid:
+          $ref: "#/components/schemas/institutionalIdentification2"
+        name:
+          type: string
+          maxLength: 35
+        address:
+          $ref: "#/components/schemas/postalAddress6-CH"
+
+    postalAddress6-CH:
+      description: |
+        as in ISO pain.001.001.03.ch.02 PostalAddress6
+        If possible structured. Simultaneous use of the structured elements <StrtNm>/ <BldgNb>/<PstCd>/<TwnNm> and the unstructured element <AdrLine> is not permitted.
+        as in ISO pain.001.001.03.ch.02 PostalAddress6-CH
+      type: object
+      properties:
+        streetName:
+          type: string
+          maxLength: 70
+        buildingNumber:
+          type: string
+          maxLength: 16
+        townName:
+          type: string
+          maxLength: 35
+        postCode:
+          type: string
+          maxLength: 16
+        country:
+          $ref: "#/components/schemas/countryCode"
+        addressLine1:
+          type: string
+          maxLength: 70
+        addressLine2:
+          type: string
+          maxLength: 70
+
+#    accountReference:
+#      description: |
+#        Reference to an account by either
+#          * IBAN, of a payment accounts, or
+#          * BBAN, for payment accounts if there is no IBAN, or
+#          * the Primary Account Number (PAN) of a card, can be tokenised by the ASPSP due to PCI DSS requirements, or
+#          * the Primary Account Number (PAN) of a card in a masked form, or
+#          * an alias to access a payment account via a registered mobile phone number (MSISDN).
+#      type: object
+#      properties:
+#        iban:
+#          $ref: "#/components/schemas/iban"
+#        bban:
+#          $ref: "#/components/schemas/bban"
+#        pan:
+#          $ref: "#/components/schemas/pan"
+#        maskedPan:
+#          $ref: "#/components/schemas/maskedPan"
+#        msisdn:
+#          $ref: "#/components/schemas/msisdn"
+#        currency:
+#          $ref: "#/components/schemas/currencyCode"
 
 #    accountReferenceIban:
 #      type: object
@@ -4477,7 +4532,7 @@ components:
             If the array is empty, also the arrays for balances or transactions shall be empty, if used.
           type: array
           items:
-            $ref: "#/components/schemas/accountReference"
+            $ref: "#/components/schemas/accountReference16-CH"
         balances:
           description: |
             Is asking for balances of the addressed accounts.
@@ -4487,7 +4542,7 @@ components:
             If the array is empty, also the arrays for accounts or transactions shall be empty, if used.
           type: array
           items:
-            $ref: "#/components/schemas/accountReference"
+            $ref: "#/components/schemas/accountReference16-CH"
         transactions:
           description: |
             Is asking for transactions of the addressed accounts.
@@ -4497,7 +4552,7 @@ components:
             If the array is empty, also the arrays for accounts or balances shall be empty, if used.
           type: array
           items:
-            $ref: "#/components/schemas/accountReference"
+            $ref: "#/components/schemas/accountReference16-CH"
         availableAccounts:
           description: |
             Optional if supported by API provider.
@@ -4780,13 +4835,13 @@ components:
         creditorName:
           $ref: "#/components/schemas/creditorName"
         creditorAccount:
-          $ref: "#/components/schemas/accountReduced1"
+          $ref: "#/components/schemas/accountReference16-CH"
         ultimateCreditor:
           $ref: "#/components/schemas/ultimateCreditor"
         debtorName:
           $ref: "#/components/schemas/debtorName"
         debtorAccount:
-          $ref: "#/components/schemas/accountReduced1"
+          $ref: "#/components/schemas/accountReference16-CH"
         ultimateDebtor:
           $ref: "#/components/schemas/ultimateDebtor"
         remittanceInformationUnstructured:
@@ -4889,16 +4944,32 @@ components:
           type: string
 
 
-    paymentExchangeRate:
-      description: Exchange Rate
+#    paymentExchangeRate:
+#      description: Exchange Rate
+#      type: object
+#      properties:
+#        unitCurrency:
+#          type: string
+#        exchangeRate:
+#          type: string
+#        contractIdentification:
+#          type: string
+#        rateType:
+#          type: string
+#          enum:
+#            - "SPOT"
+#            - "SALE"
+#            - "AGRD"
+
+    exchangeRateInformation1:
+      description: as in ISO pain.001.001.03.ch.02 ExchangeRateInformation1
       type: object
       properties:
-        unitCurrency:
-          type: string
         exchangeRate:
           type: string
         contractIdentification:
           type: string
+          maxLength: 35
         rateType:
           type: string
           enum:
@@ -5148,6 +5219,11 @@ components:
       type: string
       description:  Specifies the external service level code in the format of character string with a maximum length of 4 characters.
       maxLength: 4
+      enum:
+       - "SEPA"
+       - "PRPT"
+       - "SDVA"
+       - "URGP"
 
     #####################################################
     # Predefined Text Formats
@@ -5321,11 +5397,11 @@ components:
       maxLength: 35
       example: "Creditor Id 1234"
 
-    creditorAgentName:
-      description: Creditor Agent Name
-      type: string
-      maxLength: 70
-      example: "Creditor Agent Name"
+#    creditorAgentName:
+#      description: Creditor Agent Name
+#      type: string
+#      maxLength: 70
+#      example: "Creditor Agent Name"
 
     debtorName:
       description: Debtor Name
@@ -5435,7 +5511,7 @@ components:
         The following data element are depending on the actual payment product available (in source code):
 
         <table style="width:100%">
-        <tr><td></td><td>Zahlungsart 1: ESR</td><td>Zahlungsart 3: IBAN/Postkonto und IID/BIC - nur mit IBAN</td><td>Zahlungsart 4: Fremdwährung - nur mit IBAN</td><td>Zahlungsart 5: Ausland SEPA</td><td>Zahlungsart 6: Ausland - nur mit BIC</td></tr>
+        <tr><td></td><td>Zahlungsart 1: ESR</td><td>Zahlungsart 3: IBAN/Postkonto und IID/BIC - nur mit IBAN</td><td>Zahlungsart 4: FremdwÃ¤hrung - nur mit IBAN</td><td>Zahlungsart 5: Ausland SEPA</td><td>Zahlungsart 6: Ausland - nur mit BIC</td></tr>
         <tr><td>Data Element</td><td>domestic-swiss-credit-transfers-ISR</td><td>domestic-swiss-credit-transfers</td><td>domestic-swiss-credit-transfers</td><td>sepa-credit-transfers</td><td>cross-border-credit-transfers</td></tr>
         <tr><td>endToEnd Identification</td><td>mandatory (not provided)</td><td>mandatory (not provided)</td><td>mandatory (not provided)</td><td>mandatory (not provided)</td><td>optional</td></tr>
         <tr><td>debtorAccount (incl. type)</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
@@ -5449,11 +5525,11 @@ components:
         <tr><td>creditorAgentName</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td></tr>
         <tr><td>creditorName</td><td>optional, Vorschlag: mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
         <tr><td>creditorId</td><td>n.a.</td><td>dependent</td><td>dependent</td><td>optional</td><td>dependent</td></tr>
-        <tr><td>creditorAddress</td><td>optional</td><td>optional, wenn möglich strukturiert</td><td>optional, wenn möglich strukturiert</td><td>optional, unstrukturiert</td><td>optional, unstrukturiert</td></tr>
+        <tr><td>creditorAddress</td><td>optional</td><td>optional, wenn m?glich strukturiert</td><td>optional, wenn mÃ¶glich strukturiert</td><td>optional, unstrukturiert</td><td>optional, unstrukturiert</td></tr>
         <tr><td>creditorNameAndAddress</td><td>n.a.</td><td>dependent</td><td>dependent</td><td>dependent</td><td>dependent</td></tr>
         <tr><td>ultimateCreditorName</td><td>n.a.</td><td>optional</td><td>optional</td><td>optional</td><td>MT n.a. / MX optional</td></tr>
         <tr><td>chargeBearer</td><td>n.a.</td><td>optional</td><td>optional</td><td>mandatory - SLEV</td><td>optional</td></tr>
-        <tr><td>purposeCode (SALA / PENS)</td><td>optional (z.B. Salär)</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td></tr>
+        <tr><td>purposeCode (SALA / PENS)</td><td>optional (z.B. SalÃ¤r)</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td></tr>
         <tr><td>remittanceInformation (Unstrd 1..N)</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td></tr>
         <tr><td>serviceLevel</td><td>n.a.</td><td>optional</td><td>optional</td><td>mandatory</td><td>optional</td></tr>
         <tr><td>remittanceInformation (Unstrd nur 1)</td><td>n.a.</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td></tr>
@@ -5489,11 +5565,11 @@ components:
           type: string
           maxLength: 35
         debtorAccount:
-          $ref: "#/components/schemas/accountReduced1"
+          $ref: "#/components/schemas/accountReference16-CH"
         debtorId: # N.A. for all, but can be used by ASPSP if needed
           $ref: "#/components/schemas/debtorId"
         debtorAgent:
-          $ref: "#/components/schemas/bicfi"
+          $ref: "#/components/schemas/deptorAgent7-CH"
         debtorName:
           $ref: "#/components/schemas/debtorName"
         ultimateDebtor: # N.A. for all, but can be used by ASPSP if needed
@@ -5503,13 +5579,13 @@ components:
         transactionCurrency: # N.A. for all, but can be used by ASPSP if needed
           $ref: "#/components/schemas/currencyCode"
         exchangeRateInformation: # N.A. for all, but can be used by ASPSP if needed
-          $ref: "#/components/schemas/paymentExchangeRate"
+          $ref: "#/components/schemas/exchangeRateInformation1"
         creditorAccount:
-          $ref: "#/components/schemas/accountReduced1"
+          $ref: "#/components/schemas/accountReference16-CH"
         creditorAgent:
-          $ref: "#/components/schemas/bicfi"
-        creditorAgentName:
-          $ref: "#/components/schemas/creditorAgentName"
+          $ref: "#/components/schemas/creditorAgent7-CH"
+#        creditorAgentName:
+#          $ref: "#/components/schemas/creditorAgentName"
         creditorName:
           $ref: "#/components/schemas/creditorName"
         creditorId:
@@ -5571,7 +5647,7 @@ components:
         The following data element are depending on the actual payment product available (in source code):
 
         <table style="width:100%">
-        <tr><td></td><td>Zahlungsart 1: ESR</td><td>Zahlungsart 3: IBAN/Postkonto und IID/BIC - nur mit IBAN</td><td>Zahlungsart 4: Fremdwährung - nur mit IBAN</td><td>Zahlungsart 5: Ausland SEPA</td><td>Zahlungsart 6: Ausland - nur mit BIC</td></tr>
+        <tr><td></td><td>Zahlungsart 1: ESR</td><td>Zahlungsart 3: IBAN/Postkonto und IID/BIC - nur mit IBAN</td><td>Zahlungsart 4: Fremdw?hrung - nur mit IBAN</td><td>Zahlungsart 5: Ausland SEPA</td><td>Zahlungsart 6: Ausland - nur mit BIC</td></tr>
         <tr><td>Data Element</td><td>domestic-swiss-credit-transfers-ISR</td><td>domestic-swiss-credit-transfers</td><td>domestic-swiss-credit-transfers</td><td>sepa-credit-transfers</td><td>cross-border-credit-transfers</td></tr>
         <tr><td>endToEndIdentification</td><td>mandatory (not provided)</td><td>mandatory (not provided)</td><td>mandatory (not provided)</td><td>mandatory (not provided)</td><td>optional</td></tr>
         <tr><td>debtorAccount</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
@@ -5585,11 +5661,11 @@ components:
         <tr><td>creditorAgentName</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td></tr>
         <tr><td>creditorName</td><td>optional, Vorschlag: mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
         <tr><td>creditorId</td><td>n.a.</td><td>dependent</td><td>dependent</td><td>optional</td><td>dependent</td></tr>
-        <tr><td>creditorAddress</td><td>optional</td><td>optional, wenn möglich strukturiert</td><td>optional, wenn möglich strukturiert</td><td>optional, unstrukturiert</td><td>optional, unstrukturiert</td></tr>
+        <tr><td>creditorAddress</td><td>optional</td><td>optional, wenn mÃ¶glich strukturiert</td><td>optional, wenn m?glich strukturiert</td><td>optional, unstrukturiert</td><td>optional, unstrukturiert</td></tr>
         <tr><td>creditorNameAndAddress</td><td>n.a.</td><td>dependent</td><td>dependent</td><td>dependent</td><td>dependent</td></tr>
         <tr><td>ultimateCreditorName</td><td>n.a.</td><td>optional</td><td>optional</td><td>optional</td><td>MT n.a. / MX optional</td></tr>
         <tr><td>chargeBearer</td><td>n.a.</td><td>optional</td><td>optional</td><td>mandatory - SLEV</td><td>optional</td></tr>
-        <tr><td>purposeCode</td><td>optional (z.B. Salär)</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td></tr>
+        <tr><td>purposeCode</td><td>optional (z.B. SalÃ¤r)</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td></tr>
         <tr><td>remittanceInformation</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td></tr>
         <tr><td>serviceLevel</td><td>n.a.</td><td>optional</td><td>optional</td><td>mandatory</td><td>optional</td></tr>
         <tr><td>remittanceInformation</td><td>n.a.</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td></tr>
@@ -5630,13 +5706,13 @@ components:
         transactionCurrency: # N.A. for all, but can be used by ASPSP if needed
           $ref: "#/components/schemas/currencyCode"
         exchangeRateInformation: # N.A. for all, but can be used by ASPSP if needed
-          $ref: "#/components/schemas/paymentExchangeRate"
+          $ref: "#/components/schemas/exchangeRateInformation1"
         creditorAccount:
-          $ref: "#/components/schemas/accountReduced1"
+          $ref: "#/components/schemas/accountReference16-CH"
         creditorAgent:
-          $ref: "#/components/schemas/bicfi"
-        creditorAgentName:
-          $ref: "#/components/schemas/creditorAgentName"
+          $ref: "#/components/schemas/creditorAgent7-CH"
+#        creditorAgentName:
+#          $ref: "#/components/schemas/creditorAgentName"
         creditorName:
           $ref: "#/components/schemas/creditorName"
         creditorId:
@@ -5749,15 +5825,15 @@ components:
           type: string
           maxLength: 35
         debtorAccount:
-          $ref: "#/components/schemas/accountReduced1"
+          $ref: "#/components/schemas/accountReference16-CH"
         ultimateDebtor: # N.A.
           $ref: "#/components/schemas/ultimateDebtor"
         instructedAmount:
           $ref: "#/components/schemas/amount"
         creditorAccount:
-          $ref: "#/components/schemas/accountReduced1"
+          $ref: "#/components/schemas/accountReference16-CH"
         creditorAgent:
-          $ref: "#/components/schemas/bicfi"
+          $ref: "#/components/schemas/creditorAgent7-CH"
         creditorName:
           $ref: "#/components/schemas/creditorName"
         creditorAddress:
@@ -5807,7 +5883,7 @@ components:
         batchBookingPreferred:
           $ref: "#/components/schemas/batchBookingPreferred"
         debtorAccount:
-          $ref: "#/components/schemas/accountReduced1"
+          $ref: "#/components/schemas/accountReference16-CH"
 #        paymentInformationId:
 #          description: |
 #            Unique identification as assigned by the sending party to unambiguously identify this bulk payment.
@@ -5871,7 +5947,7 @@ components:
           type: string
           maxLength: 35
         account:
-          $ref: "#/components/schemas/accountReference"
+          $ref: "#/components/schemas/accountReference16-CH"
         payee:
           description: Name payee
           type: string
@@ -6154,15 +6230,15 @@ components:
           type: string
           maxLength: 35
         debtorAccount:
-          $ref: "#/components/schemas/accountReduced1"
+          $ref: "#/components/schemas/accountReference16-CH"
         ultimateDebtor: # N.A.
           $ref: "#/components/schemas/ultimateDebtor"
         instructedAmount:
           $ref: "#/components/schemas/amount"
         creditorAccount:
-          $ref: "#/components/schemas/accountReduced1"
+          $ref: "#/components/schemas/accountReference16-CH"
         creditorAgent:
-          $ref: "#/components/schemas/bicfi"
+          $ref: "#/components/schemas/creditorAgent7-CH"
         creditorName:
           $ref: "#/components/schemas/creditorName"
         creditorAddress:
@@ -6203,15 +6279,15 @@ components:
           type: string
           maxLength: 35
         debtorAccount:
-          $ref: "#/components/schemas/accountReduced1"
+          $ref: "#/components/schemas/accountReference16-CH"
         ultimateDebtor: # N.A.
           $ref: "#/components/schemas/ultimateDebtor"
         instructedAmount:
           $ref: "#/components/schemas/amount"
         creditorAccount:
-          $ref: "#/components/schemas/accountReduced1"
+          $ref: "#/components/schemas/accountReference16-CH"
         creditorAgent:
-          $ref: "#/components/schemas/bicfi"
+          $ref: "#/components/schemas/creditorAgent7-CH"
         creditorName:
           $ref: "#/components/schemas/creditorName"
         creditorAddress:
@@ -6261,7 +6337,7 @@ components:
           type: string
           format: date
         debtorAccount:
-          $ref: "#/components/schemas/accountReduced1"
+          $ref: "#/components/schemas/accountReference16-CH"
         payments:
           description: |
             A list of generic JSON bodies payment initations for bulk payments via JSON.
@@ -6490,7 +6566,7 @@ components:
         - balances
       properties:
         account:
-          $ref: "#/components/schemas/accountReference"
+          $ref: "#/components/schemas/accountReference16-CH"
         balances:
           $ref: "#/components/schemas/balanceList"
 
@@ -6502,7 +6578,7 @@ components:
         - balances
       properties:
         cardAccount:
-          $ref: "#/components/schemas/accountReference"
+          $ref: "#/components/schemas/accountReference16-CH"
         balances:
           $ref: "#/components/schemas/balanceList"
 
@@ -6514,7 +6590,7 @@ components:
       type: object
       properties:
         account:
-          $ref: "#/components/schemas/accountReference"
+          $ref: "#/components/schemas/accountReference16-CH"
         transactions:
           $ref: "#/components/schemas/accountReport"
         balances:
@@ -6530,7 +6606,7 @@ components:
       type: object
       properties:
         cardAccount:
-          $ref: "#/components/schemas/accountReference"
+          $ref: "#/components/schemas/accountReference16-CH"
         cardTransactions:
           $ref: "#/components/schemas/cardAccountReport"
         balances:
@@ -10639,7 +10715,7 @@ components:
     ASPSP-Notification-Content:
       description: |
         The string has the form
-        status=X1, â€¦, Xn
+        status=X1, ..., Xn
         where Xi is one of the constants SCA, PROCESS, LAST and where constants are not repeated.
         The usage of the constants supports the following semantics
         SCA - Notification on every change of the scaStatus attribute for all related authorisation processes is provided by the ASPSP for the related resource.
