@@ -1,0 +1,6 @@
+site_url: https://example.com/foo/
+
+nav:
+    - Home: README.md
+    - Glossary: GLOSSARY.MD
+    - Bug Tracker: /issues/
