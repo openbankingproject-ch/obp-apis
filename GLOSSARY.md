@@ -20,12 +20,12 @@
 
 ## Allgemeine SCA egriffe
 
-|   Abkrz.   |                               Begriff (en)                               | Begriff (de) |
-| ---------- | ------------------------------------------------------------------------ | ------------ |
-| Embedded   | The user authentication is embedded in the REST-Call over the TPP-Server |              |
-| Redirect   | The user authentication is redirected to the e-Banking Weblogin          |              |
-| Decoupled  | The user authentication is requested over a decoupled device             |              |
-| Multilevel | More than one users has to authorize an action                           |              |
+|    Abkrz.     |                               Begriff (en)                               | Begriff (de) |
+| ------------- | ------------------------------------------------------------------------ | ------------ |
+| Redirect      | The user authentication is redirected to the e-Banking Weblogin          |              |
+| Embedded      | The user authentication is embedded in the REST-Call over the TPP-Server |              |
+| ~~Decoupled~~ | ~~The user authentication is requested over a decoupled device~~         |              |
+| Multilevel    | More than one users has to authorize an action                           |              |
 
 ## Allgemeine Begriffe
 
