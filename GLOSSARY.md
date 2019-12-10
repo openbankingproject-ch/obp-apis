@@ -64,8 +64,8 @@
 
 ## Nationale Begriffe
 
-| Abkrz. |                      Begriff (en)                      |         Begriff (de)          |
-| ------ | ------------------------------------------------------ | ----------------------------- |
-| NCA    | National Competent Authority, e.g.: BaFin & Bundesbank | Nationale Regulierungsbehörde |
-| BaFin  | Bundesanstalt für Finanzdienstleistungsaufsicht        |                               |
-| CBA    | Croatian Banking Association                           |                               |
+| Abkrz. |                      Begriff (en)                      |         Begriff (de)                            |
+| ------ | ------------------------------------------------------ | ----------------------------------------------- |
+| NCA    | National Competent Authority                           | Nationale Regulierungsbehörde                   |
+| BaFin  |                                                        | Bundesanstalt für Finanzdienstleistungsaufsicht |
+| CBA    | Croatian Banking Association                           |                                                 |
