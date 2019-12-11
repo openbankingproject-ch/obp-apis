@@ -5497,7 +5497,7 @@ components:
 
           * domestic-swiss-credit-transfers-isr
           * domestic-swiss-credit-transfers
-		      * domestic-swiss-foreign-credit-transfers
+          * domestic-swiss-foreign-credit-transfers
           * sepa-credit-transfers
           * cross-border-credit-transfers
 
@@ -5513,7 +5513,7 @@ components:
 
         <table style="width:100%">
         <tr><td></td><td>Payment Type 1: ISR</td><td>Payment Type 2: IBAN/postal account and IID/BIC</td><td>Payment Type 4: Foreign currency</td><td>Payment Type 5: Foreign SEPA</td><td>Payment Type 6: Foreign</td></tr>
-<tr><td>CH Domestic Data Element</td><td>domestic-swiss-credit-transfers-ISR</td><td>domestic-swiss-credit-transfers</td><td>domestic-swiss-foreign-credit-transfers</td><td>sepa-credit-transfers</td><td>cross-border-credit-transfers</td></tr>
+        <tr><td>CH Domestic Data Element</td><td>domestic-swiss-credit-transfers-ISR</td><td>domestic-swiss-credit-transfers</td><td>domestic-swiss-foreign-credit-transfers</td><td>sepa-credit-transfers</td><td>cross-border-credit-transfers</td></tr>
         <tr><td>endToEndIdentification</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
         <tr><td>debtorAccount (incl. type)</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
         <tr><td>debtorAgent</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>optional</td></tr>
@@ -5542,7 +5542,7 @@ components:
         <tr><td>requestedExecutionTime</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td></tr>
         </table>
 
-        Notes:
+        Footnotes from the table:
         1) currencyOfTransfer is a subfield of equivalentAmount and may only be used if equivalentAmount is used instead of instructedAmount.
         2) The element may only be used in consultation with the financial institution commissioned.
         3) The element is currently ignored by financial institutions.
