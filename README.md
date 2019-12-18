@@ -14,7 +14,7 @@ follows the [OpenAPI 3.0](https://github.com/OAI/OpenAPI-Specification/blob/mast
 spezification:
 * the API as HTML: [/docs](https://openbankingproject-ch.github.io/obp-apis)
 * the API as YAML: [/swiss-ng-api.yaml](https://github.com/openbankingproject-ch/obp-apis/raw/master/swiss-ng-api.yaml)
-![Prüfungsstatus der Spezifikation](https://travis-ci.com/openbankingproject-ch/obp-apis.svg?branch=master "Prüfungsstatus der Spezifikation")
+[![Prüfungsstatus der Spezifikation](https://travis-ci.com/openbankingproject-ch/obp-apis.svg?branch=master "Prüfungsstatus der Spezifikation")](https://travis-ci.com/openbankingproject-ch/obp-apis)
 
 ## Swiss Domestic Payment Definitions
 
