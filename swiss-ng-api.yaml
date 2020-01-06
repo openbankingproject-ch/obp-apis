@@ -10599,15 +10599,29 @@ components:
 
 
           examples:
-            "Swiss ESR: 'payments' - 'domestic-swiss-credit-transfers-isr'":
-              $ref: "#/components/examples/paymentInitiationSwissIsrBody_payments_json"
-            "Swiss ES: 'payments' - 'domestic-swiss-credit-transfers'":
-              $ref: "#/components/examples/paymentInitiationSwissBody_payments_json"
-            "Example 1: 'payments' - 'sepa-credit-transfers'":
-              $ref: "#/components/examples/paymentInitiationSctBody_payments_json"
-            "Example 2: 'periodic-payments' - 'sepa-credit-transfers'":
+            "Example 1: 'payments' - 'paymentInitiation_domestic-swiss-credit-transfers-ISR_json_1'":
+              $ref: "#/components/examples/paymentInitiation_domestic-swiss-credit-transfers-ISR_json_1"
+            "Example 2: 'payments' - 'paymentInitiation_domestic-swiss-credit-transfers-ISR_json_2'":
+              $ref: "#/components/examples/paymentInitiation_domestic-swiss-credit-transfers-ISR_json_2"
+            "Example 3: 'payments' - 'paymentInitiation_domestic-swiss-credit-transfers_json_1'":
+              $ref: "#/components/examples/paymentInitiation_domestic-swiss-credit-transfers_json_1"
+            "Example 4: 'payments' - 'paymentInitiation_domestic-swiss-credit-transfers_json_2'":
+              $ref: "#/components/examples/paymentInitiation_domestic-swiss-credit-transfers_json_2"
+            "Example 5: 'payments' - 'paymentInitiation_domestic-swiss-foreign-credit-transfers_json_1'":
+              $ref: "#/components/examples/paymentInitiation_domestic-swiss-foreign-credit-transfers_json_1"
+            "Example 6: 'payments' - 'paymentInitiation_domestic-swiss-foreign-credit-transfers_json_2'":
+              $ref: "#/components/examples/paymentInitiation_domestic-swiss-foreign-credit-transfers_json_2"
+            "Example 7: 'payments' - 'paymentInitiation_sepa-credit-transfers_json_1'":
+              $ref: "#/components/examples/paymentInitiation_sepa-credit-transfers_json_1"
+            "Example 8: 'payments' - 'paymentInitiation_sepa-credit-transfers_json_2'":
+              $ref: "#/components/examples/paymentInitiation_sepa-credit-transfers_json_2"
+            "Example 9: 'payments' - 'paymentInitiation_cross-border-credit-transfers_json_1'":
+              $ref: "#/components/examples/paymentInitiation_cross-border-credit-transfers_json_1"
+            "Example 10: 'payments' - 'paymentInitiation_cross-border-credit-transfers_json_2'":
+              $ref: "#/components/examples/paymentInitiation_cross-border-credit-transfers_json_2"
+            "Example 11 (generic NextGenPSD2): 'periodic-payments' - 'sepa-credit-transfers'":
               $ref: "#/components/examples/paymentInitiationSctBody_periodic-payments_json"
-            "Example 3: 'bulk-payments' - 'sepa-credit-transfers'":
+            "Example 12 (generic NextGenPSD2): 'bulk-payments' - 'sepa-credit-transfers'":
               $ref: "#/components/examples/paymentInitiationSctBody_bulk-payments_json"
 
         application/xml:
@@ -12358,24 +12372,326 @@ components:
           "remittanceInformationUnstructured": "Ref Number Merchant"
         }
 
-    paymentInitiationSwissIsrBody_payments_json:
+    paymentInitiation_domestic-swiss-credit-transfers-ISR_json_1:
       value:
         {
-          "instructedAmount": {"currency": "CHF", "amount": "123.50"},
-          "debtorAccount": {"iban": "CH40100100103307118608"},
-          "creditorName": "Ricardo Schweiz",
-          "creditorAccount": {"bban": "01-43884-8"},
-          "remittanceInformationStructured": "15 00011 23456 78901 23456 78901"
+          "endToEndIdentification": "54947df80e9e4471a2f99af509fb5889",
+          "debtorAccount": {
+            "iban": "CH2781412000006944106"
+          },  
+          "debtorAgent": {
+            "bic": "KBTGCH22XXX"
+          },
+          "debtorName": "Example Isrone",
+          "instructedAmount": {
+            "currency": "CHF",
+            "amount": "1000.00"
+          },
+          "creditorAccount": {
+            "otherAccountIdentification": "010391391"
+          }, 
+          "creditorName": "Kunde 1",
+          "creditorAddress": {
+            "buildingNumber": "1",
+            "townName": "Wittenbach",
+            "country": "CH",
+            "postCode": "9300",
+            "streetName": "Kundenstrasse"
+          },
+          "remittanceInformationStructured": "210000000003139471430009017",
+          "requestedExecutionDate": "2019-10-22"
         }
 
-    paymentInitiationSwissBody_payments_json:
+    paymentInitiation_domestic-swiss-credit-transfers-ISR_json_2:
       value:
         {
-          "instructedAmount": {"currency": "CHF", "amount": "456.78"},
-          "debtorAccount": {"iban": "CH40100100103307118608"},
-          "creditorName": "Ricardo",
-          "creditorAccount": {"iban": "CH6109000000606572058"},
-          "remittanceInformationUnstructured": "Ricardo: RasenmC$her"
+          "endToEndIdentification": "54947df80e9e4471a2f99af509fb5889",
+          "debtorAccount": {
+            "iban": "CH0900784152046193205"
+          },  
+          "debtorAgent": {
+            "bic": "KBTGCH22XXX"
+          },
+          "debtorName": "Example Isrtwo",
+          "instructedAmount": {
+            "currency": "EUR",
+            "amount": "1000.00"
+          },
+          "creditorAccount": {
+            "otherAccountIdentification": "010391391"
+          },
+          "creditorName": "Kunde 1",
+          "creditorAddress": {
+            "buildingNumber": "1",
+            "townName": "Wittenbach",
+            "postCode": "9300",
+            "streetName": "Kundenstrasse"
+          },
+          "remittanceInformationStructured": "210000000003139471430009017",
+          "requestedExecutionDate": "2019-10-22"
+        }
+
+    paymentInitiation_domestic-swiss-credit-transfers_json_1:
+      value:
+        {
+          "endToEndIdentification": "54947df80e9e4471a2f99af509fb5889",
+          "debtorAccount": {
+            "iban": "CH2781412000006944106"
+          },  
+          "debtorAgent": {
+            "bic": "RAIFCH22E12"
+          },
+          "debtorName": "Example Swissone",
+          "instructedAmount": {
+            "currency": "CHF",
+            "amount": "4000.00"
+          },
+          "creditorAccount": {
+            "iban": "CH450021721745521840J"
+          },
+          "creditorAgent": {
+            "bic": "UBSWCHZH82P"
+          },
+          "creditorName": "Kunde 2",
+          "creditorAddress": {
+            "townName": "Biel",
+            "country": "CH",
+            "postCode": "2501",
+            "streetName": "Rue de la gare"
+          },
+          "requestedExecutionDate": "2019-10-22"
+        }
+
+    paymentInitiation_domestic-swiss-credit-transfers_json_2:
+      value:
+        {
+          "endToEndIdentification": "54947df80e9e4471a2f99af509fb5889",
+          "debtorAccount": {
+            "iban": "CH0900784152046193205"
+          },    
+          "debtorAgent": {
+            "bic": "KBTGCH22XXX"
+          },
+          "debtorName": "Example Swisstwo",
+          },
+          "instructedAmount": {
+            "currency": "EUR",
+            "amount": "4000.00"
+          },
+          "creditorAccount": {
+            "iban": "CH5309000000800053446"
+          },
+          "creditorAgent": {
+            "bic": "POFICHBEXXX"
+          },
+          "creditorName": "Kunde 2",
+          "creditorAddress": {
+            "townName": "Biel/Bienne",
+            "country": "CH",
+            "postCode": "2501",
+            "streetName": "Rue de la gare"
+          },
+          "requestedExecutionDate": "2019-10-22"
+        }
+
+    paymentInitiation_domestic-swiss-foreign-credit-transfers_json_1:
+      value:
+        {
+          "endToEndIdentification": "54947df80e9e4471a2f99af509fb5889",
+          "debtorAccount": {
+            "iban": "CH2781412000006944106"
+          },  
+          "debtorAgent": {
+            "bic": "RAIFCH22E12"
+          },
+          "debtorName": "Example Swissforeignone",
+          "instructedAmount": {
+            "currency": "USD",
+            "amount": "5000.00"
+          },
+          "creditorAccount": {
+            "iban": "CH450021721745521840J"
+          },
+          "creditorAgent": {
+            "bic": "UBSWCHZH82P"
+          },
+          "creditorName": "Kunde 2",
+          "creditorAddress": {
+            "buildingNumber": "1",
+            "townName": "Biel/Bienne",
+            "country": "CH",
+            "postCode": "2501",
+            "streetName": "Rue de la gare"
+          },
+          "requestedExecutionDate": "2019-10-22"
+        }
+
+    paymentInitiation_domestic-swiss-foreign-credit-transfers_json_2:
+      value:
+        {
+          "endToEndIdentification": "54947df80e9e4471a2f99af509fb5889",
+          "debtorAccount": {
+            "iban": "CH0900784152046193205"
+          },  
+          "debtorAgent": {
+            "bic": "KBTGCH22XXX"
+          },
+         "debtorName": "Example Swissforeigntwo"
+          },
+          "instructedAmount": {
+            "currency": "USD",
+            "amount": "4000.00"
+          },
+          "creditorAccount": {
+            "iban": "CH5309000000800053446"
+          },
+          "creditorAgent": {
+            "bic": "POFICHBEXXX"
+          },
+          "creditorName": "Kunde 2",
+          "creditorAddress": {
+            "townName": "Biel/Bienne",
+            "country": "CH",
+            "postCode": "2501",
+            "streetName": "Rue de la gare"
+          },
+          "requestedExecutionDate": "2019-10-22"
+        }
+
+    paymentInitiation_sepa-credit-transfers_json_1:
+      value:
+        {
+          "endToEndIdentification": "54947df80e9e4471a2f99af509fb5889",
+          "debtorAccount": {
+            "iban": "CH2781412000006944106"
+          },  
+          "debtorAgent": {
+            "bic": "RAIFCH22E12"
+          },
+          "debtorName": "Example Sepaone",
+          "instructedAmount": {
+            "currency": "EUR",
+            "amount": "5000.00"
+          },
+          "creditorAccount": {
+            "iban": "DE80690700240048159800"
+          },
+          "creditorAgent": {
+            "bic": "DEUTDEDB690",
+          },
+          "creditorName": "Kunde 3",
+          "creditorAddress": {
+            "townName": "Muenchen",
+            "country": "DE",
+            "postCode": "80036",
+            "streetName": "Rosenauweg"
+          },
+          "chargeBearer": "SLEV",
+          "serviceLevel": "SEPA",
+          "requestedExecutionDate": "2019-10-22"
+        }
+
+    paymentInitiation_sepa-credit-transfers_json_2:
+      value:
+        {
+          "endToEndIdentification": "54947df80e9e4471a2f99af509fb5889",
+          "debtorAccount": {
+            "iban": "CH6309000000250097798"
+          },  
+          "debtorAgent": {
+            "bic": "POFICHBEXXX"
+          },
+          "debtorName": "Example Sepatwo",
+          },
+          "instructedAmount": {
+            "currency": "EUR",
+            "amount": "5000.00"
+          },
+          "creditorAccount": {
+            "iban": "DE80690700240048159800"
+          },
+          "creditorAgent": {
+            "bic": "DEUTDEDB690",
+          },
+          "creditorName": "Kunde 3",
+          "creditorAddress": {
+            "townName": "Muenchen",
+            "country": "DE",
+            "postCode": "80036",
+            "streetName": "Rosenauweg"
+          },
+          "chargeBearer": "SLEV",
+          "serviceLevel": "SEPA",
+          "requestedExecutionDate": "2019-10-22"
+        }
+
+    paymentInitiation_cross-border-credit-transfers_json_1:
+      value:
+        {
+          "endToEndIdentification": "54947df80e9e4471a2f99af509fb5889",
+          "debtorAccount": {
+            "iban": "CH0900784152046193205"  
+          "debtorAgent": {
+            "bic": "KBTGCH22XXX",
+          },
+          "debtorName": "Example Crossborderone",
+          },
+          "instructedAmount": {
+            "currency": "USD",
+            "amount": "6000.00"
+          },
+          "creditorAccount": {
+            "otherAccountIdentification": "474-8512-007"
+          },
+          "creditorAgent": {
+            "name": "US Bank",
+            "address": {
+              "streetName": "Timesquare",
+              "postCode": "10036",
+              "townName": "New York",
+              "country": "US"
+            }
+          },
+          "creditorName": "Max Mueller",
+          "creditorAddress": {
+            "country": "US",
+            "addressLine1": "Timesquare",
+            "addressLine1": "10036 New York"
+          },
+          "chargeBearer": "SHAR",
+          "requestedExecutionDate": "2019-10-22"
+        }
+
+    paymentInitiation_cross-border-credit-transfers_json_2:
+      value:
+        {
+          "endToEndIdentification": "54947df80e9e4471a2f99af509fb5889",
+          "debtorAccount": {
+            "iban": "CH2781412000006944106"  
+          "debtorAgent": {
+            "bic": "RAIFCH22E12",
+          },
+          "debtorName": "Example Crossbordertwo",
+          },
+          "instructedAmount": {
+            "currency": "GBP",
+            "amount": "6000.00"
+          },
+          "creditorAccount": {
+            "iban": "DE80690700240048159800"
+          },
+          "creditorAgent": {
+            "bic": "DEUTDEDB690",
+          },
+          "creditorName": "Kunde 3",
+          "creditorAddress": {
+            "townName": "Muenchen",
+            "country": "DE",
+            "postCode": "80036",
+            "streetName": "Rosenauweg"
+          },
+          "chargeBearer": "SHAR",
+          "requestedExecutionDate": "2019-10-22"
         }
 
     paymentInitiationSctBody_periodic-payments_json:
