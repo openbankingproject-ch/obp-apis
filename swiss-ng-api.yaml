@@ -12473,7 +12473,6 @@ components:
             "bic": "KBTGCH22XXX"
           },
           "debtorName": "Example Swisstwo",
-          },
           "instructedAmount": {
             "currency": "EUR",
             "amount": "4000.00"
@@ -12536,8 +12535,7 @@ components:
           "debtorAgent": {
             "bic": "KBTGCH22XXX"
           },
-         "debtorName": "Example Swissforeigntwo"
-          },
+         "debtorName": "Example Swissforeigntwo",
           "instructedAmount": {
             "currency": "USD",
             "amount": "4000.00"
@@ -12602,7 +12600,6 @@ components:
             "bic": "POFICHBEXXX"
           },
           "debtorName": "Example Sepatwo",
-          },
           "instructedAmount": {
             "currency": "EUR",
             "amount": "5000.00"
@@ -12630,12 +12627,12 @@ components:
         {
           "endToEndIdentification": "54947df80e9e4471a2f99af509fb5889",
           "debtorAccount": {
-            "iban": "CH0900784152046193205"  
+            "iban": "CH0900784152046193205"
+          },
           "debtorAgent": {
             "bic": "KBTGCH22XXX",
           },
           "debtorName": "Example Crossborderone",
-          },
           "instructedAmount": {
             "currency": "USD",
             "amount": "6000.00"
@@ -12656,7 +12653,7 @@ components:
           "creditorAddress": {
             "country": "US",
             "addressLine1": "Timesquare",
-            "addressLine1": "10036 New York"
+            "addressLine2": "10036 New York"
           },
           "chargeBearer": "SHAR",
           "requestedExecutionDate": "2019-10-22"
@@ -12667,12 +12664,12 @@ components:
         {
           "endToEndIdentification": "54947df80e9e4471a2f99af509fb5889",
           "debtorAccount": {
-            "iban": "CH2781412000006944106"  
+            "iban": "CH2781412000006944106"
+          },            
           "debtorAgent": {
             "bic": "RAIFCH22E12",
           },
           "debtorName": "Example Crossbordertwo",
-          },
           "instructedAmount": {
             "currency": "GBP",
             "amount": "6000.00"
