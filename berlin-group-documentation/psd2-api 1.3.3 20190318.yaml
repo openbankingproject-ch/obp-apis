@@ -1,10 +1,10 @@
 openapi: 3.0.1
 info:
   title: NextGenPSD2 XS2A Framework
-  version: "1.3.4_2019-07-17v1"
+  version: "1.3.3 Mar 29th 2019"
   description: |
     # Summary
-    The **NextGenPSD2** *Framework Version 1.3.4* offers a modern, open, harmonised and interoperable set of 
+    The **NextGenPSD2** *Framework Version 1.3.2* offers a modern, open, harmonised and interoperable set of 
     Application Programming Interfaces (APIs) as the safest and most efficient way to provide data securely. 
     The NextGenPSD2 Framework reduces XS2A complexity and costs, addresses the problem of multiple competing standards 
     in Europe and, aligned with the goals of the Euro Retail Payments Board,
@@ -2966,7 +2966,6 @@ paths:
       #header
           #common header parameter
         - $ref: "#/components/parameters/X-Request-ID"
-        - $ref: "#/components/parameters/Authorization"
           #method specific header elements
         #- $ref: "#/components/parameters/consentId_HEADER_optional" # Consent-Id for usage of extended services
           #header to support the signature function
@@ -3857,10 +3856,6 @@ components:
         ID of the corresponding consent object as returned by an Account Information Consent Request.
       type: string
 
-    authorization:
-      description: |
-        Authorization by OAuth2 based Protocol.
-      type: string
 
     consentIdList:
       description: A list of consentIds
@@ -4391,11 +4386,6 @@ components:
             For card-accounts, this is composed of
               - invoiced, but not yet paid entries, 
               - not yet invoiced but already booked entries
-          - "interimBooked":
-            Balance calculated in the course of the account servicer's business day, at the time specified, 
-            and subject to further changes during the business day. 
-            The interim balance is calculated on the basis of booked credit and debit items during the calculation time/period 
-            specified.
           - "forwardAvailable":
             Forward available balance of money that is at the disposal of the account owner on the date specified.
           - "nonInvoiced": 
@@ -4450,18 +4440,11 @@ components:
           description: |
             Optional if supported by API provider.
             
-            Only the value "allAccounts" is admitted.
+            Only the values "allAccounts" or "allAccountsWithBalances" is admitted.
           type: string
           enum:
             - "allAccounts"
-        availableAccountsWithBalance:
-          description: |
-            Optional if supported by API provider.
-            
-            Only the value "allAccounts" is admitted.
-          type: string
-          enum:
-            - "allAccounts"
+            - "allAccountsWithBalances"
         allPsd2:
           description: |
             Optional if supported by API provider.
@@ -4488,7 +4471,6 @@ components:
         - "enabled"
         - "deleted"
         - "blocked"
-
 
     accountDetails:
       description: |
@@ -4976,14 +4958,14 @@ components:
       required:
         - country
       properties:
-        streetName:
+        street:
           type: string
           maxLength: 70
         buildingNumber:
           type: string
-        townName:
+        city:
           type: string
-        postCode:
+        postalCode:
           type: string
         country:
           $ref: "#/components/schemas/countryCode"
@@ -7478,7 +7460,6 @@ components:
       type: string
       enum: 
         - "CERTIFICATE_INVALID"       #gen
-        - "ROLE_INVALID"              #gen
         - "CERTIFICATE_EXPIRED"       #gen
         - "CERTIFICATE_BLOCKED"       #gen
         - "CERTIFICATE_REVOKE"        #gen
@@ -7500,7 +7481,6 @@ components:
       type: string
       enum: 
         - "CERTIFICATE_INVALID"       #gen
-        - "ROLE_INVALID"              #gen
         - "CERTIFICATE_EXPIRED"       #gen
         - "CERTIFICATE_BLOCKED"       #gen
         - "CERTIFICATE_REVOKE"        #gen
@@ -7521,7 +7501,6 @@ components:
       type: string
       enum: 
         - "CERTIFICATE_INVALID"       #gen
-        - "ROLE_INVALID"              #gen
         - "CERTIFICATE_EXPIRED"       #gen
         - "CERTIFICATE_BLOCKED"       #gen
         - "CERTIFICATE_REVOKE"        #gen
@@ -7542,7 +7521,6 @@ components:
       type: string
       enum: 
         - "CERTIFICATE_INVALID"       #gen
-        - "ROLE_INVALID"              #gen
         - "CERTIFICATE_EXPIRED"       #gen
         - "CERTIFICATE_BLOCKED"       #gen
         - "CERTIFICATE_REVOKE"        #gen
@@ -10176,15 +10154,6 @@ components:
       schema:
         $ref: "#/components/schemas/consentId"
 
-    Authorization:
-      name: Authorization
-      in: header
-      description: |
-        This field  might be used in case where a consent was agreed between ASPSP and PSU through an OAuth2 based protocol, 
-        facilitated by the TPP.
-      required: false
-      schema:
-        $ref: "#/components/schemas/authorization"
 
     consentId_HEADER_mandatory:
       name: Consent-ID
@@ -10436,13 +10405,6 @@ components:
       description: |
         URI for the Endpoint of the TPP-API to which the status of the payment initiation should be sent.
         This header field may by ignored by the ASPSP.
-        
-        For security reasons, it shall be ensured that the TPP-Notification-URI as introduced above is secured by the TPP eIDAS QWAC used for identification of the TPP. The following applies:
-        
-        URIs which are provided by TPPs in TPP-Notification-URI shall comply with the domain secured by the eIDAS QWAC certificate of the TPP in the field CN or SubjectAltName of the certificate. Please note that in case of example-TPP.com as certificate entry TPP- Notification-URI like www.example-TPP.com/xs2a-client/v1/ASPSPidentifcation/mytransaction- id/notifications or notifications.example-TPP.com/xs2a-client/v1/ASPSPidentifcation/mytransaction- id/notifications would be compliant.
-        
-        Wildcard definitions shall be taken into account for compliance checks by the ASPSP.
-         ASPSPs may respond with ASPSP-Notification-Support set to false, if the provided URIs do not comply.
       schema:
         type: string
       required: false
@@ -10806,34 +10768,7 @@ components:
         type: string
         format: url
       required: false
-      
-    #conditional for extended service lean push
-    ASPSP-Notification-Support:
-      description: |
-        true if the ASPSP supports resource status notification services.
-    
-        false if the ASPSP supports resource status notification in general, but not for the current request.
-    
-        Not used, if resource status notification services are generally not supported by the ASPSP.
-    
-        Shall be supported if the ASPSP supports resource status notification services.
-      schema:
-        type: boolean       
-      required: false
-    
-    ASPSP-Notification-Content:
-      description: |
-        The string has the form
-        status=X1, …, Xn
-        where Xi is one of the constants SCA, PROCESS, LAST and where constants are not repeated.
-        The usage of the constants supports the following semantics
-        SCA - Notification on every change of the scaStatus attribute for all related authorisation processes is provided by the ASPSP for the related resource.
-        PROCESS - Notification on all changes of consentStatus or transactionStatus attributes is provided by the ASPSP for the related resource
-        LAST - Notification on the last consentStatus or transactionStatus as available in the XS2A interface is provided by the ASPSP for the related resource.
-        This field must be provided if the ASPSP-Notification-Support=true. The ASPSP might consider the notification content as preferred by the TPP, but can also respond independently of the preferred request    
-      schema:
-        type: string        
-      required: false
+
   responses:
   #####################################################
   # Reusabale Responses
@@ -10989,12 +10924,7 @@ components:
       content:
         application/json:
           schema:
-            type: object
-            required:
-              - account
-            properties:
-              account:
-                $ref: "#/components/schemas/accountDetails"
+            $ref: "#/components/schemas/accountDetails"
           examples:
             "Regular Account": 
               $ref: "#/components/examples/accountDetailsRegularAccount"
@@ -11012,12 +10942,7 @@ components:
       content:
         application/json:
           schema:
-            type: object
-            required:
-              - cardAccount
-            properties:
-              cardAccount:
-                $ref: "#/components/schemas/cardAccountDetails"
+            $ref: "#/components/schemas/cardAccountDetails"
           examples:
             "Card Account": 
               $ref: "#/components/examples/cardAccountDetailsExample"
@@ -11033,12 +10958,7 @@ components:
       content:
         application/json:
           schema:
-            type: object
-            required: 
-              - transactionsDetails
-            properties:
-              transactionsDetails:
-                $ref: "#/components/schemas/transactionDetails"
+            $ref: "#/components/schemas/transactionDetails"
           examples:
             Example:
               $ref: "#/components/examples/transactionDetailsExample"
@@ -11264,11 +11184,6 @@ components:
           $ref: "#/components/headers/X-Request-ID"
         ASPSP-SCA-Approach:
           $ref: "#/components/headers/ASPSP-SCA-Approach"
-        #conditional for extended service lean Push
-        ASPSP-Notification-Support:
-          $ref: "#/components/headers/ASPSP-Notification-Support"
-        ASPSP-Notification-Content:
-          $ref: "#/components/headers/ASPSP-Notification-Content"
           
       content:
         application/json:
@@ -11289,12 +11204,7 @@ components:
           $ref: "#/components/headers/Location"
         ASPSP-SCA-Approach:
           $ref: "#/components/headers/ASPSP-SCA-Approach"
-        #conditional for extended service lean Push
-        ASPSP-Notification-Support:
-          $ref: "#/components/headers/ASPSP-Notification-Support"
-        ASPSP-Notification-Content:
-          $ref: "#/components/headers/ASPSP-Notification-Content"
-
+      
       content:
         application/json:
           schema:
@@ -11340,12 +11250,7 @@ components:
           $ref: "#/components/headers/X-Request-ID"
         ASPSP-SCA-Approach:
           $ref: "#/components/headers/ASPSP-SCA-Approach"
-        #conditional for extended service lean Push
-        ASPSP-Notification-Support:
-          $ref: "#/components/headers/ASPSP-Notification-Support"
-        ASPSP-Notification-Content:
-          $ref: "#/components/headers/ASPSP-Notification-Content"
-
+      
       content:
         application/json:
           schema:
