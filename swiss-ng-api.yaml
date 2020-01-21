@@ -9965,6 +9965,7 @@ components:
           - cross-border-credit-transfers
           - domestic-swiss-credit-transfers
           - domestic-swiss-credit-transfers-isr
+          - domestic-swiss-foreign-credit-transfers
           - pain.001-sepa-credit-transfers
           - pain.001-cross-border-credit-transfers
           - pain.001-swiss-six-credit-transfers
@@ -9985,6 +9986,7 @@ components:
           - "cross-border-credit-transfers"
           - "domestic-swiss-credit-transfers"
           - "domestic-swiss-credit-transfers-isr"
+          - "domestic-swiss-foreign-credit-transfers"
           - "pain.001-sepa-credit-transfers"
           - "pain.001-cross-border-credit-transfers"
           - "pain.001-swiss-six-credit-transfers"
