@@ -18,7 +18,7 @@
 | TPP    | **Third Party** (Payment Service) **Providers**                                          | Drittparteien für den Kunden, oft "FinTech" |
 | XS2A   | **Access to Accounts**                                                                   | Lesende Zugriffe auf Kontos (Inkl. Karten)  |
 
-## Allgemeine SCA egriffe
+## Allgemeine SCA Begriffe
 
 |    Abkrz.     |                               Begriff (en)                               |
 | ------------- | ------------------------------------------------------------------------ |
