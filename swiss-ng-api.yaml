@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: Swiss NextGen Banking API-Framework
-  version: "1.3.4_2019-07-17v1 - Swiss edition 1.3.4.3-CH"
+  version: "1.3.4_2019-07-17v1 - Swiss edition 1.3.4.4-CH"
   x-logo:
     url: "https://openbankingproject-ch.github.io/obp-apis/swiss-ng-logo.png"
     backgroundColor: "#FFFFFF"
