@@ -12576,9 +12576,6 @@ components:
           "creditorAccount": {
             "iban": "DE80690700240048159800"
           },
-          "creditorAgent": {
-            "bic": "DEUTDEDB690"
-          },
           "creditorName": "Kunde 3",
           "creditorAddress": {
             "townName": "Muenchen",
@@ -12610,7 +12607,7 @@ components:
             "iban": "DE80690700240048159800"
           },
           "creditorAgent": {
-            "bic": "DEUTDEDB690",
+            "bic": "DEUTDEDB690"
           },
           "creditorName": "Kunde 3",
           "creditorAddress": {
