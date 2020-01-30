@@ -5248,7 +5248,7 @@ components:
           * Domain Code,
           * Family Code, and
           * SubFamiliy Code
-        by hyphens, resulting in o?=DomainCodeo?=-o?=FamilyCodeo?=-o?=SubFamilyCodeo?=.
+        by hyphens, resulting in 'DomainCode'-'FamilyCode'-'SubFamilyCode'.
       type: string
       example: "PMNT-RCDT-ESCT"
 
