@@ -9,7 +9,7 @@
 | ASPS   | **Account Servicing Payment Service**                                                    |                                             |
 | ASPSP  | **Account Servicing Payment Service Providers**, article 4 (17) of [PSD2]                | Das Finanzinstitut                          |
 | CAF    | **Confirmation Availability of Funds**                                                   |                                             |
-| PIS    | **Payment Initiation Service**                                                           | Kanal für Zahlungsauftrag                   |
+| PIS    | **Payment Initiation Service**                                                           | Zahlungsauftragsdienst, siehe auch           |
 | PISP   | **Payment Initiation Service Providers**, article 4 (18) of [PSD2]                       |                                             |
 | PIISP  | **Payment Instrument Issuer Service Providers**                                          |                                             |
 | PSP    | **Payment Service Provider**, article 4 (11) of [PSD2]                                   |                                             |
@@ -18,7 +18,7 @@
 | TPP    | **Third Party** (Payment Service) **Providers**                                          | Drittparteien für den Kunden, oft "FinTech" |
 | XS2A   | **Access to Accounts**                                                                   | Lesende Zugriffe auf Kontos (Inkl. Karten)  |
 
-## Allgemeine SCA egriffe
+## Allgemeine SCA Begriffe
 
 |    Abkrz.     |                               Begriff (en)                               |
 | ------------- | ------------------------------------------------------------------------ |
