@@ -20,7 +20,7 @@ spezification:
 
 The Swiss Domestic Payment Definitions are adapted from the [SIX Swiss Payment Standard](https://www.six-group.com/interbank-clearing/en/home/standardization/iso-payments/customer-bank/implementation-guidelines.html) and verified by our community. We will be happy to examine your suggestions for further development.
 
-| CH Domestic Data Element               | CH Domestic Type                 | domestic-swiss-credit-transfers-ISR | domestic-swiss-credit-transfers                 | domestic-swiss-foreign-credit-transfers | sepa-credit-transfers        | cross-border-credit-transfers | 
+| CH Domestic Data Element               | CH Domestic Type                 | domestic-swiss-credit-transfers-isr | domestic-swiss-credit-transfers                 | domestic-swiss-foreign-credit-transfers | sepa-credit-transfers        | cross-border-credit-transfers | 
 |----------------------------------------|----------------------------------|-------------------------------------|-------------------------------------------------|-----------------------------------------|------------------------------|-------------------------------| 
 |                                        |                                  | Payment Type 1: ISR                 | Payment Type 2: IBAN/postal account and IID/BIC | Payment Type 4: Foreign currency        | Payment Type 5: Foreign SEPA | Payment Type 6: Foreign       | 
 | endToEndIdentification                 | Max35Text-Swift                  | mandatory                           | mandatory                                       | mandatory                               | mandatory                    | mandatory                     | 
