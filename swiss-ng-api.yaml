@@ -10582,7 +10582,7 @@ components:
             Only country specific schemes are currently available
           * "pain.001-cross-border-credit-transfers" with pain.001 body.
             Only country specific schemes are currently available
-          * pain.001-swiss-six-credit-transfers
+          * "pain.001-swiss-six-credit-transfers"
 
         There are the following payment-services supported:
           * "payments"
