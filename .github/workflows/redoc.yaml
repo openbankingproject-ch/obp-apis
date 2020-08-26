@@ -1,0 +1,17 @@
+name: Node CI
+
+# https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions
+on: [push, pull_request]
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # then use redoc-cli-github-action to generate your HTML bundle
+      - name: redoc-cli test
+        uses: seeebiii/redoc-cli-github-action@v9
+        with:
+          args: 'bundle swiss-ng-api.yaml -o docs/index.html'
