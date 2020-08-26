@@ -15,3 +15,14 @@ jobs:
         uses: seeebiii/redoc-cli-github-action@v9
         with:
           args: 'bundle swiss-ng-api.yaml -o docs/index.html'
+
+      - name: push
+        uses: github-actions-x/commit@v2.7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          push-branch: 'master'
+          commit-message: 'Update Docs'
+          force-add: 'true'
+          files: docs/index.html
+          name: Github Actions
+          email: gitact@obp.ch
