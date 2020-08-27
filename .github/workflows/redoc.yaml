@@ -10,11 +10,27 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      # then use redoc-cli-github-action to generate your HTML bundle
+      #
+      # Use redoc-cli-github-action to generate your HTML bundle
+      #
+
+      # Swiss Next Gen
+
       - name: redoc-cli test
         uses: seeebiii/redoc-cli-github-action@v9
         with:
           args: 'bundle swiss-ng-api.yaml -o docs/index.html'
+
+      # Berlin Group
+
+      - name: redoc-cli test
+        uses: seeebiii/redoc-cli-github-action@v9
+        with:
+          args: 'bundle berlin-group-documentation/psd2-api.yaml -o docs/berlin-group.html'
+
+      # 
+      # Push the result to github pages
+      # 
 
       - name: push
         uses: github-actions-x/commit@v2.7
@@ -23,6 +39,6 @@ jobs:
           push-branch: 'master'
           commit-message: 'Update Docs'
           force-add: 'true'
-          files: docs/index.html
+          files: docs/index.html docs/berlin-group.html
           name: Github Actions
           email: gitact@obp.ch
