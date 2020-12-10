@@ -26,3 +26,8 @@ externalDocs:
 servers:
   - url: https://api.dev.openbankingproject.ch
     description: Open Banking Project Switzerland Developer Portal
+
+paths:
+  /test:
+    get:
+      summary: Just a test endpoint
