@@ -7,4 +7,6 @@ cache: npm
 before_script:
   - npm install -g speccy
 
-script: speccy lint --skip openapi-tags-alphabetical swiss-ng-api.yaml
+script:
+- speccy lint --skip openapi-tags-alphabetical swiss-ng-api.yaml
+- speccy lint --skip openapi-tags-alphabetical bankable-assets-api.yaml
