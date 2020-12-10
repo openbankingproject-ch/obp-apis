@@ -31,3 +31,6 @@ paths:
   /test:
     get:
       summary: Just a test endpoint
+      responses: 
+        '200':
+          description: OK
