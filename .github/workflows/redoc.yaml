@@ -31,7 +31,7 @@ jobs:
       - name: redoc-cli test
         uses: seeebiii/redoc-cli-github-action@v9
         with:
-          args: 'bundle berlin-group-documentation/psd2-api.yaml -o docs/berlin-group.html'
+          args: 'bundle swiss-ng-api/berlin-group-documentation/psd2-api.yaml -o docs/berlin-group.html'
 
       # 
       # Push the result to github pages
