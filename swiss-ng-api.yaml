@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: Swiss NextGen Banking API-Framework
-  version: "1.3.4_2019-07-17v1 - Swiss edition 1.3.4.4-CH"
+  version: "1.3.4_2019-07-17v1 - Swiss edition 1.3.4.5-CH"
   x-logo:
     url: "https://openbankingproject-ch.github.io/obp-apis/swiss-ng-logo.png"
     backgroundColor: "#FFFFFF"
@@ -113,6 +113,7 @@ paths:
           - Payment products with payment information in *JSON* format:
             - ***domestic-swiss-credit-transfers-isr***
             - ***domestic-swiss-credit-transfers***
+            - ***domestic-swiss-credit-transfers-qr***
             - ***domestic-swiss-foreign-credit-transfers***
             - ***swiss-sepa-credit-transfers***
             - ***swiss-cross-border-credit-transfers***
@@ -4248,7 +4249,7 @@ components:
     hrefEntry:
       description: Link to a resource
       type: string
-      example: "/v1/payments/swiss-sepa-credit-transfers/1234-wertiq-983"
+      example: "/v1/payments/sepa-credit-transfers/1234-wertiq-983"
 
 
 
@@ -5196,7 +5197,16 @@ components:
         referenceIssuer:
           type: string
           maxLength: 35
-
+        SCORorQRRorIPI:
+          type: string
+          enum:
+            - SCOR
+            - QRR
+            - IPI
+          example:  "SCOR"
+        additionalRemittanceInformation:
+          type: string
+          maxLength: 140
 
     remittanceInformationUnstructured:
       description: |
@@ -5495,6 +5505,7 @@ components:
 
           * domestic-swiss-credit-transfers-isr
           * domestic-swiss-credit-transfers
+          * domestic-swiss-credit-transfers-qr
           * domestic-swiss-foreign-credit-transfers
           * swiss-sepa-credit-transfers
           * swiss-cross-border-credit-transfers
@@ -5510,42 +5521,267 @@ components:
         The following data element are depending on the actual payment product available (in source code):
 
         <table style="width:100%">
-        <tr><td></td><td>Payment Type 1: ISR</td><td>Payment Type 3: IBAN/postal account and IID/BIC</td><td>Payment Type 4: Foreign currency</td><td>Payment Type 5: Foreign SEPA</td><td>Payment Type 6: Foreign</td></tr>
-        <tr><td>CH Domestic Data Element</td><td>domestic-swiss-credit-transfers-isr</td><td>domestic-swiss-credit-transfers</td><td>domestic-swiss-foreign-credit-transfers</td><td>swiss-sepa-credit-transfers</td><td>swiss-cross-border-credit-transfers</td></tr>
-        <tr><td>endToEndIdentification</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
-        <tr><td>debtorAccount (incl. type)</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
-        <tr><td>debtorAgent</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>optional</td></tr>
-        <tr><td>debtorName</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
-        <tr><td>debtorId</td><td>optional 3)</td><td>optional 3)</td><td>optional 3)</td><td>optional 3)</td><td>optional 3)</td></tr>
-        <tr><td>ultimateDebtor</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td></tr>
-        <tr><td>instructedAmount (incl. currency)</td><td>mandatory</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td></tr>
-        <tr><td>equivalentAmount</td><td>n.a.</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td></tr>
-        <tr><td>currencyOfTransfer</td><td>n.a.</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td></tr>
-        <tr><td>exchangeRateInformation</td><td>n.a.</td><td>optional 2)</td><td>optional 2)</td><td>optional 2)</td><td>optional 2)</td></tr>
-        <tr><td>creditorAccount</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
-        <tr><td>creditorAgent</td><td>n.a.</td><td>dependent 4)</td><td>dependent 4)</td><td>dependent 4)</td><td>dependent 4)</td></tr>
-        <tr><td>creditorAgentName</td><td>n.a.</td><td>n.a.</td><td>dependent 5)</td><td>n.a.</td><td>dependent 5)</td></tr>
-        <tr><td>creditorName</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
-        <tr><td>creditorId</td><td>n.a.</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td></tr>
-        <tr><td>creditorAddress</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td></tr>
-        <tr><td>creditorNameAndAddress</td><td>n.a.</td><td>dependent</td><td>dependent</td><td>dependent</td><td>dependent</td></tr>
-        <tr><td>ultimateCreditor</td><td>n.a.</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td></tr>
-        <tr><td>chargeBearer</td><td>n.a.</td><td>optional</td><td>optional</td><td>mandatory</td><td>optional</td></tr>
-        <tr><td>purposeCode</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td></tr>
-        <tr><td>remittanceInformationUnstructuredArray</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td></tr>
-        <tr><td>serviceLevel</td><td>n.a.</td><td>optional</td><td>optional</td><td>mandatory</td><td>optional</td></tr>
-        <tr><td>remittanceInformationUnstructured</td><td>n.a.</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td></tr>
-        <tr><td>remittanceInformationStructured</td><td>mandatory</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td></tr>
-        <tr><td>requestedExecutionDate</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
-        <tr><td>requestedExecutionTime</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td></tr>
+        <tr>
+        <td></td>
+        <td>Payment Type 1: ISR</td>
+        <td>Payment Type 3: IBAN/postal account and IID/BIC</td>
+        <td>Payment Type 3: QR-bill</td>
+        <td>Payment Type 4: Foreign currency</td>
+        <td>Payment Type 5: Foreign SEPA</td>
+        <td>Payment Type 6: Foreign</td>
+        </tr>
+        <tr>
+        <td>CH Domestic Data Element</td>
+        <td>domestic-swiss-credit-transfers-isr</td>
+        <td>domestic-swiss-credit-transfers</td>
+        <td>domestic-swiss-credit-transfers-qr</td>
+        <td>domestic-swiss-foreign-credit-transfers</td>
+        <td>swiss-sepa-credit-transfers</td>
+        <td>swiss-cross-border-credit-transfers</td>
+        </tr>
+        <tr>
+        <td>endToEndIdentification</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        </tr>
+        <tr>
+        <td>debtorAccount (incl. type)</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        </tr>
+        <tr>
+        <td>debtorAgent</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>optional</td>
+        </tr>
+        <tr>
+        <td>debtorName</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        </tr>
+        <tr>
+        <td>debtorId</td>
+        <td>optional 3)</td>
+        <td>optional 3)</td>
+        <td>optional 3)</td>
+        <td>optional 3)</td>
+        <td>optional 3)</td>
+        <td>optional 3)</td>
+        </tr>
+        <tr>
+        <td>ultimateDebtor</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        </tr>
+        <tr>
+        <td>instructedAmount (incl. currency)</td>
+        <td>mandatory</td>
+        <td>dependent 1)</td>
+        <td>dependent 1)</td>
+        <td>dependent 1)</td>
+        <td>dependent 1)</td>
+        <td>dependent 1)</td>
+        </tr>
+        <tr>
+        <td>equivalentAmount</td>
+        <td>n.a.</td>
+        <td>dependent 1)</td>
+        <td>dependent 1)</td>
+        <td>dependent 1)</td>
+        <td>dependent 1)</td>
+        <td>dependent 1)</td>
+        </tr>
+        <tr>
+        <td>currencyOfTransfer</td>
+        <td>n.a.</td>
+        <td>dependent 1)</td>
+        <td>dependent 1)</td>
+        <td>dependent 1)</td>
+        <td>dependent 1)</td>
+        <td>dependent 1)</td>
+        </tr>
+        <tr>
+        <td>exchangeRateInformation</td>
+        <td>n.a.</td>
+        <td>optional 2)</td>
+        <td>optional 2)</td>
+        <td>optional 2)</td>
+        <td>optional 2)</td>
+        <td>optional 2)</td>
+        </tr>
+        <tr>
+        <td>creditorAccount</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        </tr>
+        <tr>
+        <td>creditorAgent</td>
+        <td>n.a.</td>
+        <td>dependent 4)</td>
+        <td>dependent 4)</td>
+        <td>dependent 4)</td>
+        <td>dependent 4)</td>
+        <td>dependent 4)</td>
+        </tr>
+        <tr>
+        <td>creditorAgentName</td>
+        <td>n.a.</td>
+        <td>n.a.</td>
+        <td>n.a.</td>
+        <td>dependent 5)</td>
+        <td>n.a.</td>
+        <td>dependent 5)</td>
+        </tr>
+        <tr>
+        <td>creditorName</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        </tr>
+        <tr>
+        <td>creditorId</td>
+        <td>n.a.</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        </tr>
+        <tr>
+        <td>creditorAddress</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        </tr>
+        <tr>
+        <td>creditorNameAndAddress</td>
+        <td>n.a.</td>
+        <td>dependent</td>
+        <td>dependent</td>
+        <td>dependent</td>
+        <td>dependent</td>
+        <td>dependent</td>
+        </tr>
+        <tr>
+        <td>ultimateCreditor</td>
+        <td>n.a.</td>
+        <td>optional</td>
+        <td>n.a. (for future use)</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        </tr>
+        <tr>
+        <td>chargeBearer</td>
+        <td>n.a.</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>mandatory</td>
+        <td>optional</td>
+        </tr>
+        <tr>
+        <td>purposeCode</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        </tr>
+        <tr>
+        <td>remittanceInformationUnstructuredArray</td>
+        <td>n.a.</td>
+        <td>n.a.</td>
+        <td>n.a.</td>
+        <td>n.a.</td>
+        <td>n.a.</td>
+        <td>n.a.</td>
+        </tr>
+        <tr>
+        <td>serviceLevel</td>
+        <td>n.a.</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>mandatory</td>
+        <td>optional</td>
+        </tr>
+        <tr>
+        <td>remittanceInformationUnstructured</td>
+        <td>n.a.</td>
+        <td>optional</td>
+        <td>n.a.</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        </tr>
+        <tr>
+        <td>remittanceInformationStructured</td>
+        <td>mandatory</td>
+        <td>optional</td>
+        <td>mandatory 6)</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        </tr>
+        <tr>
+        <td>requestedExecutionDate</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        </tr>
+        <tr>
+        <td>requestedExecutionTime</td>
+        <td>n.a.</td>
+        <td>n.a.</td>
+        <td>n.a.</td>
+        <td>n.a.</td>
+        <td>n.a.</td>
+        <td>n.a.</td>
+        </tr>
         </table>
 
         Footnotes from the table:
-        1) currencyOfTransfer is a subfield of equivalentAmount and may only be used if equivalentAmount is used instead of instructedAmount.
+        1) This element may only be used by agreement with the instructed financial institution. currencyOfTransfer is a subfield of equivalentAmount and may only be used if equivalentAmount is used instead of instructedAmount.
         2) The element may only be used in consultation with the financial institution commissioned.
         3) The element is currently ignored by financial institutions.
         4) Dependence on creditorAccount, see SIX Swiss Payments Standards implementation guidelines.
         5) Type 4(V3), 6(V2, V3): Must be present. Type 4(V2): May be present. Other species: May not be present.
+        6) QR-reference, creditor reference or IPI reference
 
         IMPORTANT: In this API definition the following holds:
           *  All data elements mentioned above are defined, but some of them are commented,
@@ -5639,6 +5875,7 @@ components:
 
           * domestic-swiss-credit-transfers-isr
           * domestic-swiss-credit-transfers
+          * domestic-swiss-credit-transfers-qr
           * domestic-swiss-foreign-credit-transfers
           * swiss-sepa-credit-transfers
           * swiss-cross-border-credit-transfers
@@ -5648,48 +5885,266 @@ components:
 
         Take care: Since the format is intended to fit for all payment products
         there are additional conditions which are NOT covered by this specification.
-        Please check the SIX Swiss Payment Standards implementation guidelines for details.
+        Please check the Implementation Guidelines for detailes.
 
 
         The following data element are depending on the actual payment product available (in source code):
 
+        
         <table style="width:100%">
-        <tr><td></td><td>Payment Type 1: ISR</td><td>Payment Type 3: IBAN/postal account and IID/BIC</td><td>Payment Type 4: Foreign currency</td><td>Payment Type 5: Foreign SEPA</td><td>Payment Type 6: Foreign</td></tr>
-        <tr><td>CH Domestic Data Element</td><td>domestic-swiss-credit-transfers-isr</td><td>domestic-swiss-credit-transfers</td><td>domestic-swiss-foreign-credit-transfers</td><td>swiss-sepa-credit-transfers</td><td>swiss-cross-border-credit-transfers</td></tr>
-        <tr><td>endToEndIdentification</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
-        <tr><td>debtorAccount (incl. type)</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
-        <tr><td>debtorAgent</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>optional</td></tr>
-        <tr><td>debtorName</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
-        <tr><td>debtorId</td><td>optional 3)</td><td>optional 3)</td><td>optional 3)</td><td>optional 3)</td><td>optional 3)</td></tr>
-        <tr><td>ultimateDebtor</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td></tr>
-        <tr><td>instructedAmount (incl. currency)</td><td>mandatory</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td></tr>
-        <tr><td>equivalentAmount</td><td>n.a.</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td></tr>
-        <tr><td>currencyOfTransfer</td><td>n.a.</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td></tr>
-        <tr><td>exchangeRateInformation</td><td>n.a.</td><td>optional 2)</td><td>optional 2)</td><td>optional 2)</td><td>optional 2)</td></tr>
-        <tr><td>creditorAccount</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
-        <tr><td>creditorAgent</td><td>n.a.</td><td>dependent 4)</td><td>dependent 4)</td><td>dependent 4)</td><td>dependent 4)</td></tr>
-        <tr><td>creditorAgentName</td><td>n.a.</td><td>n.a.</td><td>dependent 5)</td><td>n.a.</td><td>dependent 5)</td></tr>
-        <tr><td>creditorName</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
-        <tr><td>creditorId</td><td>n.a.</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td></tr>
-        <tr><td>creditorAddress</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td></tr>
-        <tr><td>creditorNameAndAddress</td><td>n.a.</td><td>dependent</td><td>dependent</td><td>dependent</td><td>dependent</td></tr>
-        <tr><td>ultimateCreditor</td><td>n.a.</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td></tr>
-        <tr><td>chargeBearer</td><td>n.a.</td><td>optional</td><td>optional</td><td>mandatory</td><td>optional</td></tr>
-        <tr><td>purposeCode</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td></tr>
-        <tr><td>remittanceInformationUnstructuredArray</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td></tr>
-        <tr><td>serviceLevel</td><td>n.a.</td><td>optional</td><td>optional</td><td>mandatory</td><td>optional</td></tr>
-        <tr><td>remittanceInformationUnstructured</td><td>n.a.</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td></tr>
-        <tr><td>remittanceInformationStructured</td><td>mandatory</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td></tr>
-        <tr><td>requestedExecutionDate</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
-        <tr><td>requestedExecutionTime</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td></tr>
+        <tr>
+        <td></td>
+        <td>Payment Type 1: ISR</td>
+        <td>Payment Type 3: IBAN/postal account and IID/BIC</td>
+        <td>Payment Type 3: QR-bill</td>
+        <td>Payment Type 4: Foreign currency</td>
+        <td>Payment Type 5: Foreign SEPA</td>
+        <td>Payment Type 6: Foreign</td>
+        </tr>
+        <tr>
+        <td>CH Domestic Data Element</td>
+        <td>domestic-swiss-credit-transfers-isr</td>
+        <td>domestic-swiss-credit-transfers</td>
+        <td>domestic-swiss-credit-transfers-qr</td>
+        <td>domestic-swiss-foreign-credit-transfers</td>
+        <td>swiss-sepa-credit-transfers</td>
+        <td>swiss-cross-border-credit-transfers</td>
+        </tr>
+        <tr>
+        <td>endToEndIdentification</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        </tr>
+        <tr>
+        <td>debtorAccount (incl. type)</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        </tr>
+        <tr>
+        <td>debtorAgent</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>optional</td>
+        </tr>
+        <tr>
+        <td>debtorName</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        </tr>
+        <tr>
+        <td>debtorId</td>
+        <td>optional 3)</td>
+        <td>optional 3)</td>
+        <td>optional 3)</td>
+        <td>optional 3)</td>
+        <td>optional 3)</td>
+        <td>optional 3)</td>
+        </tr>
+        <tr>
+        <td>ultimateDebtor</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        </tr>
+        <tr>
+        <td>instructedAmount (incl. currency)</td>
+        <td>mandatory</td>
+        <td>dependent 1)</td>
+        <td>dependent 1)</td>
+        <td>dependent 1)</td>
+        <td>dependent 1)</td>
+        <td>dependent 1)</td>
+        </tr>
+        <tr>
+        <td>equivalentAmount</td>
+        <td>n.a.</td>
+        <td>dependent 1)</td>
+        <td>dependent 1)</td>
+        <td>dependent 1)</td>
+        <td>dependent 1)</td>
+        <td>dependent 1)</td>
+        </tr>
+        <tr>
+        <td>currencyOfTransfer</td>
+        <td>n.a.</td>
+        <td>dependent 1)</td>
+        <td>dependent 1)</td>
+        <td>dependent 1)</td>
+        <td>dependent 1)</td>
+        <td>dependent 1)</td>
+        </tr>
+        <tr>
+        <td>exchangeRateInformation</td>
+        <td>n.a.</td>
+        <td>optional 2)</td>
+        <td>optional 2)</td>
+        <td>optional 2)</td>
+        <td>optional 2)</td>
+        <td>optional 2)</td>
+        </tr>
+        <tr>
+        <td>creditorAccount</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        </tr>
+        <tr>
+        <td>creditorAgent</td>
+        <td>n.a.</td>
+        <td>dependent 4)</td>
+        <td>dependent 4)</td>
+        <td>dependent 4)</td>
+        <td>dependent 4)</td>
+        <td>dependent 4)</td>
+        </tr>
+        <tr>
+        <td>creditorAgentName</td>
+        <td>n.a.</td>
+        <td>n.a.</td>
+        <td>n.a.</td>
+        <td>dependent 5)</td>
+        <td>n.a.</td>
+        <td>dependent 5)</td>
+        </tr>
+        <tr>
+        <td>creditorName</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        </tr>
+        <tr>
+        <td>creditorId</td>
+        <td>n.a.</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        </tr>
+        <tr>
+        <td>creditorAddress</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        </tr>
+        <tr>
+        <td>creditorNameAndAddress</td>
+        <td>n.a.</td>
+        <td>dependent</td>
+        <td>dependent</td>
+        <td>dependent</td>
+        <td>dependent</td>
+        <td>dependent</td>
+        </tr>
+        <tr>
+        <td>ultimateCreditor</td>
+        <td>n.a.</td>
+        <td>optional</td>
+        <td>n.a. (for future use)</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        </tr>
+        <tr>
+        <td>chargeBearer</td>
+        <td>n.a.</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>mandatory</td>
+        <td>optional</td>
+        </tr>
+        <tr>
+        <td>purposeCode</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        </tr>
+        <tr>
+        <td>remittanceInformationUnstructuredArray</td>
+        <td>n.a.</td>
+        <td>n.a.</td>
+        <td>n.a.</td>
+        <td>n.a.</td>
+        <td>n.a.</td>
+        <td>n.a.</td>
+        </tr>
+        <tr>
+        <td>serviceLevel</td>
+        <td>n.a.</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>mandatory</td>
+        <td>optional</td>
+        </tr>
+        <tr>
+        <td>remittanceInformationUnstructured</td>
+        <td>n.a.</td>
+        <td>optional</td>
+        <td>n.a.</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        </tr>
+        <tr>
+        <td>remittanceInformationStructured</td>
+        <td>mandatory</td>
+        <td>optional</td>
+        <td>mandatory 6)</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        </tr>
+        <tr>
+        <td>requestedExecutionDate</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        </tr>
+        <tr>
+        <td>requestedExecutionTime</td>
+        <td>n.a.</td>
+        <td>n.a.</td>
+        <td>n.a.</td>
+        <td>n.a.</td>
+        <td>n.a.</td>
+        <td>n.a.</td>
+        </tr>
         </table>
-
-        Footnotes from the table:
-        1) currencyOfTransfer is a subfield of equivalentAmount and may only be used if equivalentAmount is used instead of instructedAmount.
-        2) The element may only be used in consultation with the financial institution commissioned.
-        3) The element is currently ignored by financial institutions.
-        4) Dependence on creditorAccount, see SIX Swiss Payments Standards implementation guidelines.
-        5) Type 4(V3), 6(V2, V3): Must be present. Type 4(V2): May be present. Other species: May not be present.
 
         IMPORTANT: In this API definition the following holds:
           *  All data elements mentioned above are defined, but some of them are commented,
@@ -5768,6 +6223,7 @@ components:
 
           * domestic-swiss-credit-transfers-isr
           * domestic-swiss-credit-transfers
+          * domestic-swiss-credit-transfers-qr
           * domestic-swiss-foreign-credit-transfers
           * swiss-sepa-credit-transfers
           * swiss-cross-border-credit-transfers
@@ -5777,48 +6233,273 @@ components:
 
         Take care: Since the format is intended to fit for all payment products
         there are additional conditions which are NOT covered by this specification.
-        Please check the SIX Swiss Payment Standards implementation guidelines for details.
+        Please check the Implementation Guidelines for detailes.
 
 
         The following data element are depending on the actual payment product available (in source code):
 
         <table style="width:100%">
-        <tr><td></td><td>Payment Type 1: ISR</td><td>Payment Type 3: IBAN/postal account and IID/BIC</td><td>Payment Type 4: Foreign currency</td><td>Payment Type 5: Foreign SEPA</td><td>Payment Type 6: Foreign</td></tr>
-        <tr><td>CH Domestic Data Element</td><td>domestic-swiss-credit-transfers-isr</td><td>domestic-swiss-credit-transfers</td><td>domestic-swiss-foreign-credit-transfers</td><td>swiss-sepa-credit-transfers</td><td>swiss-cross-border-credit-transfers</td></tr>
-        <tr><td>endToEndIdentification</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
-        <tr><td>debtorAccount (incl. type)</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
-        <tr><td>debtorAgent</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>optional</td></tr>
-        <tr><td>debtorName</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
-        <tr><td>debtorId</td><td>optional 3)</td><td>optional 3)</td><td>optional 3)</td><td>optional 3)</td><td>optional 3)</td></tr>
-        <tr><td>ultimateDebtor</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td></tr>
-        <tr><td>instructedAmount (incl. currency)</td><td>mandatory</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td></tr>
-        <tr><td>equivalentAmount</td><td>n.a.</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td></tr>
-        <tr><td>currencyOfTransfer</td><td>n.a.</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td></tr>
-        <tr><td>exchangeRateInformation</td><td>n.a.</td><td>optional 2)</td><td>optional 2)</td><td>optional 2)</td><td>optional 2)</td></tr>
-        <tr><td>creditorAccount</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
-        <tr><td>creditorAgent</td><td>n.a.</td><td>dependent 4)</td><td>dependent 4)</td><td>dependent 4)</td><td>dependent 4)</td></tr>
-        <tr><td>creditorAgentName</td><td>n.a.</td><td>n.a.</td><td>dependent 5)</td><td>n.a.</td><td>dependent 5)</td></tr>
-        <tr><td>creditorName</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
-        <tr><td>creditorId</td><td>n.a.</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td></tr>
-        <tr><td>creditorAddress</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td></tr>
-        <tr><td>creditorNameAndAddress</td><td>n.a.</td><td>dependent</td><td>dependent</td><td>dependent</td><td>dependent</td></tr>
-        <tr><td>ultimateCreditor</td><td>n.a.</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td></tr>
-        <tr><td>chargeBearer</td><td>n.a.</td><td>optional</td><td>optional</td><td>mandatory</td><td>optional</td></tr>
-        <tr><td>purposeCode</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td></tr>
-        <tr><td>remittanceInformationUnstructuredArray</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td></tr>
-        <tr><td>serviceLevel</td><td>n.a.</td><td>optional</td><td>optional</td><td>mandatory</td><td>optional</td></tr>
-        <tr><td>remittanceInformationUnstructured</td><td>n.a.</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td></tr>
-        <tr><td>remittanceInformationStructured</td><td>mandatory</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td></tr>
-        <tr><td>requestedExecutionDate</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
-        <tr><td>requestedExecutionTime</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td></tr>
+        <tr>
+        <td></td>
+        <td>Payment Type 1: ISR</td>
+        <td>Payment Type 3: IBAN/postal account and IID/BIC</td>
+        <td>Payment Type 3: QR-bill</td>
+        <td>Payment Type 4: Foreign currency</td>
+        <td>Payment Type 5: Foreign SEPA</td>
+        <td>Payment Type 6: Foreign</td>
+        </tr>
+        <tr>
+        <td>CH Domestic Data Element</td>
+        <td>domestic-swiss-credit-transfers-isr</td>
+        <td>domestic-swiss-credit-transfers</td>
+        <td>domestic-swiss-credit-transfers-qr</td>
+        <td>domestic-swiss-foreign-credit-transfers</td>
+        <td>swiss-sepa-credit-transfers</td>
+        <td>swiss-cross-border-credit-transfers</td>
+        </tr>
+        <tr>
+        <td>endToEndIdentification</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        </tr>
+        <tr>
+        <td>debtorAccount (incl. type)</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        </tr>
+        <tr>
+        <td>debtorAgent</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>optional</td>
+        </tr>
+        <tr>
+        <td>debtorName</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        </tr>
+        <tr>
+        <td>debtorId</td>
+        <td>optional 3)</td>
+        <td>optional 3)</td>
+        <td>optional 3)</td>
+        <td>optional 3)</td>
+        <td>optional 3)</td>
+        <td>optional 3)</td>
+        </tr>
+        <tr>
+        <td>ultimateDebtor</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        </tr>
+        <tr>
+        <td>instructedAmount (incl. currency)</td>
+        <td>mandatory</td>
+        <td>dependent 1)</td>
+        <td>dependent 1)</td>
+        <td>dependent 1)</td>
+        <td>dependent 1)</td>
+        <td>dependent 1)</td>
+        </tr>
+        <tr>
+        <td>equivalentAmount</td>
+        <td>n.a.</td>
+        <td>dependent 1)</td>
+        <td>dependent 1)</td>
+        <td>dependent 1)</td>
+        <td>dependent 1)</td>
+        <td>dependent 1)</td>
+        </tr>
+        <tr>
+        <td>currencyOfTransfer</td>
+        <td>n.a.</td>
+        <td>dependent 1)</td>
+        <td>dependent 1)</td>
+        <td>dependent 1)</td>
+        <td>dependent 1)</td>
+        <td>dependent 1)</td>
+        </tr>
+        <tr>
+        <td>exchangeRateInformation</td>
+        <td>n.a.</td>
+        <td>optional 2)</td>
+        <td>optional 2)</td>
+        <td>optional 2)</td>
+        <td>optional 2)</td>
+        <td>optional 2)</td>
+        </tr>
+        <tr>
+        <td>creditorAccount</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        </tr>
+        <tr>
+        <td>creditorAgent</td>
+        <td>n.a.</td>
+        <td>dependent 4)</td>
+        <td>dependent 4)</td>
+        <td>dependent 4)</td>
+        <td>dependent 4)</td>
+        <td>dependent 4)</td>
+        </tr>
+        <tr>
+        <td>creditorAgentName</td>
+        <td>n.a.</td>
+        <td>n.a.</td>
+        <td>n.a.</td>
+        <td>dependent 5)</td>
+        <td>n.a.</td>
+        <td>dependent 5)</td>
+        </tr>
+        <tr>
+        <td>creditorName</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        </tr>
+        <tr>
+        <td>creditorId</td>
+        <td>n.a.</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        </tr>
+        <tr>
+        <td>creditorAddress</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        </tr>
+        <tr>
+        <td>creditorNameAndAddress</td>
+        <td>n.a.</td>
+        <td>dependent</td>
+        <td>dependent</td>
+        <td>dependent</td>
+        <td>dependent</td>
+        <td>dependent</td>
+        </tr>
+        <tr>
+        <td>ultimateCreditor</td>
+        <td>n.a.</td>
+        <td>optional</td>
+        <td>n.a. (for future use)</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        </tr>
+        <tr>
+        <td>chargeBearer</td>
+        <td>n.a.</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>mandatory</td>
+        <td>optional</td>
+        </tr>
+        <tr>
+        <td>purposeCode</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        </tr>
+        <tr>
+        <td>remittanceInformationUnstructuredArray</td>
+        <td>n.a.</td>
+        <td>n.a.</td>
+        <td>n.a.</td>
+        <td>n.a.</td>
+        <td>n.a.</td>
+        <td>n.a.</td>
+        </tr>
+        <tr>
+        <td>serviceLevel</td>
+        <td>n.a.</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>mandatory</td>
+        <td>optional</td>
+        </tr>
+        <tr>
+        <td>remittanceInformationUnstructured</td>
+        <td>n.a.</td>
+        <td>optional</td>
+        <td>n.a.</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        </tr>
+        <tr>
+        <td>remittanceInformationStructured</td>
+        <td>mandatory</td>
+        <td>optional</td>
+        <td>mandatory 6)</td>
+        <td>optional</td>
+        <td>optional</td>
+        <td>optional</td>
+        </tr>
+        <tr>
+        <td>requestedExecutionDate</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        <td>mandatory</td>
+        </tr>
+        <tr>
+        <td>requestedExecutionTime</td>
+        <td>n.a.</td>
+        <td>n.a.</td>
+        <td>n.a.</td>
+        <td>n.a.</td>
+        <td>n.a.</td>
+        <td>n.a.</td>
+        </tr>
         </table>
 
         Footnotes from the table:
-        1) currencyOfTransfer is a subfield of equivalentAmount and may only be used if equivalentAmount is used instead of instructedAmount.
+        1) This element may only be used by agreement with the instructed financial institution. currencyOfTransfer is a subfield of equivalentAmount and may only be used if equivalentAmount is used instead of instructedAmount.
         2) The element may only be used in consultation with the financial institution commissioned.
         3) The element is currently ignored by financial institutions.
         4) Dependence on creditorAccount, see SIX Swiss Payments Standards implementation guidelines.
         5) Type 4(V3), 6(V2, V3): Must be present. Type 4(V2): May be present. Other species: May not be present.
+        6) QR-reference, creditor reference or IPI reference
 
         IMPORTANT: In this API definition the following holds:
           *  All data elements mentioned above are defined, but some of them are commented,
@@ -6814,7 +7495,7 @@ components:
       example:
         {
         "scaRedirect": {"href": "https://www.testbank.com/asdfasdfasdf"},
-        "self": {"href": "/v1/payments/swiss-sepa-credit-transfers/1234-wertiq-983"}
+        "self": {"href": "/v1/payments/sepa-credit-transfers/1234-wertiq-983"}
         }
 
 
@@ -9976,6 +10657,7 @@ components:
         The following payment products are supported:
           - domestic-swiss-credit-transfers-isr
           - domestic-swiss-credit-transfers
+          - domestic-swiss-credit-transfers-qr
           - domestic-swiss-foreign-credit-transfers
           - swiss-sepa-credit-transfers
           - swiss-cross-border-credit-transfers
@@ -9997,6 +10679,7 @@ components:
         enum:
           - "domestic-swiss-credit-transfers-isr"
           - "domestic-swiss-credit-transfers"
+          - "domestic-swiss-credit-transfers-qr"
           - "domestic-swiss-foreign-credit-transfers"
           - "swiss-sepa-credit-transfers"
           - "swiss-cross-border-credit-transfers"
@@ -10589,7 +11272,7 @@ components:
         There are the following payment-products supported:
           * "domestic-swiss-credit-transfers-isr"
           * "domestic-swiss-credit-transfers"
-          * "domestic-swiss-foreign-credit-transfers"
+          * "domestic-swiss-credit-transfers-qr"
           * "swiss-sepa-credit-transfers" with JSON-Body
           * "swiss-cross-border-credit-transfers" with JSON-Body
           * "pain.001-sepa-credit-transfers" with XML pain.001.001.03 body for SCT scheme
@@ -10623,21 +11306,23 @@ components:
               $ref: "#/components/examples/paymentInitiation_domestic-swiss-credit-transfers_json_1"
             "Example 4: 'payments' - 'paymentInitiation_domestic-swiss-credit-transfers_json_2'":
               $ref: "#/components/examples/paymentInitiation_domestic-swiss-credit-transfers_json_2"
-            "Example 5: 'payments' - 'paymentInitiation_domestic-swiss-foreign-credit-transfers_json_1'":
+            "Example 5: 'payments' - 'paymentInitiation_domestic-swiss-credit-transfers-qr_json_1'":
+              $ref: "#/components/examples/paymentInitiation_domestic-swiss-credit-transfers-qr_json_1"
+            "Example 6: 'payments' - 'paymentInitiation_domestic-swiss-foreign-credit-transfers_json_1'":
               $ref: "#/components/examples/paymentInitiation_domestic-swiss-foreign-credit-transfers_json_1"
-            "Example 6: 'payments' - 'paymentInitiation_domestic-swiss-foreign-credit-transfers_json_2'":
+            "Example 7: 'payments' - 'paymentInitiation_domestic-swiss-foreign-credit-transfers_json_2'":
               $ref: "#/components/examples/paymentInitiation_domestic-swiss-foreign-credit-transfers_json_2"
-            "Example 7: 'payments' - 'paymentInitiation_swiss-sepa-credit-transfers_json_1'":
+            "Example 8: 'payments' - 'paymentInitiation_swiss-sepa-credit-transfers_json_1'":
               $ref: "#/components/examples/paymentInitiation_swiss-sepa-credit-transfers_json_1"
-            "Example 8: 'payments' - 'paymentInitiation_swiss-sepa-credit-transfers_json_2'":
+            "Example 9: 'payments' - 'paymentInitiation_swiss-sepa-credit-transfers_json_2'":
               $ref: "#/components/examples/paymentInitiation_swiss-sepa-credit-transfers_json_2"
-            "Example 9: 'payments' - 'paymentInitiation_swiss-cross-border-credit-transfers_json_1'":
+            "Example 10: 'payments' - 'paymentInitiation_swiss-cross-border-credit-transfers_json_1'":
               $ref: "#/components/examples/paymentInitiation_swiss-cross-border-credit-transfers_json_1"
-            "Example 10: 'payments' - 'paymentInitiation_swiss-cross-border-credit-transfers_json_2'":
+            "Example 11: 'payments' - 'paymentInitiation_swiss-cross-border-credit-transfers_json_2'":
               $ref: "#/components/examples/paymentInitiation_swiss-cross-border-credit-transfers_json_2"
-            "Example 11 (generic NextGenPSD2): 'periodic-payments' - 'sepa-credit-transfers'":
+            "Example 12 (generic NextGenPSD2): 'periodic-payments' - 'sepa-credit-transfers'":
               $ref: "#/components/examples/paymentInitiationSctBody_periodic-payments_json"
-            "Example 12 (generic NextGenPSD2): 'bulk-payments' - 'sepa-credit-transfers'":
+            "Example 13 (generic NextGenPSD2): 'bulk-payments' - 'sepa-credit-transfers'":
               $ref: "#/components/examples/paymentInitiationSctBody_bulk-payments_json"
 
         application/xml:
@@ -12509,6 +13194,39 @@ components:
           "requestedExecutionDate": "2019-10-22"
         }
 
+    paymentInitiation_domestic-swiss-credit-transfers-qr_json_1:
+      value:
+        {
+          "endToEndIdentification": "8ff86bf0908a4b5f99a582220bbe0033",
+          "debtorAccount": {
+            "iban": "CH900025425440020003X"
+          },
+          "debtorAgent": {
+            "bic": "UBSWCHZH90A"
+          },
+          "debtorName": "Example Qrone",
+          "instructedAmount": {
+            "currency": "CHF",
+            "amount": "100.00"
+          },
+          "creditorAccount": {
+            "iban": "CH3630005200123456789"
+          },
+          "creditorName": "Kunde 1",
+          "creditorAddress": {
+            "buildingNumber": "1",
+            "townName": "Wittenbach",
+            "country": "CH",
+            "postCode": "9300",
+            "streetName": "Kundenstrasse"
+          },
+          "remittanceInformationStructured": {
+            "reference": "000000000000000000000000011",
+            "SCORorQRRorIPI": "QRR"
+          },
+          "requestedExecutionDate": "2019-10-22"
+        }
+
     paymentInitiation_domestic-swiss-foreign-credit-transfers_json_1:
       value:
         {
@@ -13180,7 +13898,7 @@ components:
           "_links":
             {
             "scaRedirect": {"href": "https://www.testbank.com/asdfasdfasdf"},
-            "self": {"href": "/v1/payments/swiss-sepa-credit-transfers/1234-wertiq-983"},
+            "self": {"href": "/v1/payments/sepa-credit-transfers/1234-wertiq-983"},
             "status": {"href": "/v1/payments/1234-wertiq-983/status"},
             "scaStatus": {"href": "/v1/payments/1234-wertiq-983/authorisations/123auth456"}
             }
