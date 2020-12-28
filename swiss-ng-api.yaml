@@ -5521,258 +5521,34 @@ components:
         The following data element are depending on the actual payment product available (in source code):
 
         <table style="width:100%">
-        <tr>
-        <td></td>
-        <td>Payment Type 1: ISR</td>
-        <td>Payment Type 3: IBAN/postal account and IID/BIC</td>
-        <td>Payment Type 3: QR-bill</td>
-        <td>Payment Type 4: Foreign currency</td>
-        <td>Payment Type 5: Foreign SEPA</td>
-        <td>Payment Type 6: Foreign</td>
-        </tr>
-        <tr>
-        <td>CH Domestic Data Element</td>
-        <td>domestic-swiss-credit-transfers-isr</td>
-        <td>domestic-swiss-credit-transfers</td>
-        <td>domestic-swiss-credit-transfers-qr</td>
-        <td>domestic-swiss-foreign-credit-transfers</td>
-        <td>swiss-sepa-credit-transfers</td>
-        <td>swiss-cross-border-credit-transfers</td>
-        </tr>
-        <tr>
-        <td>endToEndIdentification</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        </tr>
-        <tr>
-        <td>debtorAccount (incl. type)</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        </tr>
-        <tr>
-        <td>debtorAgent</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>optional</td>
-        </tr>
-        <tr>
-        <td>debtorName</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        </tr>
-        <tr>
-        <td>debtorId</td>
-        <td>optional 3)</td>
-        <td>optional 3)</td>
-        <td>optional 3)</td>
-        <td>optional 3)</td>
-        <td>optional 3)</td>
-        <td>optional 3)</td>
-        </tr>
-        <tr>
-        <td>ultimateDebtor</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        </tr>
-        <tr>
-        <td>instructedAmount (incl. currency)</td>
-        <td>mandatory</td>
-        <td>dependent 1)</td>
-        <td>dependent 1)</td>
-        <td>dependent 1)</td>
-        <td>dependent 1)</td>
-        <td>dependent 1)</td>
-        </tr>
-        <tr>
-        <td>equivalentAmount</td>
-        <td>n.a.</td>
-        <td>dependent 1)</td>
-        <td>dependent 1)</td>
-        <td>dependent 1)</td>
-        <td>dependent 1)</td>
-        <td>dependent 1)</td>
-        </tr>
-        <tr>
-        <td>currencyOfTransfer</td>
-        <td>n.a.</td>
-        <td>dependent 1)</td>
-        <td>dependent 1)</td>
-        <td>dependent 1)</td>
-        <td>dependent 1)</td>
-        <td>dependent 1)</td>
-        </tr>
-        <tr>
-        <td>exchangeRateInformation</td>
-        <td>n.a.</td>
-        <td>optional 2)</td>
-        <td>optional 2)</td>
-        <td>optional 2)</td>
-        <td>optional 2)</td>
-        <td>optional 2)</td>
-        </tr>
-        <tr>
-        <td>creditorAccount</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        </tr>
-        <tr>
-        <td>creditorAgent</td>
-        <td>n.a.</td>
-        <td>dependent 4)</td>
-        <td>dependent 4)</td>
-        <td>dependent 4)</td>
-        <td>dependent 4)</td>
-        <td>dependent 4)</td>
-        </tr>
-        <tr>
-        <td>creditorAgentName</td>
-        <td>n.a.</td>
-        <td>n.a.</td>
-        <td>n.a.</td>
-        <td>dependent 5)</td>
-        <td>n.a.</td>
-        <td>dependent 5)</td>
-        </tr>
-        <tr>
-        <td>creditorName</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        </tr>
-        <tr>
-        <td>creditorId</td>
-        <td>n.a.</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        </tr>
-        <tr>
-        <td>creditorAddress</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        </tr>
-        <tr>
-        <td>creditorNameAndAddress</td>
-        <td>n.a.</td>
-        <td>dependent</td>
-        <td>dependent</td>
-        <td>dependent</td>
-        <td>dependent</td>
-        <td>dependent</td>
-        </tr>
-        <tr>
-        <td>ultimateCreditor</td>
-        <td>n.a.</td>
-        <td>optional</td>
-        <td>n.a. (for future use)</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        </tr>
-        <tr>
-        <td>chargeBearer</td>
-        <td>n.a.</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>mandatory</td>
-        <td>optional</td>
-        </tr>
-        <tr>
-        <td>purposeCode</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        </tr>
-        <tr>
-        <td>remittanceInformationUnstructuredArray</td>
-        <td>n.a.</td>
-        <td>n.a.</td>
-        <td>n.a.</td>
-        <td>n.a.</td>
-        <td>n.a.</td>
-        <td>n.a.</td>
-        </tr>
-        <tr>
-        <td>serviceLevel</td>
-        <td>n.a.</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>mandatory</td>
-        <td>optional</td>
-        </tr>
-        <tr>
-        <td>remittanceInformationUnstructured</td>
-        <td>n.a.</td>
-        <td>optional</td>
-        <td>n.a.</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        </tr>
-        <tr>
-        <td>remittanceInformationStructured</td>
-        <td>mandatory</td>
-        <td>optional</td>
-        <td>mandatory 6)</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        </tr>
-        <tr>
-        <td>requestedExecutionDate</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        </tr>
-        <tr>
-        <td>requestedExecutionTime</td>
-        <td>n.a.</td>
-        <td>n.a.</td>
-        <td>n.a.</td>
-        <td>n.a.</td>
-        <td>n.a.</td>
-        <td>n.a.</td>
-        </tr>
+        <tr><td></td><td>Payment Type 1: ISR</td><td>Payment Type 3: IBAN/postal account and IID/BIC</td><td>Payment Type 3: QR-bill</td><td>Payment Type 4: Foreign currency</td><td>Payment Type 5: Foreign SEPA</td><td>Payment Type 6: Foreign</td></tr>
+        <tr><td>CH Domestic Data Element</td><td>domestic-swiss-credit-transfers-isr</td><td>domestic-swiss-credit-transfers</td><td>domestic-swiss-credit-transfers-qr</td><td>domestic-swiss-foreign-credit-transfers</td><td>swiss-sepa-credit-transfers</td><td>swiss-cross-border-credit-transfers</td></tr>
+        <tr><td>endToEndIdentification</td>td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
+        <tr><td>debtorAccount (incl. type)</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
+        <tr><td>debtorAgent</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>optional</td></tr>
+        <tr><td>debtorName</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
+        <tr><td>debtorId</td><td>optional 3)</td><td>optional 3)</td><td>optional 3)</td><td>optional 3)</td><td>optional 3)</td><td>optional 3)</td></tr>
+        <tr><td>ultimateDebtor</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td></tr>
+        <tr><td>instructedAmount (incl. currency)</td><td>mandatory</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td></tr>
+        <tr><td>equivalentAmount</td><td>n.a.</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td></tr>
+        <tr><td>currencyOfTransfer</td><td>n.a.</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td></tr>
+        <tr><td>exchangeRateInformation</td><td>n.a.</td><td>optional 2)</td><td>optional 2)</td><td>optional 2)</td><td>optional 2)</td><td>optional 2)</td></tr>
+        <tr><td>creditorAccount</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
+        <tr><td>creditorAgent</td><td>n.a.</td><td>dependent 4)</td><td>dependent 4)</td><td>dependent 4)</td><td>dependent 4)</td><td>dependent 4)</td></tr>
+        <tr><td>creditorAgentName</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>dependent 5)</td><td>n.a.</td><td>dependent 5)</td></tr>
+        <tr><td>creditorName</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
+        <tr><td>creditorId</td><td>n.a.</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td></tr>
+        <tr><td>creditorAddress</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td></tr>
+        <tr><td>creditorNameAndAddress</td><td>n.a.</td><td>dependent</td><td>dependent</td><td>dependent</td><td>dependent</td><td>dependent</td></tr>
+        <tr><td>ultimateCreditor</td><td>n.a.</td><td>optional</td><td>n.a. (for future use)</td><td>optional</td><td>optional</td><td>optional</td></tr>
+        <tr><td>chargeBearer</td><td>n.a.</td><td>optional</td><td>optional</td><td>optional</td><td>mandatory</td><td>optional</td></tr>
+        <tr><td>purposeCode</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td></tr>
+        <tr><td>remittanceInformationUnstructuredArray</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td></tr>
+        <tr><td>serviceLevel</td><td>n.a.</td><td>optional</td><td>optional</td><td>optional</td><td>mandatory</td><td>optional</td></tr>
+        <tr><td>remittanceInformationUnstructured</td><td>n.a.</td><td>optional</td><td>n.a.</td><td>optional</td><td>optional</td><td>optional</td></tr>
+        <tr><td>remittanceInformationStructured</td><td>mandatory</td><td>optional</td><td>mandatory 6)</td><td>optional</td><td>optional</td><td>optional</td></tr>
+        <tr><td>requestedExecutionDate</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
+        <tr><td>requestedExecutionTime</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td></tr>
         </table>
 
         Footnotes from the table:
@@ -5892,258 +5668,34 @@ components:
 
         
         <table style="width:100%">
-        <tr>
-        <td></td>
-        <td>Payment Type 1: ISR</td>
-        <td>Payment Type 3: IBAN/postal account and IID/BIC</td>
-        <td>Payment Type 3: QR-bill</td>
-        <td>Payment Type 4: Foreign currency</td>
-        <td>Payment Type 5: Foreign SEPA</td>
-        <td>Payment Type 6: Foreign</td>
-        </tr>
-        <tr>
-        <td>CH Domestic Data Element</td>
-        <td>domestic-swiss-credit-transfers-isr</td>
-        <td>domestic-swiss-credit-transfers</td>
-        <td>domestic-swiss-credit-transfers-qr</td>
-        <td>domestic-swiss-foreign-credit-transfers</td>
-        <td>swiss-sepa-credit-transfers</td>
-        <td>swiss-cross-border-credit-transfers</td>
-        </tr>
-        <tr>
-        <td>endToEndIdentification</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        </tr>
-        <tr>
-        <td>debtorAccount (incl. type)</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        </tr>
-        <tr>
-        <td>debtorAgent</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>optional</td>
-        </tr>
-        <tr>
-        <td>debtorName</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        </tr>
-        <tr>
-        <td>debtorId</td>
-        <td>optional 3)</td>
-        <td>optional 3)</td>
-        <td>optional 3)</td>
-        <td>optional 3)</td>
-        <td>optional 3)</td>
-        <td>optional 3)</td>
-        </tr>
-        <tr>
-        <td>ultimateDebtor</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        </tr>
-        <tr>
-        <td>instructedAmount (incl. currency)</td>
-        <td>mandatory</td>
-        <td>dependent 1)</td>
-        <td>dependent 1)</td>
-        <td>dependent 1)</td>
-        <td>dependent 1)</td>
-        <td>dependent 1)</td>
-        </tr>
-        <tr>
-        <td>equivalentAmount</td>
-        <td>n.a.</td>
-        <td>dependent 1)</td>
-        <td>dependent 1)</td>
-        <td>dependent 1)</td>
-        <td>dependent 1)</td>
-        <td>dependent 1)</td>
-        </tr>
-        <tr>
-        <td>currencyOfTransfer</td>
-        <td>n.a.</td>
-        <td>dependent 1)</td>
-        <td>dependent 1)</td>
-        <td>dependent 1)</td>
-        <td>dependent 1)</td>
-        <td>dependent 1)</td>
-        </tr>
-        <tr>
-        <td>exchangeRateInformation</td>
-        <td>n.a.</td>
-        <td>optional 2)</td>
-        <td>optional 2)</td>
-        <td>optional 2)</td>
-        <td>optional 2)</td>
-        <td>optional 2)</td>
-        </tr>
-        <tr>
-        <td>creditorAccount</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        </tr>
-        <tr>
-        <td>creditorAgent</td>
-        <td>n.a.</td>
-        <td>dependent 4)</td>
-        <td>dependent 4)</td>
-        <td>dependent 4)</td>
-        <td>dependent 4)</td>
-        <td>dependent 4)</td>
-        </tr>
-        <tr>
-        <td>creditorAgentName</td>
-        <td>n.a.</td>
-        <td>n.a.</td>
-        <td>n.a.</td>
-        <td>dependent 5)</td>
-        <td>n.a.</td>
-        <td>dependent 5)</td>
-        </tr>
-        <tr>
-        <td>creditorName</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        </tr>
-        <tr>
-        <td>creditorId</td>
-        <td>n.a.</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        </tr>
-        <tr>
-        <td>creditorAddress</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        </tr>
-        <tr>
-        <td>creditorNameAndAddress</td>
-        <td>n.a.</td>
-        <td>dependent</td>
-        <td>dependent</td>
-        <td>dependent</td>
-        <td>dependent</td>
-        <td>dependent</td>
-        </tr>
-        <tr>
-        <td>ultimateCreditor</td>
-        <td>n.a.</td>
-        <td>optional</td>
-        <td>n.a. (for future use)</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        </tr>
-        <tr>
-        <td>chargeBearer</td>
-        <td>n.a.</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>mandatory</td>
-        <td>optional</td>
-        </tr>
-        <tr>
-        <td>purposeCode</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        </tr>
-        <tr>
-        <td>remittanceInformationUnstructuredArray</td>
-        <td>n.a.</td>
-        <td>n.a.</td>
-        <td>n.a.</td>
-        <td>n.a.</td>
-        <td>n.a.</td>
-        <td>n.a.</td>
-        </tr>
-        <tr>
-        <td>serviceLevel</td>
-        <td>n.a.</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>mandatory</td>
-        <td>optional</td>
-        </tr>
-        <tr>
-        <td>remittanceInformationUnstructured</td>
-        <td>n.a.</td>
-        <td>optional</td>
-        <td>n.a.</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        </tr>
-        <tr>
-        <td>remittanceInformationStructured</td>
-        <td>mandatory</td>
-        <td>optional</td>
-        <td>mandatory 6)</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        </tr>
-        <tr>
-        <td>requestedExecutionDate</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        </tr>
-        <tr>
-        <td>requestedExecutionTime</td>
-        <td>n.a.</td>
-        <td>n.a.</td>
-        <td>n.a.</td>
-        <td>n.a.</td>
-        <td>n.a.</td>
-        <td>n.a.</td>
-        </tr>
+        <tr><td></td><td>Payment Type 1: ISR</td><td>Payment Type 3: IBAN/postal account and IID/BIC</td><td>Payment Type 3: QR-bill</td><td>Payment Type 4: Foreign currency</td><td>Payment Type 5: Foreign SEPA</td><td>Payment Type 6: Foreign</td></tr>
+        <tr><td>CH Domestic Data Element</td><td>domestic-swiss-credit-transfers-isr</td><td>domestic-swiss-credit-transfers</td><td>domestic-swiss-credit-transfers-qr</td><td>domestic-swiss-foreign-credit-transfers</td><td>swiss-sepa-credit-transfers</td><td>swiss-cross-border-credit-transfers</td></tr>
+        <tr><td>endToEndIdentification</td>td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
+        <tr><td>debtorAccount (incl. type)</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
+        <tr><td>debtorAgent</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>optional</td></tr>
+        <tr><td>debtorName</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
+        <tr><td>debtorId</td><td>optional 3)</td><td>optional 3)</td><td>optional 3)</td><td>optional 3)</td><td>optional 3)</td><td>optional 3)</td></tr>
+        <tr><td>ultimateDebtor</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td></tr>
+        <tr><td>instructedAmount (incl. currency)</td><td>mandatory</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td></tr>
+        <tr><td>equivalentAmount</td><td>n.a.</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td></tr>
+        <tr><td>currencyOfTransfer</td><td>n.a.</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td></tr>
+        <tr><td>exchangeRateInformation</td><td>n.a.</td><td>optional 2)</td><td>optional 2)</td><td>optional 2)</td><td>optional 2)</td><td>optional 2)</td></tr>
+        <tr><td>creditorAccount</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
+        <tr><td>creditorAgent</td><td>n.a.</td><td>dependent 4)</td><td>dependent 4)</td><td>dependent 4)</td><td>dependent 4)</td><td>dependent 4)</td></tr>
+        <tr><td>creditorAgentName</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>dependent 5)</td><td>n.a.</td><td>dependent 5)</td></tr>
+        <tr><td>creditorName</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
+        <tr><td>creditorId</td><td>n.a.</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td></tr>
+        <tr><td>creditorAddress</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td></tr>
+        <tr><td>creditorNameAndAddress</td><td>n.a.</td><td>dependent</td><td>dependent</td><td>dependent</td><td>dependent</td><td>dependent</td></tr>
+        <tr><td>ultimateCreditor</td><td>n.a.</td><td>optional</td><td>n.a. (for future use)</td><td>optional</td><td>optional</td><td>optional</td></tr>
+        <tr><td>chargeBearer</td><td>n.a.</td><td>optional</td><td>optional</td><td>optional</td><td>mandatory</td><td>optional</td></tr>
+        <tr><td>purposeCode</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td></tr>
+        <tr><td>remittanceInformationUnstructuredArray</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td></tr>
+        <tr><td>serviceLevel</td><td>n.a.</td><td>optional</td><td>optional</td><td>optional</td><td>mandatory</td><td>optional</td></tr>
+        <tr><td>remittanceInformationUnstructured</td><td>n.a.</td><td>optional</td><td>n.a.</td><td>optional</td><td>optional</td><td>optional</td></tr>
+        <tr><td>remittanceInformationStructured</td><td>mandatory</td><td>optional</td><td>mandatory 6)</td><td>optional</td><td>optional</td><td>optional</td></tr>
+        <tr><td>requestedExecutionDate</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
+        <tr><td>requestedExecutionTime</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td></tr>
         </table>
 
         IMPORTANT: In this API definition the following holds:
@@ -6239,258 +5791,34 @@ components:
         The following data element are depending on the actual payment product available (in source code):
 
         <table style="width:100%">
-        <tr>
-        <td></td>
-        <td>Payment Type 1: ISR</td>
-        <td>Payment Type 3: IBAN/postal account and IID/BIC</td>
-        <td>Payment Type 3: QR-bill</td>
-        <td>Payment Type 4: Foreign currency</td>
-        <td>Payment Type 5: Foreign SEPA</td>
-        <td>Payment Type 6: Foreign</td>
-        </tr>
-        <tr>
-        <td>CH Domestic Data Element</td>
-        <td>domestic-swiss-credit-transfers-isr</td>
-        <td>domestic-swiss-credit-transfers</td>
-        <td>domestic-swiss-credit-transfers-qr</td>
-        <td>domestic-swiss-foreign-credit-transfers</td>
-        <td>swiss-sepa-credit-transfers</td>
-        <td>swiss-cross-border-credit-transfers</td>
-        </tr>
-        <tr>
-        <td>endToEndIdentification</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        </tr>
-        <tr>
-        <td>debtorAccount (incl. type)</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        </tr>
-        <tr>
-        <td>debtorAgent</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>optional</td>
-        </tr>
-        <tr>
-        <td>debtorName</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        </tr>
-        <tr>
-        <td>debtorId</td>
-        <td>optional 3)</td>
-        <td>optional 3)</td>
-        <td>optional 3)</td>
-        <td>optional 3)</td>
-        <td>optional 3)</td>
-        <td>optional 3)</td>
-        </tr>
-        <tr>
-        <td>ultimateDebtor</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        </tr>
-        <tr>
-        <td>instructedAmount (incl. currency)</td>
-        <td>mandatory</td>
-        <td>dependent 1)</td>
-        <td>dependent 1)</td>
-        <td>dependent 1)</td>
-        <td>dependent 1)</td>
-        <td>dependent 1)</td>
-        </tr>
-        <tr>
-        <td>equivalentAmount</td>
-        <td>n.a.</td>
-        <td>dependent 1)</td>
-        <td>dependent 1)</td>
-        <td>dependent 1)</td>
-        <td>dependent 1)</td>
-        <td>dependent 1)</td>
-        </tr>
-        <tr>
-        <td>currencyOfTransfer</td>
-        <td>n.a.</td>
-        <td>dependent 1)</td>
-        <td>dependent 1)</td>
-        <td>dependent 1)</td>
-        <td>dependent 1)</td>
-        <td>dependent 1)</td>
-        </tr>
-        <tr>
-        <td>exchangeRateInformation</td>
-        <td>n.a.</td>
-        <td>optional 2)</td>
-        <td>optional 2)</td>
-        <td>optional 2)</td>
-        <td>optional 2)</td>
-        <td>optional 2)</td>
-        </tr>
-        <tr>
-        <td>creditorAccount</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        </tr>
-        <tr>
-        <td>creditorAgent</td>
-        <td>n.a.</td>
-        <td>dependent 4)</td>
-        <td>dependent 4)</td>
-        <td>dependent 4)</td>
-        <td>dependent 4)</td>
-        <td>dependent 4)</td>
-        </tr>
-        <tr>
-        <td>creditorAgentName</td>
-        <td>n.a.</td>
-        <td>n.a.</td>
-        <td>n.a.</td>
-        <td>dependent 5)</td>
-        <td>n.a.</td>
-        <td>dependent 5)</td>
-        </tr>
-        <tr>
-        <td>creditorName</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        </tr>
-        <tr>
-        <td>creditorId</td>
-        <td>n.a.</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        </tr>
-        <tr>
-        <td>creditorAddress</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        </tr>
-        <tr>
-        <td>creditorNameAndAddress</td>
-        <td>n.a.</td>
-        <td>dependent</td>
-        <td>dependent</td>
-        <td>dependent</td>
-        <td>dependent</td>
-        <td>dependent</td>
-        </tr>
-        <tr>
-        <td>ultimateCreditor</td>
-        <td>n.a.</td>
-        <td>optional</td>
-        <td>n.a. (for future use)</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        </tr>
-        <tr>
-        <td>chargeBearer</td>
-        <td>n.a.</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>mandatory</td>
-        <td>optional</td>
-        </tr>
-        <tr>
-        <td>purposeCode</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        </tr>
-        <tr>
-        <td>remittanceInformationUnstructuredArray</td>
-        <td>n.a.</td>
-        <td>n.a.</td>
-        <td>n.a.</td>
-        <td>n.a.</td>
-        <td>n.a.</td>
-        <td>n.a.</td>
-        </tr>
-        <tr>
-        <td>serviceLevel</td>
-        <td>n.a.</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>mandatory</td>
-        <td>optional</td>
-        </tr>
-        <tr>
-        <td>remittanceInformationUnstructured</td>
-        <td>n.a.</td>
-        <td>optional</td>
-        <td>n.a.</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        </tr>
-        <tr>
-        <td>remittanceInformationStructured</td>
-        <td>mandatory</td>
-        <td>optional</td>
-        <td>mandatory 6)</td>
-        <td>optional</td>
-        <td>optional</td>
-        <td>optional</td>
-        </tr>
-        <tr>
-        <td>requestedExecutionDate</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        <td>mandatory</td>
-        </tr>
-        <tr>
-        <td>requestedExecutionTime</td>
-        <td>n.a.</td>
-        <td>n.a.</td>
-        <td>n.a.</td>
-        <td>n.a.</td>
-        <td>n.a.</td>
-        <td>n.a.</td>
-        </tr>
+        <tr><td></td><td>Payment Type 1: ISR</td><td>Payment Type 3: IBAN/postal account and IID/BIC</td><td>Payment Type 3: QR-bill</td><td>Payment Type 4: Foreign currency</td><td>Payment Type 5: Foreign SEPA</td><td>Payment Type 6: Foreign</td></tr>
+        <tr><td>CH Domestic Data Element</td><td>domestic-swiss-credit-transfers-isr</td><td>domestic-swiss-credit-transfers</td><td>domestic-swiss-credit-transfers-qr</td><td>domestic-swiss-foreign-credit-transfers</td><td>swiss-sepa-credit-transfers</td><td>swiss-cross-border-credit-transfers</td></tr>
+        <tr><td>endToEndIdentification</td>td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
+        <tr><td>debtorAccount (incl. type)</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
+        <tr><td>debtorAgent</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>optional</td></tr>
+        <tr><td>debtorName</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
+        <tr><td>debtorId</td><td>optional 3)</td><td>optional 3)</td><td>optional 3)</td><td>optional 3)</td><td>optional 3)</td><td>optional 3)</td></tr>
+        <tr><td>ultimateDebtor</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td></tr>
+        <tr><td>instructedAmount (incl. currency)</td><td>mandatory</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td></tr>
+        <tr><td>equivalentAmount</td><td>n.a.</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td></tr>
+        <tr><td>currencyOfTransfer</td><td>n.a.</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td></tr>
+        <tr><td>exchangeRateInformation</td><td>n.a.</td><td>optional 2)</td><td>optional 2)</td><td>optional 2)</td><td>optional 2)</td><td>optional 2)</td></tr>
+        <tr><td>creditorAccount</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
+        <tr><td>creditorAgent</td><td>n.a.</td><td>dependent 4)</td><td>dependent 4)</td><td>dependent 4)</td><td>dependent 4)</td><td>dependent 4)</td></tr>
+        <tr><td>creditorAgentName</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>dependent 5)</td><td>n.a.</td><td>dependent 5)</td></tr>
+        <tr><td>creditorName</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
+        <tr><td>creditorId</td><td>n.a.</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td></tr>
+        <tr><td>creditorAddress</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td></tr>
+        <tr><td>creditorNameAndAddress</td><td>n.a.</td><td>dependent</td><td>dependent</td><td>dependent</td><td>dependent</td><td>dependent</td></tr>
+        <tr><td>ultimateCreditor</td><td>n.a.</td><td>optional</td><td>n.a. (for future use)</td><td>optional</td><td>optional</td><td>optional</td></tr>
+        <tr><td>chargeBearer</td><td>n.a.</td><td>optional</td><td>optional</td><td>optional</td><td>mandatory</td><td>optional</td></tr>
+        <tr><td>purposeCode</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td></tr>
+        <tr><td>remittanceInformationUnstructuredArray</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td></tr>
+        <tr><td>serviceLevel</td><td>n.a.</td><td>optional</td><td>optional</td><td>optional</td><td>mandatory</td><td>optional</td></tr>
+        <tr><td>remittanceInformationUnstructured</td><td>n.a.</td><td>optional</td><td>n.a.</td><td>optional</td><td>optional</td><td>optional</td></tr>
+        <tr><td>remittanceInformationStructured</td><td>mandatory</td><td>optional</td><td>mandatory 6)</td><td>optional</td><td>optional</td><td>optional</td></tr>
+        <tr><td>requestedExecutionDate</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
+        <tr><td>requestedExecutionTime</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td></tr>
         </table>
 
         Footnotes from the table:
