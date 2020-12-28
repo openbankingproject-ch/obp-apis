@@ -5661,11 +5661,10 @@ components:
 
         Take care: Since the format is intended to fit for all payment products
         there are additional conditions which are NOT covered by this specification.
-        Please check the Implementation Guidelines for detailes.
+        Please check the SIX Swiss Payment Standards implementation guidelines for details.
 
 
         The following data element are depending on the actual payment product available (in source code):
-
         
         <table style="width:100%">
         <tr><td></td><td>Payment Type 1: ISR</td><td>Payment Type 3: IBAN/postal account and IID/BIC</td><td>Payment Type 3: QR-bill</td><td>Payment Type 4: Foreign currency</td><td>Payment Type 5: Foreign SEPA</td><td>Payment Type 6: Foreign</td></tr>
@@ -5697,6 +5696,14 @@ components:
         <tr><td>requestedExecutionDate</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
         <tr><td>requestedExecutionTime</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td></tr>
         </table>
+
+        Footnotes from the table:
+        1) This element may only be used by agreement with the instructed financial institution. currencyOfTransfer is a subfield of equivalentAmount and may only be used if equivalentAmount is used instead of instructedAmount.
+        2) The element may only be used in consultation with the financial institution commissioned.
+        3) The element is currently ignored by financial institutions.
+        4) Dependence on creditorAccount, see SIX Swiss Payments Standards implementation guidelines.
+        5) Type 4(V3), 6(V2, V3): Must be present. Type 4(V2): May be present. Other species: May not be present.
+        6) QR-reference, creditor reference or IPI reference
 
         IMPORTANT: In this API definition the following holds:
           *  All data elements mentioned above are defined, but some of them are commented,
@@ -5785,7 +5792,7 @@ components:
 
         Take care: Since the format is intended to fit for all payment products
         there are additional conditions which are NOT covered by this specification.
-        Please check the Implementation Guidelines for detailes.
+        Please check the SIX Swiss Payment Standards implementation guidelines for details.
 
 
         The following data element are depending on the actual payment product available (in source code):
