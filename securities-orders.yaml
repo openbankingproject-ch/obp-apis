@@ -55,6 +55,11 @@ info:
         and `security` in
         [Operation Object](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.3.md#operation-object).
 
+  contact:
+    name: Open Banking Project Switzerland
+    url: https://www.openbankingproject.ch
+    email: info@obp.ch
+
 servers:
   # --------------------------------------------------------------------------------------------------------------------
   # SERVERS
@@ -75,6 +80,7 @@ paths:
       summary: Get all securities orders
       description: >-
         Get a collection of Securities Orders.
+      operationId: getOrders
       parameters:
       - $ref: '#/components/parameters/Accept-Language'
       responses:
@@ -91,6 +97,7 @@ paths:
       summary: Add new securities order
       description: >-
         Generate new securities order
+      operationId: postOrder
       requestBody:
         content:
           application/json:
@@ -118,6 +125,7 @@ paths:
       summary: Get single securities order
       description: >-
         *Get securities order identified by `orderIdentification`*.
+      operationId: getOrder
       parameters:
       - $ref: '#/components/parameters/OrderIdentification'
       - $ref: '#/components/parameters/Accept-Language'
@@ -139,6 +147,7 @@ paths:
       summary: Update single securities order
       description: >-
         *Update securities order identified by `orderIdentification`.*
+      operationId: putOrder
       parameters:
       - $ref: '#/components/parameters/OrderIdentification'
       requestBody:
@@ -168,6 +177,7 @@ paths:
       summary: Delete single securities order
       description: >-
         *Delete securities order identified by `orderIdentification`.*
+      operationId: deleteOrder
       parameters:
       - $ref: '#/components/parameters/OrderIdentification'
       responses:
@@ -194,6 +204,7 @@ paths:
       summary: Get all executions of securities order
       description: >-
         *Get all executions of the securities order identified by `orderIdentification`.*
+      operationId: getTrades
       parameters:
       - $ref: '#/components/parameters/OrderIdentification'
       - $ref: '#/components/parameters/Accept-Language'
@@ -216,6 +227,7 @@ paths:
         by `orderIdentification`.*
 
         An execution or trade is a fill or a partial fill for a securities order.
+      operationId: getTrade
       parameters:
       - $ref: '#/components/parameters/OrderIdentification'
       - $ref: '#/components/parameters/TradeIdentification'

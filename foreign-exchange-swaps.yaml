@@ -56,6 +56,11 @@ info:
         and `security` in
         [Operation Object](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.3.md#operation-object).
 
+  contact:
+    name: Open Banking Project Switzerland
+    url: https://www.openbankingproject.ch
+    email: info@obp.ch
+
 servers:
   # --------------------------------------------------------------------------------------------------------------------
   # SERVERS
@@ -76,6 +81,7 @@ paths:
       summary: Get all foreign exchange swap orders
       description: >-
         Get a collection of foreign exchange swap orders.
+      operationId: getOrders
       parameters:
       - $ref: '#/components/parameters/Accept-Language'
       responses:
@@ -92,6 +98,7 @@ paths:
       summary: Add new foreign exchange swap order
       description: >-
         Generate new foreign exchange swap order
+      operationId: postOrder
       requestBody:
         content:
           application/json:
@@ -119,6 +126,7 @@ paths:
       summary: Get foreign exchange swap order
       description: >-
         *Get foreign exchange swap order identified by `orderIdentification`*.
+      operationId: getOrder
       parameters:
       - $ref: '#/components/parameters/OrderIdentification'
       - $ref: '#/components/parameters/Accept-Language'
@@ -140,6 +148,7 @@ paths:
       summary: Update foreign exchange swap order
       description: >-
         *Update foreign exchange swap order identified by `orderIdentification`.*
+      operationId: putOrder
       parameters:
       - $ref: '#/components/parameters/OrderIdentification'
       requestBody:
@@ -169,6 +178,7 @@ paths:
       summary: Delete foreign exchange swap order
       description: >-
         *Delete foreign exchange swap order identified by `orderIdentification`.*
+      operationId: deleteOrder
       parameters:
       - $ref: '#/components/parameters/OrderIdentification'
       responses:
@@ -985,9 +995,9 @@ components:
       description: Details of the foreign trade captured
       properties:
         side:
-          description: Side3Code (BUYI,SELL), View from Instructing Party for the near leg, buy/sell the trading currency/amount 
+          description: Side1Code (BUYI,SELL), View from Instructing Party for the near leg, buy/sell the trading currency/amount 
           allOf:
-          - $ref: '#/components/schemas/Side3Code'
+          - $ref: '#/components/schemas/Side1Code'
         foreignExchangeTradeProduct:
           description: Indicates the underlying product type for reporting to trade repositories. These product codes must be in line with the ISDA Product Taxonomy (SWAP).
           allOf:
