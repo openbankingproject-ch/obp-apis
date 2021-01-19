@@ -4249,7 +4249,7 @@ components:
     hrefEntry:
       description: Link to a resource
       type: string
-      example: "/v1/payments/sepa-credit-transfers/1234-wertiq-983"
+      example: "/v1/payments/swiss-sepa-credit-transfers/1234-wertiq-983"
 
 
 
@@ -5523,7 +5523,7 @@ components:
         <table style="width:100%">
         <tr><td></td><td>Payment Type 1: ISR</td><td>Payment Type 3: IBAN/postal account and IID/BIC</td><td>Payment Type 3: QR-bill</td><td>Payment Type 4: Foreign currency</td><td>Payment Type 5: Foreign SEPA</td><td>Payment Type 6: Foreign</td></tr>
         <tr><td>CH Domestic Data Element</td><td>domestic-swiss-credit-transfers-isr</td><td>domestic-swiss-credit-transfers</td><td>domestic-swiss-credit-transfers-qr</td><td>domestic-swiss-foreign-credit-transfers</td><td>swiss-sepa-credit-transfers</td><td>swiss-cross-border-credit-transfers</td></tr>
-        <tr><td>endToEndIdentification</td>td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
+        <tr><td>endToEndIdentification</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
         <tr><td>debtorAccount (incl. type)</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
         <tr><td>debtorAgent</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>optional</td></tr>
         <tr><td>debtorName</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
@@ -5552,12 +5552,13 @@ components:
         </table>
 
         Footnotes from the table:
-        1) This element may only be used by agreement with the instructed financial institution. currencyOfTransfer is a subfield of equivalentAmount and may only be used if equivalentAmount is used instead of instructedAmount.
+        1) This element may only be used by agreement with the instructed financial institution.
         2) The element may only be used in consultation with the financial institution commissioned.
         3) The element is currently ignored by financial institutions.
         4) Dependence on creditorAccount, see SIX Swiss Payments Standards implementation guidelines.
         5) Type 4(V3), 6(V2, V3): Must be present. Type 4(V2): May be present. Other species: May not be present.
         6) QR-reference, creditor reference or IPI reference
+        7) currencyOfTransfer is a subfield of equivalentAmount and may only be used if equivalentAmount is used instead of instructedAmount.
 
         IMPORTANT: In this API definition the following holds:
           *  All data elements mentioned above are defined, but some of them are commented,
@@ -5665,11 +5666,11 @@ components:
 
 
         The following data element are depending on the actual payment product available (in source code):
-        
+
         <table style="width:100%">
         <tr><td></td><td>Payment Type 1: ISR</td><td>Payment Type 3: IBAN/postal account and IID/BIC</td><td>Payment Type 3: QR-bill</td><td>Payment Type 4: Foreign currency</td><td>Payment Type 5: Foreign SEPA</td><td>Payment Type 6: Foreign</td></tr>
         <tr><td>CH Domestic Data Element</td><td>domestic-swiss-credit-transfers-isr</td><td>domestic-swiss-credit-transfers</td><td>domestic-swiss-credit-transfers-qr</td><td>domestic-swiss-foreign-credit-transfers</td><td>swiss-sepa-credit-transfers</td><td>swiss-cross-border-credit-transfers</td></tr>
-        <tr><td>endToEndIdentification</td>td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
+        <tr><td>endToEndIdentification</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
         <tr><td>debtorAccount (incl. type)</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
         <tr><td>debtorAgent</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>optional</td></tr>
         <tr><td>debtorName</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
@@ -5698,12 +5699,13 @@ components:
         </table>
 
         Footnotes from the table:
-        1) This element may only be used by agreement with the instructed financial institution. currencyOfTransfer is a subfield of equivalentAmount and may only be used if equivalentAmount is used instead of instructedAmount.
+        1) This element may only be used by agreement with the instructed financial institution.
         2) The element may only be used in consultation with the financial institution commissioned.
         3) The element is currently ignored by financial institutions.
         4) Dependence on creditorAccount, see SIX Swiss Payments Standards implementation guidelines.
         5) Type 4(V3), 6(V2, V3): Must be present. Type 4(V2): May be present. Other species: May not be present.
         6) QR-reference, creditor reference or IPI reference
+        7) currencyOfTransfer is a subfield of equivalentAmount and may only be used if equivalentAmount is used instead of instructedAmount.
 
         IMPORTANT: In this API definition the following holds:
           *  All data elements mentioned above are defined, but some of them are commented,
@@ -5800,7 +5802,7 @@ components:
         <table style="width:100%">
         <tr><td></td><td>Payment Type 1: ISR</td><td>Payment Type 3: IBAN/postal account and IID/BIC</td><td>Payment Type 3: QR-bill</td><td>Payment Type 4: Foreign currency</td><td>Payment Type 5: Foreign SEPA</td><td>Payment Type 6: Foreign</td></tr>
         <tr><td>CH Domestic Data Element</td><td>domestic-swiss-credit-transfers-isr</td><td>domestic-swiss-credit-transfers</td><td>domestic-swiss-credit-transfers-qr</td><td>domestic-swiss-foreign-credit-transfers</td><td>swiss-sepa-credit-transfers</td><td>swiss-cross-border-credit-transfers</td></tr>
-        <tr><td>endToEndIdentification</td>td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
+        <tr><td>endToEndIdentification</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
         <tr><td>debtorAccount (incl. type)</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
         <tr><td>debtorAgent</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>optional</td></tr>
         <tr><td>debtorName</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
@@ -5829,12 +5831,13 @@ components:
         </table>
 
         Footnotes from the table:
-        1) This element may only be used by agreement with the instructed financial institution. currencyOfTransfer is a subfield of equivalentAmount and may only be used if equivalentAmount is used instead of instructedAmount.
+        1) This element may only be used by agreement with the instructed financial institution.
         2) The element may only be used in consultation with the financial institution commissioned.
         3) The element is currently ignored by financial institutions.
         4) Dependence on creditorAccount, see SIX Swiss Payments Standards implementation guidelines.
         5) Type 4(V3), 6(V2, V3): Must be present. Type 4(V2): May be present. Other species: May not be present.
         6) QR-reference, creditor reference or IPI reference
+        7) currencyOfTransfer is a subfield of equivalentAmount and may only be used if equivalentAmount is used instead of instructedAmount.
 
         IMPORTANT: In this API definition the following holds:
           *  All data elements mentioned above are defined, but some of them are commented,
@@ -6830,7 +6833,7 @@ components:
       example:
         {
         "scaRedirect": {"href": "https://www.testbank.com/asdfasdfasdf"},
-        "self": {"href": "/v1/payments/sepa-credit-transfers/1234-wertiq-983"}
+        "self": {"href": "/v1/payments/swiss-sepa-credit-transfers/1234-wertiq-983"}
         }
 
 
@@ -10608,6 +10611,7 @@ components:
           * "domestic-swiss-credit-transfers-isr"
           * "domestic-swiss-credit-transfers"
           * "domestic-swiss-credit-transfers-qr"
+          * "domestic-swiss-foreign-credit-transfers"
           * "swiss-sepa-credit-transfers" with JSON-Body
           * "swiss-cross-border-credit-transfers" with JSON-Body
           * "pain.001-sepa-credit-transfers" with XML pain.001.001.03 body for SCT scheme
@@ -13233,7 +13237,7 @@ components:
           "_links":
             {
             "scaRedirect": {"href": "https://www.testbank.com/asdfasdfasdf"},
-            "self": {"href": "/v1/payments/sepa-credit-transfers/1234-wertiq-983"},
+            "self": {"href": "/v1/payments/swiss-sepa-credit-transfers/1234-wertiq-983"},
             "status": {"href": "/v1/payments/1234-wertiq-983/status"},
             "scaStatus": {"href": "/v1/payments/1234-wertiq-983/authorisations/123auth456"}
             }

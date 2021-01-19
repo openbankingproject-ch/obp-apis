@@ -42,9 +42,10 @@ The Swiss Domestic Payment Definitions are adapted from the [SIX Swiss Payment S
 | requestedExecutionTime                  | ISODateTime                       | n.a.                                | n.a.                                            | n.a.                               | n.a.                                    | n.a.                               | n.a.                                |
 | intermediaryAgent                       | bicfi                             | n.a.                                | n.a.                                            | n.a.                               | optional 2)                             | n.a.                               | optional 2)                         |
       
-1) This element may only be used by agreement with the instructed financial institution. currencyOfTransfer is a subfield of equivalentAmount and may only be used if equivalentAmount is used instead of instructedAmount.
+1) This element may only be used by agreement with the instructed financial institution. 
 2) The element may only be used in consultation with the financial institution commissioned.
 3) The element is currently ignored by financial institutions.
 4) Dependence on creditorAccount, see SIX Swiss Payments Standards implementation guidelines.
 5) Type 4(V3), 6(V2, V3): must be present. Type 4(V2): may be present. Other species: may not be present.
 6) QR-reference, creditor reference or IPI reference
+7) currencyOfTransfer is a subfield of equivalentAmount and may only be used if equivalentAmount is used instead of instructedAmount.
