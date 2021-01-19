@@ -18,7 +18,14 @@ spezification:
 
 ## Bankable Assets API
 
-...
-* the API as HTML: [/docs](https://openbankingproject-ch.github.io/obp-apis/bankable-assets.html)
-* the API as YAML: [/bankable-assets-api.yaml](https://github.com/openbankingproject-ch/obp-apis/raw/master/bankable-assets-api.yaml)
+### Foreign Exchange Single Leg Orders
+* the API as YAML: [/foreign-exchange-single-legs.yaml](https://github.com/openbankingproject-ch/obp-apis/raw/master/foreign-exchange-single-legs.yaml)
+[![Prüfungsstatus der Spezifikation](https://travis-ci.com/openbankingproject-ch/obp-apis.svg?branch=master "Prüfungsstatus der Spezifikation")](https://travis-ci.com/openbankingproject-ch/obp-apis)
+
+### Foreign Exchange Swap Orders
+* the API as YAML: [/foreign-exchange-swaps.yaml](https://github.com/openbankingproject-ch/obp-apis/raw/master/foreign-exchange-swaps.yaml)
+[![Prüfungsstatus der Spezifikation](https://travis-ci.com/openbankingproject-ch/obp-apis.svg?branch=master "Prüfungsstatus der Spezifikation")](https://travis-ci.com/openbankingproject-ch/obp-apis)
+
+### Securities Orders
+* the API as YAML: [/securities-orders.yaml](https://github.com/openbankingproject-ch/obp-apis/raw/master/securities-orders.yaml)
 [![Prüfungsstatus der Spezifikation](https://travis-ci.com/openbankingproject-ch/obp-apis.svg?branch=master "Prüfungsstatus der Spezifikation")](https://travis-ci.com/openbankingproject-ch/obp-apis)

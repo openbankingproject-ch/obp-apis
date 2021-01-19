@@ -1,0 +1,2615 @@
+openapi: 3.0.3
+info:
+  title: Bankable Assets API - Securities Orders
+  version: 0.1.0
+  description: >-
+
+    # Use Cases
+
+    This API covers the following use cases for **private clients** and **external asset managers**:
+
+    1. Retrieve all available information regarding current and completed securities orders, including their status
+       and list of trades -- partial and full executions.
+
+    2. Request single purchase/sale of a financial instrument for a single client account in specific markets
+       and trade currencies or in best execution mode.
+
+    3. Request single purchase/sale of a financial instrument for multiple client acoounts according to a given
+       allocation in specific markets and trade currencies or in best execution mode.
+
+    4. Request the modification of a current securities order.
+
+    5. Request the cancellation of a current securities order.
+
+    # General Remarks
+
+    * This API definition is inspired by the ISO 20022 standard messages
+      [RedemptionOrder (setr.004)](https://www.iso20022.org/standardsrepository/type/setr.004.001.04),
+      [SubscriptionOrder (setr.010)](https://www.iso20022.org/standardsrepository/type/setr.010.001.04) and
+      [SecuritiesTradeConfirmation (setr.027)](https://www.iso20022.org/standardsrepository/type/setr.027.001.03) and
+      the Financial Information eXchange (FIX) messages [NewOrderSingle (35=D)] and [ExecutionReport (35=8)].
+
+    * Schemas are generally based on datatype definitions with the same name in the
+      [ISO 20022 Repository](https://www.iso20022.org/standardsrepository).
+      In some cases, schemas may correspond to a restrictive version of the standard datatype definition without some
+      or all optional fields.
+      Any other deviations to the standard datatype definition are explicitly described below.
+
+    * Pagination is not described in any defined
+      [Operation Object](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.3.md#operation-object).
+      A productive implementation of this API may support additional query parameters for implementing pagination
+      according to the possibilities of the underlying systems.
+      These additional query parameters must be optional and they must not clash with any parameter here defined.
+
+      To allow implementing pagination and avoid clashes, this API will not use the following parameters names
+      in this or future versions of the API: `limit`, `offset` and `cursor`.
+
+    * According to the definition of
+      [Parameter Object](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.3.md#parameter-object)
+      in the OpenAPI Specification:
+      *If `in` is `"header"` and the `name` field is `"Accept"`, `"Content-Type"` or `"Authorization"`, the parameter
+      definition SHALL be ignored.* Therefore:
+      * The parameter `"Accept"` will not be defined in this file at any place.
+      * The parameters `"Content-Type"` and `"Authorization"` are implicitly defined by the fields `content` in
+        [Response Object](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.3.md#response-object)
+        and `security` in
+        [Operation Object](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.3.md#operation-object).
+
+  contact:
+    name: Open Banking Project Switzerland
+    url: https://www.openbankingproject.ch
+    email: info@obp.ch
+
+servers:
+  # --------------------------------------------------------------------------------------------------------------------
+  # SERVERS
+  # --------------------------------------------------------------------------------------------------------------------
+  - url: /api1/securities-orders
+    description: Development server
+
+paths:
+  # --------------------------------------------------------------------------------------------------------------------
+  # PATHS
+  # --------------------------------------------------------------------------------------------------------------------
+
+  /orders:
+
+    get: # OrderCollection
+      tags:
+        - Orders
+      summary: Get all securities orders
+      description: >-
+        Get a collection of Securities Orders.
+      operationId: getOrders
+      parameters:
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          $ref: '#/components/responses/OK_200_OrderCollection'
+        '400':
+          $ref: '#/components/responses/BAD_REQUEST_400'
+        '401':
+          $ref: '#/components/responses/UNAUTHORIZED_401'
+
+    post: # OrderCreation
+      tags:
+        - Orders
+      summary: Add new securities order
+      description: >-
+        Generate new securities order
+      operationId: postOrder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecuritiesOrder'
+      responses:
+        '201':
+          $ref: '#/components/responses/CREATED_201_OrderCreation'
+        '202':
+          $ref: '#/components/responses/ACCEPTED_202_OrderCreation'
+        '400':
+          $ref: '#/components/responses/BAD_REQUEST_400'
+        '401':
+          $ref: '#/components/responses/UNAUTHORIZED_401'
+        '403':
+          $ref: '#/components/responses/FORBIDDEN_403_Post'
+        '405':
+          $ref: '#/components/responses/METHOD_NOT_ALLOWED_405_Post'
+
+  /orders/{orderIdentification}:
+
+    get: # Order
+      tags:
+        - Orders
+      summary: Get single securities order
+      description: >-
+        *Get securities order identified by `orderIdentification`*.
+      operationId: getOrder
+      parameters:
+      - $ref: '#/components/parameters/OrderIdentification'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          $ref: '#/components/responses/OK_200_Order'
+        '400':
+          $ref: '#/components/responses/BAD_REQUEST_400'
+        '401':
+          $ref: '#/components/responses/UNAUTHORIZED_401'
+        '403':
+          $ref: '#/components/responses/FORBIDDEN_403'
+        '404':
+          $ref: '#/components/responses/NOT_FOUND_404'
+
+    put: # OrderModification
+      tags:
+      - Orders
+      summary: Update single securities order
+      description: >-
+        *Update securities order identified by `orderIdentification`.*
+      operationId: putOrder
+      parameters:
+      - $ref: '#/components/parameters/OrderIdentification'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecuritiesOrder'
+      responses:
+        '200':
+          $ref: '#/components/responses/OK_200_OrderModification'
+        '202':
+          $ref: '#/components/responses/ACCEPTED_202_OrderModification'
+        '400':
+          $ref: '#/components/responses/BAD_REQUEST_400'
+        '401':
+          $ref: '#/components/responses/UNAUTHORIZED_401'
+        '403':
+          $ref: '#/components/responses/FORBIDDEN_403'
+        '404':
+          $ref: '#/components/responses/NOT_FOUND_404'
+        '405':
+          $ref: '#/components/responses/METHOD_NOT_ALLOWED_405_Put'
+
+    delete: # OrderCancellation
+      tags:
+      - Orders
+      summary: Delete single securities order
+      description: >-
+        *Delete securities order identified by `orderIdentification`.*
+      operationId: deleteOrder
+      parameters:
+      - $ref: '#/components/parameters/OrderIdentification'
+      responses:
+        '200':
+          $ref: '#/components/responses/OK_200_OrderCancellation'
+        '202':
+          $ref: '#/components/responses/ACCEPTED_202_OrderCancellation'
+        '400':
+          $ref: '#/components/responses/BAD_REQUEST_400'
+        '401':
+          $ref: '#/components/responses/UNAUTHORIZED_401'
+        '403':
+          $ref: '#/components/responses/FORBIDDEN_403'
+        '404':
+          $ref: '#/components/responses/NOT_FOUND_404'
+        '405':
+          $ref: '#/components/responses/METHOD_NOT_ALLOWED_405_Delete'
+
+  /orders/{orderIdentification}/executions:
+
+    get: # TradeCollection
+      tags:
+        - Executions
+      summary: Get all executions of securities order
+      description: >-
+        *Get all executions of the securities order identified by `orderIdentification`.*
+      operationId: getTrades
+      parameters:
+      - $ref: '#/components/parameters/OrderIdentification'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          $ref: '#/components/responses/OK_200_TradeCollection'
+        '400':
+          $ref: '#/components/responses/BAD_REQUEST_400'
+        '401':
+          $ref: '#/components/responses/UNAUTHORIZED_401'
+
+  /orders/{orderIdentification}/executions/{tradeIdentification}:
+
+    get: # Trade
+      tags:
+      - Executions
+      summary: Get single execution of securities order
+      description: >-
+        *Get an execution identified by `tradeIdentification` of the securities order identified
+        by `orderIdentification`.*
+
+        An execution or trade is a fill or a partial fill for a securities order.
+      operationId: getTrade
+      parameters:
+      - $ref: '#/components/parameters/OrderIdentification'
+      - $ref: '#/components/parameters/TradeIdentification'
+      - $ref: '#/components/parameters/Accept-Language'
+      responses:
+        '200':
+          $ref: '#/components/responses/OK_200_Trade'
+        '400':
+          $ref: '#/components/responses/BAD_REQUEST_400'
+        '401':
+          $ref: '#/components/responses/UNAUTHORIZED_401'
+        '403':
+          $ref: '#/components/responses/FORBIDDEN_403'
+        '404':
+          $ref: '#/components/responses/NOT_FOUND_404'
+
+components:
+  # --------------------------------------------------------------------------------------------------------------------
+  # COMPONENTS
+  # --------------------------------------------------------------------------------------------------------------------
+  
+  headers:
+    # ------------------------------------------------------------------------------------------------------------------
+    # COMPONENTS/HEADERS
+    # ------------------------------------------------------------------------------------------------------------------
+
+    Accept-Language:
+      description: >-
+        List of acceptable human languages for response.
+        [RFC 7231, Section 5.3.5]
+      schema:
+        type: string
+      example: da, en-gb;q=0.8, en;q=0.7
+
+    Content-Language:
+      description: >-
+        The natural language or languages of the intended audience for the enclosed content.
+        [RFC 7231, Section 3.1.3.2]
+      schema:
+        type: string
+      example: da
+
+    Last-Modified:
+      description: >-
+        Timestamp indicating the date and time at which the origin server believes the selected representation
+        was last modified, as determined at the conclusion of handling the request.
+        [RFC 7232, Section 2.2]
+      schema:
+        type: string
+      example: 'Tue, 15 Nov 1994 12:45:26 GMT' # HTTP-date
+
+    Location:
+      description: >-
+        Used in redirection, or when a new resource has been created.
+        [RFC 7231, Section 7.1.2]
+      schema:
+        type: string
+      example: '/pub/WWW/People.html'
+
+    WWW-Authenticate:
+      description: >-
+        Indicates the authentication scheme that should be used to access the requested entity.
+        [RFC 7235, Section 4.1]
+      schema:
+        type: string
+      example: 'Basic'
+
+  parameters:
+    # ------------------------------------------------------------------------------------------------------------------
+    # COMPONENTS/PARAMETERS
+    # ------------------------------------------------------------------------------------------------------------------
+
+    OrderIdentification:
+      name: orderIdentification
+      in: path
+      description: Identification for the order as assigned by the receiving party.
+      required: true
+      schema:
+        $ref: '#/components/schemas/Max35Text'
+
+    TradeIdentification:
+      name: tradeIdentification
+      in: path
+      description: Identification for the trade of an order as assigned by the executing party.
+      required: true
+      schema:
+        $ref: '#/components/schemas/Max35Text'
+      
+    Accept-Language:
+      name: Accept-Language
+      in: header
+      description: List of acceptable human languages for response. [RFC 7231, Section 5.3.5]
+      schema:
+        type: string
+      example: da, en-gb;q=0.8, en;q=0.7
+
+  responses:
+    # ------------------------------------------------------------------------------------------------------------------
+    # COMPONENTS/RESPONSES
+    # ------------------------------------------------------------------------------------------------------------------
+
+    OK_200_OrderCollection:
+      description: >-
+        The requested collection of securities orders is delivered in the response.
+
+        *The 200 (OK) status code indicates that the request has succeeded.*
+        [RFC 7231, Section 6.3.1]
+      headers:
+        Content-Language:
+          $ref: '#/components/headers/Content-Language'
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/SecuritiesOrder'
+
+    OK_200_Order:
+      description: >-
+        The requested securities order is delivered in the response.
+
+
+        *The 200 (OK) status code indicates that the request has succeeded.*
+        [RFC 7231, Section 6.3.1]
+      headers:
+        Content-Language:
+          $ref: '#/components/headers/Content-Language'
+        Last-Modified:
+          $ref: '#/components/headers/Last-Modified'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SecuritiesOrder'
+
+    OK_200_TradeCollection:
+      description: >-
+        The requested securities trade collection is delivered in the response.
+
+
+        *The 200 (OK) status code indicates that the request has succeeded.*
+        [RFC 7231, Section 6.3.1]
+      headers:
+        Content-Language:
+          $ref: '#/components/headers/Content-Language'
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/SecuritiesTrade'
+
+    OK_200_Trade:
+      description: >-
+        The requested securities trade is delivered in the response.
+
+
+        *The 200 (OK) status code indicates that the request has succeeded.*
+        [RFC 7231, Section 6.3.1]
+      headers:
+        Content-Language:
+          $ref: '#/components/headers/Content-Language'
+        Last-Modified:
+          $ref: '#/components/headers/Last-Modified'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SecuritiesTrade'
+
+    OK_200_OrderModification:
+      description: >-
+        The securities order has been modified.
+
+
+        *The 200 (OK) status code indicates that the request has succeeded.*
+        [RFC 7231, Section 6.3.1]
+
+    OK_200_OrderCancellation:
+      description: >-
+        The securities order has been cancelled.
+
+
+        *The 200 (OK) status code indicates that the request has succeeded.*
+        [RFC 7231, Section 6.3.1]
+
+    CREATED_201_OrderCreation:
+      description: >-
+        The securities order has been accepted, processed and it is now available at the
+        URI delivered in the Location header field of this response.
+
+
+        *The 201 (Created) status code indicates that the request has been
+        fulfilled and has resulted in one or more new resources being
+        created.  The primary resource created by the request is identified
+        by a Location header field in the response.*
+        [RFC7231, Section 6.3.2]
+      headers:
+        Location:
+          $ref: '#/components/headers/Location'
+
+    ACCEPTED_202_OrderCreation:
+      description: >-
+        The securities order has been accepted and will be processed asynchronously.
+
+
+        *The 202 (Accepted) status code indicates that the request has been
+        accepted for processing, but the processing has not been completed.
+        The request might or might not eventually be acted upon, as it might
+        be disallowed when processing actually takes place.  There is no
+        facility in HTTP for re-sending a status code from an asynchronous
+        operation.*
+        [RFC 7231, Section 6.3.3]
+
+    ACCEPTED_202_OrderModification:
+      description: >-
+        The order modification has been requested and the securities order is now waiting for the broker to accept
+        or reject the modification.
+
+
+        *The 202 (Accepted) status code indicates that the request has been
+        accepted for processing, but the processing has not been completed.
+        The request might or might not eventually be acted upon, as it might
+        be disallowed when processing actually takes place.  There is no
+        facility in HTTP for re-sending a status code from an asynchronous
+        operation.*
+        [RFC 7231, Section 6.3.3]
+
+    ACCEPTED_202_OrderCancellation:
+      description: >-
+        The order cancellation has been requested and the securities order is now waiting for the broker to accept
+        or reject the cancellation.
+
+
+        *The 202 (Accepted) status code indicates that the request has been
+        accepted for processing, but the processing has not been completed.
+        The request might or might not eventually be acted upon, as it might
+        be disallowed when processing actually takes place.  There is no
+        facility in HTTP for re-sending a status code from an asynchronous
+        operation.*
+        [RFC 7231, Section 6.3.3]
+
+    BAD_REQUEST_400:
+      description: >-
+        The request could not be understood by the server because it is malformed or contains invalid fields.
+
+
+        *The 400 (Bad Request) status code indicates that the server cannot or
+        will not process the request due to something that is perceived to be
+        a client error (e.g., malformed request syntax, invalid request
+        message framing, or deceptive request routing).*
+        [RFC 7231, Section 6.5.1]
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+
+    UNAUTHORIZED_401:
+      description: >-
+        The request has no authentication credentials for the target resource or the authentication credentials
+        are not valid.
+
+
+        *The 401 (Unauthorized) status code indicates that the request has not
+        been applied because it lacks valid authentication credentials for
+        the target resource.  The server generating a 401 response MUST send
+        a WWW-Authenticate header field (Section 4.1) containing at least one
+        challenge applicable to the target resource.*
+        [RFC 7235, Section 3.1]
+      headers:
+        WWW-Authenticate:
+          $ref: '#/components/headers/WWW-Authenticate'
+
+    FORBIDDEN_403:
+      description: >-
+        The request has valid authentication credentials but they are not sufficient for the server to grant access
+        to the target resource.
+        In case that the server wants to hide the fact that the target resource even exists it may send a
+        404 (Not Found) status code instead of this 403 (Forbidden) status code.
+
+
+        *The 403 (Forbidden) status code indicates that the server understood
+        the request but refuses to authorize it.  A server that wishes to
+        make public why the request has been forbidden can describe that
+        reason in the response payload (if any).*
+        [RFC 7231, Section 6.5.3]
+
+    FORBIDDEN_403_Post:
+      description: >-
+        The request has valid authentication credentials but they are not sufficient for the server to allow the
+        creation of the target resource.
+
+
+        *The 403 (Forbidden) status code indicates that the server understood
+        the request but refuses to authorize it.  A server that wishes to
+        make public why the request has been forbidden can describe that
+        reason in the response payload (if any).*
+        [RFC 7231, Section 6.5.3]
+
+    NOT_FOUND_404:
+      description: >-
+        The target resource could not be found or the authentication credentials are not sufficient for the server
+        to grant access to it.
+
+
+        *The 404 (Not Found) status code indicates that the origin server did
+        not find a current representation for the target resource or is not
+        willing to disclose that one exists.  A 404 status code does not
+        indicate whether this lack of representation is temporary or
+        permanent.*
+        [RFC 7231, Section 6.5.4]
+
+    METHOD_NOT_ALLOWED_405_Post:
+      description: >-
+        The creation of the target resource is not possible at this time.
+
+
+        *The 405 (Method Not Allowed) status code indicates that the method
+        received in the request-line is known by the origin server but not
+        supported by the target resource.  The origin server MUST generate an
+        Allow header field in a 405 response containing a list of the target
+        resource's currently supported methods.*
+        [RFC 7231, Section 6.5.5]
+
+    METHOD_NOT_ALLOWED_405_Put:
+      description: >-
+        The modification of the target resource is not possible at this time.
+
+
+        *The 405 (Method Not Allowed) status code indicates that the method
+        received in the request-line is known by the origin server but not
+        supported by the target resource.  The origin server MUST generate an
+        Allow header field in a 405 response containing a list of the target
+        resource's currently supported methods.*
+        [RFC 7231, Section 6.5.5]
+
+    METHOD_NOT_ALLOWED_405_Delete:
+      description: >-
+        The deletion of the target resource is not possible at this time.
+
+
+        *The 405 (Method Not Allowed) status code indicates that the method
+        received in the request-line is known by the origin server but not
+        supported by the target resource.  The origin server MUST generate an
+        Allow header field in a 405 response containing a list of the target
+        resource's currently supported methods.*
+        [RFC 7231, Section 6.5.5]
+
+  schemas:
+    # ------------------------------------------------------------------------------------------------------------------
+    # COMPONENTS/SCHEMAS
+    # ------------------------------------------------------------------------------------------------------------------
+
+    AccountIdentification4Choice:
+      description: Specifies the unique identification of an account as assigned by the account servicer.
+      oneOf:
+      - title: IBAN
+        type: object
+        description: >-
+          International Bank Account Number (IBAN) - identifier used internationally by financial institutions to
+          uniquely identify the account of a customer. Further specifications of the format and content of the IBAN
+          can be found in the standard ISO 13616 "Banking and related financial services - International Bank Account
+          Number (IBAN)" version 1997-10-01, or later revisions.
+        properties:
+          iban:
+            $ref: '#/components/schemas/IBAN2007Identifier'
+        required:
+        - iban
+      - title: Other
+        type: object
+        description: >-
+          Unique identification of an account, as assigned by the account servicer, using an identification scheme.
+        properties:
+          other:
+            $ref: '#/components/schemas/GenericAccountIdentification1'
+        required:
+        - other
+
+    AccountSchemeName1Choice:
+      description: Sets of elements to identify a name of the identification scheme.
+      oneOf:
+      - type: object
+        title: Code
+        description: Name of the identification scheme, in a coded form as published in an external list.
+        properties:
+          code:
+            $ref: '#/components/schemas/ExternalAccountIdentification1Code'
+        required:
+        - code
+      - type: object
+        title: Proprietary
+        description: Name of the identification scheme, in a free tex.
+        properties:
+          proprietary:
+            $ref: '#/components/schemas/Max35Text'
+        required:
+        - proprietary
+
+    ActiveCurrencyCode:
+      type: string
+      description: >-
+        A code allocated to a currency by a Maintenance Agency under an international identification scheme,
+        as described in the latest edition of the international standard ISO 4217 "Codes for the representation
+        of currencies and funds".
+
+
+        Validation Rules:
+
+        * ActiveCurrency: The currency code must be a valid active currency code, not yet withdrawn on the day
+          the message containing the currency is exchanged. Valid active currency codes are registered with the
+          ISO 4217 Maintenance Agency, consist of three (3) contiguous letters, and are not yet withdrawn on the
+          day the message containing the Currency is exchanged.
+      pattern: '^[A-Z]{3}$'
+      minLength: 3
+      maxLength: 3
+
+    ActiveOrHistoricCurrencyAndAmount:
+      type: object
+      description: >-
+        A number of monetary units specified in an active or a historic currency where the unit of currency
+        is explicit and compliant with ISO 4217.
+      properties:
+        currency:
+          $ref: '#/components/schemas/ActiveOrHistoricCurrencyCode'
+        amount:
+          $ref: '#/components/schemas/ImpliedCurrencyAndAmount'
+      required:
+      - currency
+      - amount
+
+    ActiveOrHistoricCurrencyCode:
+      type: string
+      description: >-
+        A code allocated to a currency by a Maintenance Agency under an international identification scheme,
+        as described in the latest edition of the international standard ISO 4217 "Codes for the representation
+        of currencies and funds".
+
+        Validation Rules:
+        * ActiveOrHistoricCurrency: The Currency Code must be registered, or have already been registered.
+          Valid active or historic currency codes are registered with the ISO 4217 Maintenance Agency,
+          consist of three (3) contiguous letters, and may be or not be withdrawn on the day the message containing
+          the Currency is exchanged.
+      pattern: '^[A-Z]{3}$'
+      minLength: 3
+      maxLength: 3
+
+    AllocationDetails:
+      # Not part of the ISO 20022 Repository
+      type: object
+      description: Client impacted by the order.
+      properties:
+        allocationIdentification:
+          description: Unique and unambiguous identifier for the allocation, as assigned by the receiving party.
+          allOf:
+          - $ref: '#/components/schemas/Max35Text'
+          readOnly: true
+        clientAllocationReference:
+          description: Unique and unambiguous identifier for the allocation, as assigned by the instructing party.
+          allOf:
+          - $ref: '#/components/schemas/Max35Text'
+        investmentAccountDetails:
+          $ref: '#/components/schemas/InvestmentAccount58'
+        cashAccountDetails:
+          $ref: '#/components/schemas/CashAccount38'
+        allocationQuantity:
+          $ref: '#/components/schemas/OrderQuantityChoice'
+      required:
+      - allocationIdentification
+      - clientAllocationReference
+      - investmentAccountDetails
+      - allocationQuantity
+
+    AmountAndDirection28:
+      description: >-
+        Posting of an item to a cash account, in the context of a cash transaction, that results in an increase or
+        decrease to the balance of the account.
+      properties:
+        accruedInterestIndicator:
+          type: boolean
+          description: Indicates whether the net proceeds include interest accrued on the financial instrument.
+        stampDutyIndicator:
+          type: boolean
+          description: Indicates whether the settlement amount includes the stamp duty amount.
+        currency:
+          description: Currency of amount of money in the cash entry.
+          allOf:
+          - $ref: '#/components/schemas/ActiveOrHistoricCurrencyCode'
+        amount:
+          description: Amount of money in the cash entry.
+          allOf:
+          - $ref: '#/components/schemas/ImpliedCurrencyAndAmount'
+        creditDebitIndicator:
+          $ref: '#/components/schemas/CreditDebitCode'
+        originalCurrency: 
+          description: >-
+            Original currency of posting/settlement amount when conversion from/into another currency has occurred.
+          allOf:
+          - $ref: '#/components/schemas/ActiveOrHistoricCurrencyCode'
+        originalAmount:
+          description: >-
+            Posting/settlement amount in its original currency when conversion from/into another currency has occurred.
+          allOf:
+          - $ref: '#/components/schemas/ImpliedCurrencyAndAmount'
+        foreignExchangeDetails:
+          description: Information needed to process a currency exchange or conversion.
+          allOf:
+          - $ref: '#/components/schemas/ForeignExchangeTerms18'
+        valueDate:
+          description: >-
+            Date and time at which the cash is at the disposal of the credit account owner, or ceases
+            to be at the disposal of the debit account owner.
+          allOf:
+          - $ref: '#/components/schemas/DateAndDateTime1Choice'
+      required:
+      - currency
+      - amount
+
+    AmountAndDirection29:
+      type: object
+      description: Amount of money debited or credited on the books of an account servicer.
+      properties:
+        currency:
+          description: Currency of amount of money in the cash entry.
+          allOf:
+          - $ref: '#/components/schemas/ActiveOrHistoricCurrencyCode'
+        amount:
+          description: Amount of money in the cash entry.
+          allOf:
+          - $ref: '#/components/schemas/ImpliedCurrencyAndAmount'
+        creditDebitIndicator:
+          $ref: '#/components/schemas/CreditDebitCode'
+        originalCurrency: 
+          description: >-
+            Original currency of posting/settlement amount when conversion from/into another currency has occurred.
+          allOf:
+          - $ref: '#/components/schemas/ActiveOrHistoricCurrencyCode'
+        originalAmount:
+          description: >-
+            Posting/settlement amount in its original currency when conversion from/into another currency has occurred.
+          allOf:
+          - $ref: '#/components/schemas/ImpliedCurrencyAndAmount'
+        foreignExchangeDetails:
+          description: Information needed to process a currency exchange or conversion.
+          allOf:
+          - $ref: '#/components/schemas/ForeignExchangeTerms18'
+      required:
+      - currency
+      - amount
+
+    BaseOneRate:
+      type: string
+      description: >- 
+        Rate expressed as a decimal, for example, 0.7 is 7/10 and 70%.
+
+        * Total number of digits: 11
+
+        * Number of digits in fractional part: 10
+
+        * Base value: 1
+      pattern: '^-?[0-9]{1,11}(\.[0-9]{1,10})?$'
+      minLength: 1
+      maxLength: 13
+
+    CashAccount38:
+      type: object
+      description: >-
+        Unique and unambiguous identification for the cash account between the account owner
+        and the account servicer.
+      properties:
+        identification:
+          $ref: '#/components/schemas/AccountIdentification4Choice'
+      required:
+      - identification
+
+    CFIIdentifier:
+      type: string
+      description: >-
+        Classification type of the financial instrument, as per the ISO 10962 Classification of Financial Instrument
+        (CFI) codification, eg, common share with voting rights, fully paid, or registered.
+      pattern: '^[A-Z]{1,6}$'
+      minLength: 1
+      maxLength: 6
+
+    ChargeBasis2Choice:
+      description: Choice of formats for the charge or commission basis.
+      oneOf:
+      - title: Code
+        type: object
+        description: Fee (charge/commission) basis expressed as a code.
+        properties:
+          code:
+            $ref: '#/components/schemas/TaxationBasis5Code'
+        required:
+        - code
+      - title: Proprietary
+        type: object
+        description: Fee (charge/commission) basis expressed as a proprietary code.
+        properties:
+          proprietary:
+            $ref: '#/components/schemas/GenericIdentification47'
+        required:
+        - proprietary
+
+    ChargeType5Choice:
+      description: Choice of formats for the type of fee (charge/commission).
+      oneOf:
+      - title: Code
+        type: object
+        description: Fee (charge/commission) expressed as a code.
+        properties:
+          code:
+            $ref: '#/components/schemas/InvestmentFundFee1Code'
+        required:
+        - code
+      - title: Proprietary
+        type: object
+        description: Fee (charge/commission) expressed as a proprietary code.
+        properties:
+          proprietary:
+            $ref: '#/components/schemas/GenericIdentification47'
+        required:
+        - proprietary
+
+    ClassificationType30Choice:
+      description: Choice of format for the classification.
+      oneOf:
+      - title: ClassificationFinancialInstrument
+        type: object
+        description: ISO 10962 Classification of Financial Instrument (CFI).
+        properties:
+          classificationFinancialInstrument:
+            $ref: '#/components/schemas/CFIIdentifier'
+        required:
+        - classificationFinancialInstrument
+      - title: AlternateClasification
+        type: object
+        description: Proprietary classification of financial instrument.
+        properties:
+          alternateClassifiction:
+            $ref: '#/components/schemas/GenericIdentification36'
+        required:
+        - alternateClassification
+
+    CountryCode:
+      type: string
+      description: >-
+        Code to identify a country, a dependency, or another area of particular geopolitical interest, on the basis
+        of country names obtained from the United Nations (ISO 3166, Alpha-2 code).
+
+
+        Validation Rules:
+
+        * Country: The code is checked against the list of country names obtained from the United Nations (ISO 3166,
+        Alpha-2 code).
+      pattern: '^[A-Z]{2}$'
+      minLength: 2
+      maxLength: 2
+
+    CreditDebitCode:
+      type: string
+      description: Specifies if an operation is an increase or a decrease.
+      enum:
+      - CRDT # Credit
+      - DBIT # Debit
+
+    DateAndDateTime1Choice:
+      description: Choice between a date or a date and time format.
+      oneOf:
+      - title: Date
+        type: object
+        description: Numeric representation of the day of the month and year.
+        properties:
+          date:
+            $ref: '#/components/schemas/ISODate'
+        required:
+        - date
+      - title: DateTime
+        type: object
+        description: Numeric representation of time of the day and the day of the month and year.
+        properties:
+          dateTime:
+            $ref:  "#/components/schemas/ISODateTime"
+        required:
+        - dateTime
+
+    DateFormat42Choice:
+      description: Choice of formats for a date.
+      oneOf:
+      - title: YearMonth
+        type: object
+        description: Year and month.
+        properties:
+          yearMonth:
+            $ref: '#/components/schemas/ISOYearMonth'
+        required:
+        - yearMonth
+      - title: YearMonthDay
+        type: object
+        description: Year, month and date.
+        properties:
+          yearMonthDay:
+            $ref: '#/components/schemas/ISODate'
+        required:
+        - yearMonthDay
+
+    DecimalNumber:
+      type: string
+      description: >-
+        Number of objects represented as a decimal number, for example 0.75 or 45.6.
+
+        * Total number of digits: 18
+
+        * Number of digits in fractional part: 17
+      pattern: '^-?[0-9]{1,18}(\.[0-9]{1,17})?$'
+      minLength: 1
+      maxLength: 20
+
+    Exact4AlphaNumericText:
+      type: string
+      description: Specifies an alphanumeric string with a length of 4 characters.
+      pattern: '^[a-zA-Z0-9]{4}$'
+      minLength: 4
+      maxLength: 4
+
+    ExecutionTimeLimit1Code:
+      type: string
+      description: Indicates from/until when an order must be executed.
+      enum:
+      - OPEN # AtTheOpening
+      - CLOS # AtTheClosing
+      - GDAY # GoodForTheDay
+      - GTCA # GoodUntilCancelled
+      - GTHD # GoodThroughDate
+      - GTMO # GoodForTheMonth
+      - FIKI # FillOrKill
+      - GTNM # GoodUntilTheEndOfNextMonth
+      - GTXO # GoodTillCrossed
+      - IOCA # ImmediateOrCance
+
+    ExecutionTypeChoice:
+      description: Indicates the type of instruction to a broker or dealer to buy or sell a financial instrument.
+      oneOf:
+      - title: Code
+        type: object
+        description: Indicates the type of instruction to a broker or dealer to buy or sell a financial instrument.
+        properties:
+          code:
+            $ref: '#/components/schemas/OrderType2Code'
+        required:
+        - code
+      - title: Proprietary
+        type: object
+        description: Proprietary type of instruction.
+        properties:
+          proprietary:
+            $ref: '#/components/schemas/GenericIdentification38'
+        required:
+        - proprietary
+
+    ExemptionReason1Choice:
+      description: Choice of formats for the exemption reason.
+      oneOf:
+      - title: Code
+        type: object
+        description: Exemption reason expressed as a code.
+        properties:
+          code:
+            $ref: '#/components/schemas/TaxExemptReason1Code'
+        required:
+        - code
+      - title: Proprietary
+        type: object
+        description: Exemption reason expressed as a proprietary code.
+        properties:
+          proprietary:
+            $ref: '#/components/schemas/GenericIdentification47'
+        required:
+        - proprietary
+
+    ExternalAccountIdentification1Code:
+      type: string
+      description: >-
+        Specifies the external account identification scheme name code in the format of character string with a
+        maximum length of 4 characters. The list of valid codes is an external code list published separately.
+        External code sets can be downloaded from www.iso20022.org.
+      minLength: 1
+      maxLength: 4
+
+    ExternalTradeTransactionCondition1Code:
+      type: string
+      description: >-
+        Specifies the external Trade Transaction Condition code in the format of character string with a maximum
+        length of 4 characters. The list of valid codes is an external code list published separately.
+        External code sets can be downloaded from www.iso20022.org.
+      minLength: 1
+      maxLength: 4
+      example: BTEX
+
+    Fee1:
+      type: object
+      description: >-
+        Individual fee (charge/commission).
+
+
+        Validation Rules:
+
+        * [requestedCurrency] is required when [requestedAmount] is present.
+
+        * [requestedAmount] is required when [requestedCurrency] is present.
+
+        * FeeElementRule: One of the elements ( [requestedAmount], [requestedRate] ) must be present.
+      properties:
+        type:
+          description: Type of fee (charge/commission).
+          allOf:
+          - $ref: '#/components/schemas/ChargeType5Choice'
+        basis:
+          description: Method used to calculate the fee (charge/commission).
+          allOf:
+          - $ref: '#/components/schemas/ChargeBasis2Choice'
+        requestedCurrency:
+          description: Currency of requested fee (charge/commission) amount as agreed for the account.
+          allOf:
+          - $ref: '#/components/schemas/ActiveCurrencyCode'
+        requestedAmount:
+          description: Requested fee (charge/commission) amount as agreed for the account.
+          allOf:
+          - $ref: '#/components/schemas/ImpliedCurrencyAndAmount'
+        requestedRate:
+          description: >-
+            Requested rate used to calculate the amount of the fee (charge/commission), as agreed for the account.
+          allOf:
+          - $ref: '#/components/schemas/PercentageRate'
+      required:
+      - type
+
+    FeeAndTax1:
+      type: object
+      description: Amount of money associated with a service.
+      properties:
+        commercialAgreementReference:
+          description: >-
+            Reference to the agreement established between the fund and another party.
+            This element, amongst others, defines the conditions of the commissions.
+          allOf:
+          - $ref: '#/components/schemas/Max35Text'
+        individualFee:
+          type: array
+          items:
+            $ref: '#/components/schemas/Fee1'
+          readOnly: true
+        individualTax:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tax30'
+          readOnly: true
+
+    FinancialInstrumentDetails:
+      # Not part of the ISO 20022 Repository
+      # Properties from FinancialInstrument57 and FinancialInstrumentAttributes44
+      type: object
+      description: Financial instrument identification and elements characterising it.
+      properties:
+        instrumentIdentification:
+          $ref: '#/components/schemas/InstrumentIdentification'
+        alternativeInstrumentIdentification:
+          type: array
+          description: Alternative identifications of a financial instrument.
+          items:
+            $ref: '#/components/schemas/InstrumentIdentification'
+        seriesIdentification:
+          $ref: '#/components/schemas/Series1'
+        versionNumber:
+          $ref: '#/components/schemas/Number1Choice'
+        classificationType:
+          $ref: '#/components/schemas/ClassificationType30Choice'
+        optionStyle:
+          $ref: '#/components/schemas/OptionStyle6Choice'
+        optionType:
+          $ref: '#/components/schemas/OptionType4Choice'
+        maturityDate:
+          description: Planned final repayment date at the time of issuance.
+          allOf:
+          - $ref: '#/components/schemas/ISODate'
+        currentFactor:
+          description: >-
+            Rate expressed as a decimal between 0 and 1 defining the outstanding principal of the
+            financial instrument (for factored securities).
+          allOf:
+          - $ref: '#/components/schemas/BaseOneRate'
+        exercisePrice:
+          description: >-
+            Predetermined price at which the holder of a derivative will buy or sell the underlying instrument.
+          allOf:
+          - $ref: '#/components/schemas/Price4'
+        contractSize:
+          description: Ratio or multiplying factor used to convert one contract into a quantity.
+          allOf:
+          - $ref: '#/components/schemas/FinancialInstrumentQuantity18Choice'
+      required:
+      - instrumentIdentification
+
+    FinancialInstrumentQuantity1Choice:
+      description: Choice between formats for the quantity of security.
+      oneOf:
+      - title: Unit
+        type: object
+        description: Quantity expressed as a number, for example, a number of shares.
+        properties:
+          unit:
+            $ref: '#/components/schemas/DecimalNumber'
+        required:
+        - unit
+      - title: FaceAmount
+        type: object
+        description: >-
+          Quantity expressed as an amount representing the face amount, that is, the principal, of a debt instrument.
+        properties:
+          faceAmount:
+            $ref: '#/components/schemas/ImpliedCurrencyAndAmount'
+        required:
+          - faceAmount
+
+    FinancialInstrumentQuantity18Choice:
+      description: Choice between formats for the quantity of security.
+      oneOf:
+      - title: Unit
+        type: object
+        description: Quantity expressed as a number, for example, a number of shares.
+        properties:
+          unit:
+            $ref: '#/components/schemas/DecimalNumber'
+        required:
+        - unit
+      - title: FaceAmount
+        type: object
+        description: >-
+          Quantity expressed as an amount representing the face amount, that is, the principal, of a debt instrument.
+        properties:
+          faceAmount:
+            $ref: '#/components/schemas/ImpliedCurrencyAndAmount'
+        required:
+          - faceAmount
+
+    ForeignExchangeTerms18:
+      type: object
+      description: Provides information about the terms of the foreign exchange transaction.
+      properties:
+        unitCurrency:
+          description: >-
+            Currency in which the rate of exchange is expressed in a currency exchange.
+            In the example 1GBP = xxxCUR, the unit currency is GBP.
+          allOf:
+          - $ref: '#/components/schemas/ActiveCurrencyCode'
+        quotedCurrency:
+          description: Currency into which the base currency is converted, in a currency exchange.
+          allOf:
+          - $ref: '#/components/schemas/ActiveCurrencyCode'
+        exchangeRate:
+          description: >-
+            Factor used for the conversion of an amount from one currency into another. This reflects the price
+            at which one currency was bought with another currency. Usage: ExchangeRate expresses the ratio between
+            UnitCurrency and QuotedCurrency  (ExchangeRate = UnitCurrency/QuotedCurrency).
+          allOf:
+          - $ref: '#/components/schemas/BaseOneRate'
+        convertedCurrency:
+          description: Currency following a foreign exchange conversion.
+          allOf:
+          - $ref: '#/components/schemas/ActiveCurrencyCode'
+        convertedAmount:
+          description: Amount following a foreign exchange conversion.
+          allOf:
+          - $ref: '#/components/schemas/ImpliedCurrencyAndAmount'
+      required:
+      - unitCurrency
+      - quotedCurrency
+      - exchangeRate
+      - convertedCurrency
+      - convertedAmount
+
+    GenericAccountIdentification1:
+      type: object
+      properties:
+        identification:
+          description: Identification assigned by an institution.
+          allOf:
+          - $ref: '#/components/schemas/Max34Text'
+        schemeName:
+          title: AccountSchemeName1Choice
+          description: Name of the identification scheme.
+          allOf:
+          - $ref: '#/components/schemas/AccountSchemeName1Choice'
+        issuer:
+          description: Entity that assigns the identification.
+          allOf:
+          - $ref: '#/components/schemas/Max35Text'
+      required:
+      - identification
+
+    GenericIdentification7:
+      type: object
+      description: Information expressed in a proprietary format.
+      properties:
+        issuer:
+          description: Entity that assigns the identification.
+          allOf:
+          - $ref: '#/components/schemas/Max8Text'
+        information:
+          description: Proprietary information, often a code, issued by the data source scheme issuer.
+          allOf:
+          - $ref: '#/components/schemas/Max35Text'
+      required:
+      - issuer
+      - information
+
+    GenericIdentification36:
+      type: object
+      description: Identification using a proprietary scheme.
+      properties:
+        identification:
+          description: Proprietary information, often a code, issued by the data source scheme issuer.
+          allOf:
+          - $ref: '#/components/schemas/Max35Text'
+        issuer:
+          description: Entity that assigns the identification.
+          allOf:
+          - $ref: '#/components/schemas/Max35Text'
+        schemeName:
+          description: Short textual description of the scheme.
+          allOf:
+          - $ref: '#/components/schemas/Max35Text'
+      required:
+      - identification
+      - issuer
+
+    GenericIdentification38:
+      type: object
+      description: Identification expressed as a proprietary type and narrative description.
+      properties:
+        identification:
+          description: Proprietary information, often a code, issued by the data source scheme issuer.
+          allOf:
+          - $ref: '#/components/schemas/Exact4AlphaNumericText'
+        issuer:
+          description: Entity that assigns the identification.
+          allOf:
+          - $ref: '#/components/schemas/Max35Text'
+        schemeName:
+          description: Short textual description of the scheme.
+          allOf:
+          - $ref: '#/components/schemas/Max35Text'
+      required:
+      - identification
+      - issuer
+
+    GenericIdentification47:
+      type: object
+      description: Identification expressed as a proprietary type and narrative description.
+      properties:
+        identification:
+          description: Proprietary information, often a code, issued by the data source scheme issuer.
+          allOf:
+          - $ref: '#/components/schemas/Exact4AlphaNumericText'
+        issuer:
+          description: Entity that assigns the identification.
+          allOf:
+          - $ref: '#/components/schemas/Max4AlphaNumericText'
+        schemeName:
+          description: Short textual description of the scheme.
+          allOf:
+          - $ref: '#/components/schemas/Max4AlphaNumericText'
+      required:
+      - identification
+      - issuer
+
+    IBAN2007Identifier:
+      type: string
+      description: >-
+        An identifier used internationally by financial institutions to uniquely identify the account of a customer
+        at a financial institution, as described in the latest edition of the international standard ISO 13616:
+        2007 - "Banking and related financial services - International Bank Account Number (IBAN)".
+
+
+        Validation Rules:
+
+        * IBAN: A valid IBAN consists of all three of the following components: Country Code, check digits and BBAN.
+      pattern: '^[A-Z]{2}[0-9]{2}[a-zA-Z0-9]{1,30}$'
+      minLength: 5
+      maxLength: 34
+
+    ImpliedCurrencyAnd13DecimalAmount:
+      # Not part of the ISO 20022 Repository
+      type: string
+      description: >-
+        Number of monetary units specified in a currency where the unit of currency is implied by the context and
+        compliant with ISO 4217. The decimal separator is a dot.  
+        Note: a zero amount is considered a positive amount.
+
+        * Total number of digits: 18
+
+        * Number of digits in fractional part: 13
+
+        * minInclusive: 0
+      pattern: '^[0-9]{1,18}(\.[0-9]{1,13})?$'
+      minLength: 1
+      maxLength: 19
+
+    ImpliedCurrencyAndAmount:
+      type: string
+      description: >-
+        Number of monetary units specified in a currency where the unit of currency is implied by the context and
+        compliant with ISO 4217. The decimal separator is a dot.  
+        Note: a zero amount is considered a positive amount.
+
+        * Total number of digits: 18
+
+        * Number of digits in fractional part: 5
+
+        * minInclusive: 0
+      pattern: '^[0-9]{1,18}(\.[0-9]{1,5})?$'
+      minLength: 1
+      maxLength: 19
+
+    InstrumentIdentification:
+      # Not part of the ISO 20022 Repository
+      type: object
+      properties:
+        identification:
+          description: Identification of a financial instrument.
+          allOf:
+          - $ref: '#/components/schemas/Max35Text'
+        identificationType:
+          description: Type of identification of a financial instrument.
+          allOf:
+          - $ref: '#/components/schemas/Max35Text'
+      required:
+      - identification
+      - identificationType
+
+    InvestmentAccount58:
+      type: object
+      properties:
+        accountIdentification:
+          description: >-
+            Unique and unambiguous identification for the account between the account owner and the account servicer.
+          allOf:
+          - $ref: '#/components/schemas/Max35Text'
+      required:
+      - accountIdentification
+
+    InvestmentFundFee1Code:
+      type: string
+      description: Specifies the type of service for which a fee is asked or paid.
+      enum:
+      - BEND # BackEndLoad
+      - BRKF # BrokerageFee
+      - COMM # Commission
+      - CDPL # CommissionDePlacement
+      - CDSC # ContingentDeferredSalesCharge
+      - CBCH # CorrespondentBankCharge
+      - DLEV # DilutionLevy
+      - FEND # FrontEndLoad
+      - INIT # InitialCharge
+      - ADDF # AdditionalFee
+      - POST # PostageCharge
+      - PREM # Premium
+      - CHAR # ServiceProvisionFee
+      - SHIP # ShippingCharge
+      - SWIT # Switch
+      - UCIC # UCITSCommission
+      - REGF # RegulatoryFee
+      - PENA # Penalty
+
+    ISODate:
+      type: string
+      description: >-
+        A particular point in the progression of time in a calendar year expressed in the YYYY-MM-DD format. This
+        representation is defined in "XML Schema Part 2: Datatypes Second Edition - W3C Recommendation 28 October
+        2004" which is aligned with ISO 8601.
+      format: date
+
+    ISODateTime:
+      type: string
+      description: >-
+        A particular point in the progression of time defined by a mandatory date and a mandatory time component,
+        expressed in either UTC time format (YYYY-MM-DDThh:mm:ss.sssZ), local time with UTC offset format
+        (YYYY-MM-DDThh:mm:ss.sss+/-hh:mm), or local time format (YYYY-MM-DDThh:mm:ss.sss). These representations
+        are defined in "XML Schema Part 2: Datatypes Second Edition - W3C Recommendation 28 October 2004"
+        which is aligned with ISO 8601.
+
+
+        Note on the time format:
+
+        1) beginning / end of calendar day
+
+        * 00:00:00 = the beginning of a calendar day
+
+        * 24:00:00 = the end of a calendar day
+
+        2) fractions of second in time format
+
+        * Decimal fractions of seconds may be included. In this case, the involved parties shall agree on the
+        maximum number of digits that are allowed.
+      format: date-time
+
+    ISOYearMonth:
+      type: string
+      description: >-
+        Month within a particular calendar year represented by YYYY-MM (ISO 8601).
+      pattern: '^[0-9]{4}-(0[1-9]|1[0-2])$'
+      minLength: 7
+      maxLength: 7
+
+    MarketIdentification3Choice:
+      description: >-
+        Choice of market identification.
+
+
+        Note: The element "Description" in the ISO 20022 definition of MarketIdentification3CHoice has been replaced
+        here by a new element "Proprietary" based on GenericIdentification36.
+      oneOf:
+      - title: MarketIdentifierCode
+        type: object
+        description: >-
+          Market Identifier Code. Identification of a financial market, as stipulated in the norm ISO 10383
+          "Codes for exchanges and market identifications".
+        properties:
+          marketIdentifierCode:
+            $ref: '#/components/schemas/MICIdentifier'
+        required:
+        - marketIdentifierCode
+      - title: Proprietary
+        type: object
+        description: Description of the market when no Market Identifier Code is available.
+        properties:
+          proprietary:
+            $ref: '#/components/schemas/GenericIdentification36'
+        required:
+        - proprietary
+
+    MarketIdentification79:
+      type: object
+      description: >-
+        Context, or geographic environment, in which trading parties may meet in order to negotiate
+        and execute trades among themselves.
+      properties:
+        identification:
+          title: MarketIdentification3Choice
+          description: >-
+            Code allocated to places of trade, ie, stock exchanges, regulated markets, eg, Electronic Trading
+            Platforms (ECN), and unregulated markets, eg, Automated Trading Systems (ATS), as sources of prices
+            and related information, in order to facilitate automated processing.
+          allOf:
+          - $ref: '#/components/schemas/MarketIdentification3Choice'
+        type:
+          title: MarketType11Choice
+          description: Nature of a market in which transactions take place.
+          allOf:
+          - $ref: '#/components/schemas/MarketType11Choice'
+
+    MarketType6Code:
+      type: string
+      description: >-
+        Specifies the type of place where a trade was executed, a price was sourced from, an instrument is listed.
+      enum:
+      - OTCO # OverTheCounter
+      - VARI # Various
+      - EXCH # StockExchange
+
+    MarketType11Choice:
+      description: Choice of format for the market type.
+      oneOf:
+      - title: Code
+        type: object
+        description: Market type expressed as an ISO 20022 code.
+        properties:
+          code:
+            $ref: '#/components/schemas/MarketType6Code'
+        required:
+        - code
+      - title: Proprietary
+        type: object
+        description: Market type expressed as a proprietary code.
+        properties:
+          proprietary:
+            $ref: '#/components/schemas/GenericIdentification38'
+        required:
+        - proprietary
+
+    Max3Number:
+      type: integer
+      description: >-
+        Number (max 999) of objects represented as an integer.
+
+        * Total number of digit: 3
+
+        * Number of digits in fractional part: 0
+
+
+        Validation Rules:
+
+        * NumberRule: If Number is negative, then Sign must be present.
+      format: int32
+      maximum: 999
+      minimum: -999
+
+    Max3NumericText:
+      type: string
+      description: Specifies a numeric string with a maximum length of 3 digits.
+      pattern: '^[0-9]{1,3}$'
+      minLength: 1
+      maxLength: 3
+
+    Max4AlphaNumericText:
+      type: string
+      description: Specifies an alphanumeric string with a maximum length of 4 characters.
+      pattern: '^[a-zA-Z0-9]{1,4}$'
+      minLength: 1
+      maxLength: 4
+
+    Max8Text:
+      type: string
+      description: Specifies a character string with a maximum length of 8 characters.
+      minLength: 1
+      maxLength: 8
+
+    Max34Text:
+      type: string
+      description: Specifies a character string with a maximum length of 34 characters.
+      minLength: 1
+      maxLength: 34
+      
+    Max35Text:
+      type: string
+      description: Specifies a character string with a maximum length of 35 characters.
+      minLength: 1
+      maxLength: 35
+
+    MICIdentifier:
+      type: string
+      description: >-
+        Market Identifier Code. The identification of a financial market, as stipulated in the norm ISO 10383
+        'Codes for exchanges and market identifications'.
+      pattern: '^[A-Z0-9]{4}$'
+      minLength: 4
+      maxLength: 4
+
+    Number1Choice:
+      description: Choice of format for the number.
+      oneOf:
+      - title: NumberIdentification
+        type: object
+        description: Number of maximum 3 numeric text.
+        properties:
+          numberIdentification:
+            $ref: '#/components/schemas/Max3NumericText'
+        required:
+        - numberIdentification
+      - title: Proprietary
+        type: object
+        description: Proprietary number format.
+        properties:
+          proprietary:
+            $ref: '#/components/schemas/GenericIdentification7'
+        required:
+        - proprietary
+
+    OptionStyle4Code:
+      type: string
+      description: Defines how an option can be exercised.
+      enum:
+      - AMER # American - Option can be exercised before or on expiry date.
+      - EURO # European - Option that can be exercised on expiry date only.
+      - BERM # Bermudan - Option that can be exercised on multiple discrete dates prior to, or on expiry date.
+
+    OptionStyle6Choice:
+      description: Choice of format for the option style.
+      oneOf:
+      - title: Code
+        type: object
+        description: Option style expressed as an ISO 20022 code.
+        properties:
+          code:
+            $ref: '#/components/schemas/OptionStyle4Code'
+        required:
+        - code
+      - title: Proprietary
+        type: object
+        description: Option style expressed as a proprietary code.
+        properties:
+          proprietary:
+            $ref: '#/components/schemas/GenericIdentification38'
+        required:
+        - proprietary
+
+    OptionType1Code:
+      type: string
+      description: >-
+        Indicates whether it is a Call option (right to purchase a specific underlying asset) or a Put option
+        (right to sell a specific underlying asset).
+      enum:
+      - CALL # Call - Right to buy a quantity of an asset for an agreed price at exercise date.
+      - PUTO # Put - Right to sell a quantity of an asset for an agreed price at exercise date.
+
+    OptionType4Choice:
+      description: Choice of format for the option type.
+      oneOf:
+      - title: Code
+        type: object
+        description: >-
+          Indicates whether it is a Call option (right to purchase a specific underlying asset) or a Put option
+          (right to sell a specific underlying asset).
+        properties:
+          code:
+            $ref: '#/components/schemas/OptionType1Code'
+        required:
+        - code
+      - title: Proprietary
+        type: object
+        description: Option type expressed as a proprietary code.
+        properties:
+          proprietary:
+            $ref: '#/components/schemas/GenericIdentification38'
+        required:
+        - proprietary
+
+    OrderQuantityChoice:
+      # Not part of the ISO 20022 Repository
+      # Based on Quantity6Choice and FinancialInstrumentQuantity28Choice
+      oneOf:
+      - title: Quantity
+        type: object
+        description: Quantity of financial instrument in units, original face amount or current face amount.
+        properties:
+          quantity:
+            $ref: '#/components/schemas/FinancialInstrumentQuantity1Choice'
+        required:
+        - quantity
+      - title: GrossAmount
+        type: object
+        description: >-
+          Amount of money to be invested in the fund or to be redeemed from the fund.
+
+          * Gross Amount = Quantity * Price.
+        properties:
+          grossAmount:
+            $ref: '#/components/schemas/ActiveOrHistoricCurrencyAndAmount'
+        required:
+        - grossAmount
+      - title: NetAmount
+        type: object
+        description: >-
+          Amount of money to be paid by the investor when subscribing to fund units or to be received following
+          redemption of fund units.
+
+          * Net Amount = (Quantity * Price) + (Fees + Taxes) [Subscription of fund units]  
+
+          * Net Amount = (Quantity * Price) - (Fees + Taxes) [Redemption of fund units]
+        properties:
+          netAmount:
+            $ref: '#/components/schemas/ActiveOrHistoricCurrencyAndAmount'
+        required:
+        - netAmount
+
+    OrderStatusAndReason:
+      # Not part of the ISO 20022 Repository.
+      type: object
+      description: Specifies the current status of the order including a reason if applicable.
+      properties:
+        status:
+          $ref: '#/components/schemas/OrderStatusChoice'
+        reason:
+          $ref: '#/components/schemas/OrderStatusReasonChoice'
+        description:
+          description: Additional information regarding the current status of the order, in free text form.
+          allOf:
+          - $ref: '#/components/schemas/Max35Text'
+      required:
+      - status
+
+    OrderStatusChoice:
+      # Not part of the ISO 20022 Repository.
+      description: Choice of format for the order status.
+      oneOf:
+      - title: Code
+        type: object
+        description: Order status expressed as an ISO 20022 code.
+        properties:
+          code:
+            $ref: '#/components/schemas/OrderStatusCode'
+        required:
+        - code
+      - title: Proprietary
+        type: object
+        description: Order status expressed as a proprietary code.
+        properties:
+          proprietary:
+            $ref: '#/components/schemas/GenericIdentification38'
+        required:
+        - proprietary
+
+    OrderStatusCode:
+      type: string
+      description: Specifies the current status of the order.
+      enum:
+      - NEWW # New
+      - PARF # PartialFill
+      - FILL # Filled
+      - DONE # DoneForDay
+      - CANC # Cancelled
+      - REPL # Replaced
+      - CANP # PendingCancel
+      - STOP # Stopped
+      - REJT # Rejected
+      - SUSP # Suspended
+      - PENN # PendingNew
+      - CALC # Calculated
+      - EXPI # Expired
+      - ACBI # AcceptedForBidding
+      - PENR # PendingReplace
+      - CAND # Completed
+      - PACK # Accepted
+      - COSE # AlreadyExecuted
+      - STNP # SentToNextParty
+      - RECE # Received
+      - SETT # Settled
+      - CPNP # CommunicationProblemNextParty
+      - CNFC # ConfirmationAmendment
+      - DONF # PartiallyDone
+      - OPOD # Open
+      - IACO # InvalidAgentConfirmation
+      - CSNE # CashSettledOrderNotExecuted
+      - EXEC # Executing
+      - CACE # Cancelling
+      - ALER # Alert
+
+    OrderStatusReasonChoice:
+      description: >-
+        Choice of format for the order status reason.
+
+
+        Note: Not part of the ISO 20022 Repository.
+      oneOf:
+      - title: Code
+        type: object
+        description: Order status reason expressed as an ISO 20022 code.
+        properties:
+          code:
+            $ref: '#/components/schemas/OrderStatusReasonCode'
+        required:
+        - code
+      - title: Proprietary
+        type: object
+        description: Order status reason expressed as a proprietary code.
+        properties:
+          proprietary:
+            $ref: '#/components/schemas/GenericIdentification38'
+        required:
+        - proprietary
+
+    OrderStatusReasonCode:
+      type: string
+      description: >-
+        Specifies the reason for the current status of the order.
+
+        Note: This is a combination of the ISO 20022 defitions CancelledStatusReasonV2Code and
+        RejectedStatusReasonCode.
+      enum:
+      # Cancellation
+      - CANI # CancelledByYourself
+      - CANS # CancelledBySystem
+      - CSUB # CancelledByAgent
+      - CANH # CancelledByHub
+      - CANP # CancelledByInstructingParty
+      - CANO # CancelledByOther
+      - CNTA # CancelledByTransferAgent
+      - CNCL # CancelledByClient
+      - CNIN # CancelledByIntermediary
+      - CANT # CancelledDueToTransformation
+      - CANZ # CancelledSplitPartialSettlement
+      - CORP # CancelledDueToCorporateAction
+      - CREG # CancelledByIssuerRegistrar
+      - CTHP # CancelledByThirdParty
+      - BYIY # CancelledDueToBuyIn
+      - SCEX # SecuritiesNoLongerEligible
+      - CXLR # EndOfLife
+      - NARR # NarrativeReason
+      - OTHR # Other
+      # Rejection
+      - DDAT # SettlementDate
+      - IAQD # AcquisitionDate
+      - POIN # DifferentValuationPoints
+      - ICAG # DeliveringAgent
+      - IDDB # DirectDebit
+      - INTE # Intermediary
+      - SAFE # InvestmentAccount
+      - IPAY # PaymentCard
+      - ICTR # InvalidCreditTransfer
+      - DEPT # SettlementPlace
+      - IVAG # ReceivingAgent
+      - ISAF # SafekeepingPlace
+      - DFOR # InvalidSecurityForm
+      - DSEC # FinancialInstrumentIdentification
+      - BLCA # AccountBlockedForCorporateAction
+      - BLTR # AccountBlockedForTransfer
+      - DOCC # AccountBlockedMissingDocuments
+      - MONY # NotEnoughCash
+      - SECU # NotEnoughFinancialInstrument
+      - IDNA # FinancialInstrumentIdentificationAndName
+      - UWAI # UnacceptedCommissionWaiving
+      - UDCY # UnacceptedDealCurrency
+      - UNAV # UnacceptedNAVCurrency
+      - UPAY # UnacceptedPaymentMethod
+      - URSC # UnacceptedRequestedSettlementCurrency
+      - SHIG # TooHighUnitsOrAmountToSubscribe
+      - SLOW # TooLowUnitsOrAmountToSubscribe
+      - ULNK # UnknownLinkagesReference
+      - DLVY # PhysicalDeliveryImpossible
+      - ORRF # DuplicateOrderReference
+      - IPAC # InstructingPartyNotAllowedForAccount
+      - IOTP # InvalidOrderType
+      - NSLA # NotCompliantWithSLA
+      - CUTO # CutOffTime
+      - REFE # InvalidOrUnrecognisedReference
+      - NALO # NotAllowedRequest
+      - COSE # AlreadyExecuted
+      - NALC # NotAllowedToCancel
+      - LEGL # LegallyImpossible
+      - OTHR # Other
+      - DQUA # FinancialInstrumentQuantity
+      - ICTN # CertificateNumber
+      - ISTP # SettlementParties
+      - LATE # TooLate
+      - ADEA # AfterDeadline
+      - DTRD # TradeDate
+      - FEEE # FeeOrCommission
+      - IEXE # SubscriberOrRedeemer
+      - NCRR # SettlementAmountCurrency
+      - PHYS # PhysicalSettlement
+      - PLCE # PlaceOfTrade
+      - SETR # SettlementTransaction
+      - RTGS # RTGSSystem
+      - NRGM # NoCancellationMatch
+      - INUK # InvestorNameAddressUnknown
+      - INID # InsufficientInvestorData
+      - INAC # InvalidAccountServicer
+      - INNA # InvalidNomineeAccount
+      - INPM # InvalidNewPlanManager
+      - CYPA # CurrentYearPartial
+      - PTNS # PartialNotSupported
+      - FTAX # FinancialInstrumentTaxYear
+      - ISAT # InvalidISAType
+      - CASH # InvalidCashAccount
+      - TREF # DuplicateTransferReference
+      - DMON # InvalidSettlementAmount
+      - ORDR # InvalidOrderedAmount
+      - BMIN # BelowMinimumInitialInvestmentAmount
+      - BMTO # BelowMinimumTopUpAmount
+      - INSU # InsufficientCapacity
+      - PRCT # PercentageHoldingBreach
+      - BMRA # BelowMinimumRedemptionAmount
+      - BMRV # BelowMinimumRetainedAmount
+      - LOCK # LockUp
+      - ILLI # AssetsIlliquid
+      - DINV # DataInvalid
+      - CLOS # FundClosed
+      - UNSC # UnacceptableSwitchCombination
+      - NCON # NotConvertable
+      - ACLO # AssetClosed
+      - NQTY # QuantityBelowMinimum
+      - NASS # AssetNotSupported
+
+    OrderType2Code:
+      type: string
+      description: Specifies a type of order based on the Financial Information Exchange Protocol.
+      enum:
+      - MRKT # Market
+      - LMTO # Limit
+      - STOP # Stop
+      - LIWI # LimitWith
+      - LIWO # LimitWithout
+      - BAPR # OnBasisPrice
+      - MATH # MarketTouched
+      - WTWO # WithOrWithout
+      - PRQT # PreviouslyQuoted
+      - PRID # PreviouslyIndicated
+      - FXSW # ForexSwap
+      - FNRI # Funari
+      - MKLO # MarketWithLeftover
+      - PGGD # Pegged
+      - SLOS # StopLoss
+      - STLI # StopLimit
+      - COSE # CounterOrderSelection
+
+    PercentageRate:
+      type: string
+      description: >-
+        Rate expressed as a percentage, that is, in hundredths, for example, 0.7 is 7/10 of a percent, and 7.0 is 7%.
+
+
+        * Total number of digits: 11
+
+        * Number of digits in fractional part: 10
+
+        * Base value: 100
+      pattern: '^-?[0-9]{1,11}(\.[0-9]{1,10})?$'
+      minLength: 1
+      maxLength: 13
+
+    PositionEffect2Code:
+      type: string
+      description: >-
+        Indicates whether the resulting position after a trade should be an opening position or closing position.
+      enum:
+      - OPEN # OpenPosition
+      - CLOS # ClosePosition
+      - ROLL # Rolled
+      - FIFO # Fifo
+      - CLOA # CloseAccount
+
+    Price4:
+      type: object
+      description: Provides the value and optionaly the type of price.
+      properties:
+        value:
+          $ref: '#/components/schemas/PriceRateOrAmountChoice'
+        type:
+          $ref: '#/components/schemas/PriceValueType7Code'
+      required:
+      - value
+      - type
+
+    PriceRateOrAmountChoice:
+      description: Choice of formats for the price.
+      oneOf:
+      - title: Rate
+        type: object
+        description: Price expressed as a rate, that is percentage.
+        properties:
+          rate:
+            $ref: '#/components/schemas/PercentageRate'
+        required:
+        - rate
+      - title: Amount
+        type: object
+        description: Price expressed as a currency and value.
+        properties:
+          currency:
+            $ref: '#/components/schemas/ActiveOrHistoricCurrencyCode'
+          amount:
+            $ref: '#/components/schemas/ImpliedCurrencyAnd13DecimalAmount'
+        required:
+        - currency
+        - amount
+
+    PriceValueType7Code:
+      type: string
+      description: Specifies a type of value of the price.
+      enum:
+      - DISC # Discount
+      - PERM # Premium
+      - PARV # Par
+      - YIEL # Yield
+      - SPRE # Spread
+      - PEUN # PerUnit
+      - ABSO # Absolute
+      - TEDP # TEDPrice
+      - TEDY # TEDYield
+      - FICT # FixedCabinetTrade
+      - VACT # VariableCabinetTrade
+      - PRCT # Percentage
+      - ACTU # ActualAmount
+
+    Quantity6Choice:
+      description: Choice of format for the quantity.
+      oneOf:
+      - title: Quantity
+        type: object
+        description: Quantity of financial instrument in units, original face amount or current face amount.
+        properties:
+          quantity:
+            $ref: '#/components/schemas/FinancialInstrumentQuantity1Choice'
+        required:
+        - quantity
+
+    SecuritiesOrder:
+      # Not part of the ISO 20022 Repository
+      type: object
+      description: >-
+        A securities order represents the instruction on behalf of one or more investors for the purchase or sale
+        of a financial instrument sent to a broker or brokerage firm for trading in a stock exchange.
+        Allowed financial instruments in securities orders include shares, bonds, funds, futures and options.
+
+
+        Securities orders allow for investors to place restrictions affecting the price and time at which the order
+        can be executed and provide means for brokers or brokerage firms to communicate the status of the order back
+        to the investors.
+
+
+        This shema supports single client orders by filling [investmentAccountDetails] or multi-client orders
+        by filling [allocationDetails].
+
+
+        Validation Rules:
+
+        1. [investmentAccountDetails] is required when [allocationDetails] is empty.
+
+
+        2. [placeOfTrade] is required when [tradeTransactionCondition] does not include the code BTEX.
+
+
+        3. [tradeCurrency] is required when [tradeTransactionCondition] does not include the code BTEX.
+
+
+        4. [positionEffect] is required when [financialInstrumentDetails] corresponds to a derivative.
+
+
+        5. The following read-only fields are required when the order has been filled or partially filled:
+          * [dealPrice] and [typeOfPrice] are required.
+          * [dayExecutedQuantityForDay], [dayDealPrice] and [dayTypeOfPrice] are required.
+          * [numberOfDaysAccrued] and [accruedInterestAmount] are required.
+          * [grossTradeAmount] and [settlementAmount] are required.
+      properties:
+
+        # ORDER DETAILS
+        orderIdentification:
+          description: Unique and unambiguous identifier for the order, as assigned by the receiving party.
+          allOf:
+          - $ref: '#/components/schemas/Max35Text'
+          readOnly: true
+        clientOrderReference:
+          description: Unique and unambiguous identifier for the order, as assigned by the instructing party.
+          allOf:
+          - $ref: '#/components/schemas/Max35Text'
+        investmentAccountDetails:
+          $ref: '#/components/schemas/InvestmentAccount58'
+        cashAccountDetails:
+          $ref: '#/components/schemas/CashAccount38'
+        allocationDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/AllocationDetails'
+        side:
+          $ref: '#/components/schemas/Side3Code'
+        financialInstrumentDetails:
+          $ref: '#/components/schemas/FinancialInstrumentDetails'
+        orderQuantity:
+          $ref: '#/components/schemas/OrderQuantityChoice'
+        placeOfTrade:
+          $ref: '#/components/schemas/MarketIdentification79'
+        tradeTransactionCondition:
+          type: array
+          description: Indicates the conditions under which the order/trade is to be/was executed.
+          items:
+            $ref: '#/components/schemas/TradeTransactionCondition4Choice'
+        tradeCurrency:
+          description: >-
+            Currency in which a trade transaction is to be or has been executed.
+          allOf:
+          - $ref: '#/components/schemas/ActiveCurrencyCode'
+        positionEffect:
+          $ref: '#/components/schemas/PositionEffect2Code'
+        derivativeCovered:
+          type: boolean
+          description: >-
+            Indicates whether the derivative product is covered or not by an underlying financial instrument position.
+        
+        # EXECUTION DETAILS
+        executionType:
+          $ref: '#/components/schemas/ExecutionTypeChoice'
+        displayQuantity:
+          $ref: '#/components/schemas/FinancialInstrumentQuantity1Choice'
+        limitPrice:
+          $ref: '#/components/schemas/Price4'
+        stopPrice:
+          $ref: '#/components/schemas/Price4'
+        timeInForce:
+          $ref: '#/components/schemas/TimeInForceChoice'
+        expiryDateAndTime:
+          $ref: '#/components/schemas/ISODateTime'
+        
+        # ORDER STATUS
+        orderStatus:
+          allOf:
+          - $ref: '#/components/schemas/OrderStatusAndReason'
+          readOnly: true
+        executedQuantity:
+          description: >-
+            Quantity of financial instrument that has been executed.
+          
+            * [executedQuantiy] = [orderQuantity] - [remainingQuantity]
+          allOf:
+          - $ref: '#/components/schemas/FinancialInstrumentQuantity1Choice'
+          readOnly: true
+        remainingQuantity:
+          description: >-
+            Quantity of financial instrument that is remaining in order.
+          
+            * [remainingQuantity] = [orderQuantity] - [executedQuantity]
+          allOf:
+          - $ref: '#/components/schemas/FinancialInstrumentQuantity1Choice'
+          readOnly: true
+        dealPrice:
+          description: Amount of money for which goods or services are offered, sold, or bought.
+          allOf:
+          - $ref: '#/components/schemas/Price4'
+          readOnly: true
+        typeOfPrice:
+          description: Specifies the type of deal price.
+          allOf:
+          - $ref: '#/components/schemas/TypeOfPrice10Choice'
+          readOnly: true
+        dayOrderQuantity:
+          description: >-
+            Order quantity for today.
+            
+            * [dayOrderQuantity] = [orderQuantity] - ( [executedQuantity] - [dayExecutedQuantity] )
+          allOf:
+          - $ref: '#/components/schemas/FinancialInstrumentQuantity1Choice'
+          readOnly: true
+        dayExecutedQuantity:
+          description: Quantity of order executed today.
+          allOf:
+          - $ref: '#/components/schemas/FinancialInstrumentQuantity1Choice'
+          readOnly: true
+        dayDealPrice:
+          description: Amount of money for which goods or services are offered, sold, or bought today.
+          allOf:
+          - $ref: '#/components/schemas/Price4'
+          readOnly: true
+        dayTypeOfPrice:
+          description: Specifies the type of deal price for today.
+          allOf:
+          - $ref: '#/components/schemas/TypeOfPrice10Choice'
+          readOnly: true
+
+        # BILLING DETAILS
+        numberOfDaysAccrued:
+          description: Number of days on which the interest rate accrues (daily accrual note).
+          allOf:
+          - $ref: '#/components/schemas/Max3Number'
+          readOnly: true
+        accruedInterestAmount:
+          description: >-
+            Interest amount that has accrued in between two periods, for example, in between interest payment periods.
+          allOf:
+          - $ref: '#/components/schemas/AmountAndDirection29'
+          readOnly: true
+        grossTradeAmount:
+          description: Principal amount of a trade (price multiplied by quantity).
+          allOf:
+          - $ref: '#/components/schemas/AmountAndDirection29'
+          readOnly: true
+        transactionOverhead:
+          description: Fees (charges/commission) and tax to be applied to the net amount.
+          allOf:
+          - $ref: '#/components/schemas/FeeAndTax1'
+        settlementAmount:
+          description: >-
+            Total amount of money to be paid or received in exchange for the securities.
+            The amount includes the principal with any commissions and fees or accrued interest.
+          allOf:
+          - $ref: '#/components/schemas/AmountAndDirection28'
+          readOnly: true
+      required:
+      - orderIdentification
+      - clientOrderReference
+      - side
+      - financialInstrumentDetails
+      - orderQuantity
+      - executionType
+      - timeInForce
+      - orderStatus
+      - dayOrderQuantity
+
+    SecuritiesTrade:
+      # Not part of the ISO 20022 Repository
+      type: object
+      description: >-
+        A securities trade represents an execution of an order as occurred at a stock exchange.
+        Executions can be partial or complete fills of orders and provides the price, the time and other details
+        regarding the transaction.
+      properties:
+        tradeIdentification:
+          description: Unambiguous identifier for the trade of an order, as assigned by the executing party.
+          allOf:
+          - $ref: '#/components/schemas/Max35Text'
+          readOnly: true
+        investmentAccountDetails:
+          description: Account impacted by the trade.
+          allOf:
+          - $ref: '#/components/schemas/InvestmentAccount58'
+          readOnly: true
+        side:
+          description: Side taken by a party on an order.
+          allOf:
+          - $ref: '#/components/schemas/Side3Code'
+          readOnly: true
+        placeOfTrade:
+          description: Market in which a trade transaction has been executed.
+          allOf:
+          - $ref: '#/components/schemas/MarketIdentification79'
+          readOnly: true
+        tradeDate:
+          description: Processing date of the trading session.
+          allOf:
+          - $ref: '#/components/schemas/DateAndDateTime1Choice'
+          readOnly: true
+        confirmationQuantity:
+          description: Confirmed quantity in the current trade.
+          allOf:
+          - $ref: '#/components/schemas/Quantity6Choice'
+          readOnly: true
+        dealPrice:
+          description: Amount of money for which goods or services are offered, sold, or bought.
+          allOf:
+          - $ref: '#/components/schemas/Price4'
+          readOnly: true
+        numberOfDaysAccrued:
+          description: Number of days on which the interest rate accrues (daily accrual note).
+          allOf:
+          - $ref: '#/components/schemas/Max3Number'
+          readOnly: true
+        accruedInterestAmount:
+          description: >-
+            Interest amount that has accrued in between two periods, for example, in between interest payment periods.
+          allOf:
+          - $ref: '#/components/schemas/AmountAndDirection29'
+          readOnly: true
+        grossTradeAmount:
+          description: Principal amount of a trade (price multiplied by quantity).
+          allOf:
+          - $ref: '#/components/schemas/AmountAndDirection29'
+          readOnly: true
+        transactionOverhead:
+          description: Fees (charges/commission) and tax to be applied to the net amount.
+          allOf:
+          - $ref: '#/components/schemas/FeeAndTax1'
+          readOnly: true
+        settlementAmount:
+          description: >-
+            Total amount of money to be paid or received in exchange for the securities.
+            The amount includes the principal with any commissions and fees or accrued interest.
+          allOf:
+          - $ref: '#/components/schemas/AmountAndDirection28'
+          readOnly: true
+      required:
+      - tradeIdentification
+      - side
+      - placeOfTrade
+      - tradeDate
+      - confirmationQuantity
+      - dealPrice
+      - grossTradeAmount
+      - settlementAmount
+
+    Series1:
+      type: object
+      description: Choice of formats for the identification of a series.
+      properties:
+        seriesDate:
+          description: >-
+            Issue date of the fund series. It is typically applicable to a redemption order, subscription order
+            confirmation or redemption order confirmation, but may be specified in the subscription order, if known.
+          allOf:
+          - $ref: '#/components/schemas/DateFormat42Choice'
+        seriesName:
+          description: >-
+            Name of the fund series. It is typically applicable to a redemption order, subscription order
+            confirmation or redemption order confirmation, but may be specified in the subscription, if known.
+          allOf:
+          - $ref: '#/components/schemas/Max35Text'
+
+    Side3Code:
+      type: string
+      description: >-
+        Side taken by a party on an order.
+        Includes SUBS (Subscription) and REDM (Redemption) in addition to the ISO 20022 codes.
+      minLength: 4
+      maxLength: 4
+      enum:
+      - BUYI # Buy
+      - SELL # Sell
+      - CROS # Cross
+      - CRSH # CrossShort
+      - CSHE # CrossShortExempt
+      - DEFI # AsDefined
+      - OPPO # Opposite
+      - UNDI # Undisclosed
+      - TWOS # TwoSided
+      - BUMI # BuyMinus
+      - SEPL # SellPlus
+      - SESH # SellShort
+      - SSEX # SellShortExempt
+      - LEND # Lend
+      - BORW # Borrow
+      - OPEX # OptionExercise
+      - SUBS # Subscription (not part of Side3Code in ISO 20022)
+      - REDM # Redemption (not part of Side3Code in ISO 20022)
+
+    Tax30:
+      type: object
+      description: Tax related to an investment fund order.
+      properties:
+        type:
+          description: Type of tax.
+          allOf:
+          - $ref: '#/components/schemas/TaxType3Choice'
+        tax:
+          description: Tax to be applied.
+          allOf:
+          - $ref: '#/components/schemas/TaxAmountOrRate4Choice'
+        country:
+          description: Country where the tax is due.
+          allOf:
+          - $ref: '#/components/schemas/CountryCode'
+        exemptionIndicator:
+          type: boolean
+          description: Indicates whether a tax exemption applies.
+        exemptionReason:
+          description: Reason for the tax exemption.
+          allOf:
+          - $ref: '#/components/schemas/ExemptionReason1Choice'
+        taxCalculationDetails:
+          description: Information used to calculate the tax.
+          allOf:
+          - $ref: '#/components/schemas/TaxCalculationInformation9'
+      required:
+      - type
+      - exemptionIndicator
+
+    TaxAmountOrRate4Choice:
+      description: Choice between formats for the specification of a tax.
+      oneOf:
+      - title: Amount
+        type: object
+        description: Amount of money resulting from the calculation of the tax.
+        properties:
+          currency:
+            $ref: '#/components/schemas/ActiveCurrencyCode'
+          amount:
+            $ref: '#/components/schemas/ImpliedCurrencyAndAmount'
+        required:
+        - currency
+        - amount
+      - title: Rate
+        type: object
+        description: Rate used to calculate the tax.
+        properties:
+          rate:
+            $ref: '#/components/schemas/PercentageRate'
+        required:
+        - rate
+
+    TaxationBasis5Code:
+      type: string
+      description: Specifies the tax or charge basis.
+      enum:
+      - FLAT # Flat
+      - GRAM # GrossAmount
+      - NEAM # NetAmount
+      - NAVP # NetAssetValuePrice
+      - PERU # PerUnit
+
+    TaxBasis1Choice:
+      description: Choice of formats for the tax basis.
+      oneOf:
+      - title: Code
+        type: object
+        description: Tax basis expressed as a code.
+        properties:
+          code:
+            $ref: '#/components/schemas/TaxationBasis2Code'
+        required:
+        - code
+      - title: Proprietary
+        type: object
+        description: Tax basis expressed as a proprietary code.
+        properties:
+          proprietary:
+            $ref: '#/components/schemas/GenericIdentification47'
+        required:
+        - proprietary
+
+    TaxationBasis2Code:
+      type: string
+      description: Specifies the tax basis.
+      enum:
+      - FLAT # Flat
+      - PERU # PerUnit
+
+    TaxCalculationInformation9:
+      type: object
+      description: Information used to calculate the tax.
+      properties:
+        basis:
+          $ref: '#/components/schemas/TaxBasis1Choice'
+      required:
+      - basis
+
+    TaxExemptReason1Code:
+      type: string
+      description: Specifies the reason a specific tax has not been levied/deducted on a given transaction.
+      enum:
+      - NONE # None
+      - MASA # MaxiISA
+      - MISA # MiniCashISA
+      - SISA # MiniStocksAndSharesISA
+      - IISA # MiniInsuranceISA
+      - CUYP # CurrentYearPayment
+      - PRYP # PriorYearPayment
+      - ASTR # AssetTransfer
+      - EMPY # EmployeePriorYear
+      - EMCY # EmployeeCurrentYear
+      - EPRY # EmployerPriorYear
+      - ECYE # EmployerCurrentYear
+      - NFPI # NonFundPrototypeIRA
+      - NFQP # NonFundQualifiedPlan
+      - DECP # DefinedContributionPlan
+      - IRAC # IndividualRetirementAccount
+      - IRAR # IndividualRetirementAccountRollover
+      - KEOG # KEOGH
+      - PFSP # ProfitSharingPlan
+      - 401K # FourHundredAndOneK
+      - SIRA # SelfDirectedIRA
+      - 403B # FourHundredAndThreeB
+      - 457X # FourHundredFiftySeven
+      - RIRA # RothIRAFundPrototype
+      - RIAN # RothIRANonPrototype
+      - RCRF # RothConversionIRAFundPrototype
+      - RCIP # RothConversionIRANonPrototype
+      - EIFP # EducationIRAFundPrototype
+      - EIOP # EducationIRANonPrototyp
+
+    TaxType17Code:
+      type: string
+      description: Specifies the type of tax.
+      enum:
+      - PROV # Provincial
+      - NATI # NationalTax
+      - STAT # StateTax
+      - WITH # WithholdingTax
+      - KAPA # CapitalGainTax
+      - NKAP # CapitalLossCredit
+      - INPO # InterimProfitTax
+      - STAM # StampDuty
+      - WTAX # WealthTax
+      - INHT # InheritanceTax
+      - SOSU # SolidaritySurcharge
+      - CTAX # TaxCredit
+      - GIFT # GiftTax
+      - COAX # ConsumptionTax
+      - EUTR # EUTaxRetention
+      - AKT1 # Aktiengewinn1
+      - AKT2 # Aktiengewinn2
+      - ZWIS # Zwischengewinn
+
+    TaxType3Choice:
+      description: Choice of formats for the type of tax.
+      oneOf:
+      - title: Code
+        type: object
+        description: Type of tax expressed as a code.
+        properties:
+          code:
+            $ref: '#/components/schemas/TaxType17Code'
+        required:
+        - code
+      - title: Proprietary
+        type: object
+        description: Type of tax expressed as a proprietary code.
+        properties:
+          proprietary:
+            $ref: '#/components/schemas/GenericIdentification47'
+        required:
+        - proprietary
+
+    TimeInForceChoice:
+      description: Indicates from/until when an order must be executed.
+      oneOf:
+      - title: Code
+        type: object
+        properties:
+          code:
+            $ref: '#/components/schemas/ExecutionTimeLimit1Code'
+        required:
+        - code
+      - title: Proprietary
+        type: object
+        properties:
+          proprietary:
+            $ref: '#/components/schemas/GenericIdentification38'
+        required:
+        - proprietary
+
+    TradeTransactionCondition4Choice:
+      description: Choice of format for the trade transaction condition.
+      oneOf:
+      - title: Code
+        type: object
+        description: Trade conditions expressed in a coded form as published in an external list.
+        properties:
+          code:
+            $ref: '#/components/schemas/ExternalTradeTransactionCondition1Code'
+        required:
+        - code
+      - title: Proprietary
+        type: object
+        description: Trade conditions expressed as a proprietary code.
+        properties:
+          proprietary:
+            $ref: '#/components/schemas/GenericIdentification38'
+        required:
+        - proprietary
+
+    TypeOfPrice3Code:
+      type: string
+      description: Type of price expressed as an ISO 20022 code.
+      enum:
+      - AVER # Average
+      - AVOV # AverageOverride
+      - GREX # GrossOfAll
+      - NET2 # Net
+      - NET1 # NetOfAll
+      - PARV # ParValue
+      - RDAV # RoundedAverage
+
+    TypeOfPrice10Choice:
+      description: Choice of format for the type of price.
+      oneOf:
+      - title: Code
+        type: object
+        description: Type of price expressed as an ISO 20022 code.
+        properties:
+          code:
+            $ref: '#/components/schemas/TypeOfPrice3Code'
+        required:
+        - code
+      - title: Proprietary
+        type: object
+        description: Type of price expressed as a proprietary code.
+        properties:
+          proprietary:
+            $ref: '#/components/schemas/GenericIdentification38'
+        required:
+        - proprietary
+
+  securitySchemes:
+    # ------------------------------------------------------------------------------------------------------------------
+    # COMPONENTS/SECURITY SCHEMES
+    # In this file it is only described the basic security element to transport the bearer token of an OAuth2 process.
+    # The bearer token must be included in the HTTP header.
+    #
+    # WARNING:
+    # If you want to use this file for a productive implementation, it is recommended to adjust the security schemes
+    # according to your system environments and security policies.
+    # ------------------------------------------------------------------------------------------------------------------
+    bearerAuth:
+      description: OAuth 2.0 Bearer Token [RFC 6750].
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+security:
+  # --------------------------------------------------------------------------------------------------------------------
+  # SECURITY
+  # In this file it is only described the basic security element to transport the bearer token of an OAuth2 process.
+  # The bearer token must be included in the HTTP header.
+  #
+  # WARNING:
+  # If you want to use this file for a productive implementation, it is recommended to adjust the security schemes
+  # according to your system environments and security policies.
+  # --------------------------------------------------------------------------------------------------------------------
+  - {}
+  - bearerAuth: []
+
+tags:
+  # --------------------------------------------------------------------------------------------------------------------
+  # TAGS
+  #---------------------------------------------------------------------------------------------------------------------
+- name: Orders
+  description: Get, add, modify and delete securities orders
+- name: Executions
+  description: Get fills and partial fills of securities order executions
