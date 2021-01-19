@@ -18,7 +18,11 @@ spezification:
 
 ## Bankable Assets API
 
-...
+### Securities Orders
 * the API as HTML: [/docs](https://openbankingproject-ch.github.io/obp-apis/bankable-assets.html)
 * the API as YAML: [/bankable-assets-api.yaml](https://github.com/openbankingproject-ch/obp-apis/raw/master/bankable-assets-api.yaml)
 [![Prüfungsstatus der Spezifikation](https://travis-ci.com/openbankingproject-ch/obp-apis.svg?branch=master "Prüfungsstatus der Spezifikation")](https://travis-ci.com/openbankingproject-ch/obp-apis)
+
+### Foreign Exchange Single Leg Orders
+
+### Foreign Exchange Swap Orders
