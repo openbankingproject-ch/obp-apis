@@ -9,4 +9,6 @@ before_script:
 
 script:
 - speccy lint --skip openapi-tags-alphabetical swiss-ng-api.yaml
-- speccy lint --skip openapi-tags-alphabetical bankable-assets-api.yaml
+- speccy lint --skip openapi-tags-alphabetical securities-orders.yaml
+- speccy lint --skip openapi-tags-alphabetical foreign-exchange-single-legs.yaml
+- speccy lint --skip openapi-tags-alphabetical foreign-exchange-swaps.yaml
