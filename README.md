@@ -9,7 +9,7 @@ Visit our website for more information about [OpenBankingProject.ch](https://www
 
 ## Swiss NextGen API
 
-This repository contains the Swiss NextGen API, the adapted version of the NextGenPSD2 XS2A Framework of the the Berlin Group ([Homepage](https://www.berlin-group.org/nextgenpsd2-downloads), [Specification](https://openbankingproject-ch.github.io/obp-apis/berlin-group.html)) with the Swiss Domestic Payment Definitions. The API
+This repository contains the [Swiss NextGen API](https://github.com/openbankingproject-ch/obp-apis/tree/master/swiss-ng-api), the adapted version of the NextGenPSD2 XS2A Framework of the the Berlin Group ([Homepage](https://www.berlin-group.org/nextgenpsd2-downloads), [Specification](https://openbankingproject-ch.github.io/obp-apis/berlin-group.html)) with the Swiss Domestic Payment Definitions. The API
 follows the [OpenAPI 3.0](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md)
 spezification:
 * the API as HTML: [/docs](https://openbankingproject-ch.github.io/obp-apis)
