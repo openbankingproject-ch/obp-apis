@@ -20,14 +20,25 @@ jobs:
         with:
           args: 'bundle swiss-ng-api.yaml -o docs/index.html'
 
-      # Swiss Next Gen - Bankable Assets
+      # Swiss Next Gen - Securities Orders
       - name: redoc-cli test
         uses: seeebiii/redoc-cli-github-action@v9
         with:
-          args: 'bundle bankable-assets-api.yaml -o docs/bankable-assets.html'
+          args: 'bundle securities-orders.yaml -o docs/securities-orders.html'
 
+      # Swiss Next Gen - ForEx-Swaps
+      - name: redoc-cli test
+        uses: seeebiii/redoc-cli-github-action@v9
+        with:
+          args: 'bundle foreign-exchange-swaps.yaml -o docs/foreign-exchange-swaps.html'
 
-      # Berlin Group
+      # Swiss Next Gen - ForEx-Swaps
+      - name: redoc-cli test
+        uses: seeebiii/redoc-cli-github-action@v9
+        with:
+          args: 'bundle foreign-exchange-single-legs.yaml -o docs/foreign-exchange-single-legs.html'
+
+      # Current Berlin Group specification
       - name: redoc-cli test
         uses: seeebiii/redoc-cli-github-action@v9
         with:
@@ -44,6 +55,6 @@ jobs:
           push-branch: 'master'
           commit-message: 'Update Docs'
           force-add: 'true'
-          files: docs/index.html docs/berlin-group.html docs/bankable-assets.html
+          files: docs/index.html docs/berlin-group.html docs/securities-orders.html docs/foreign-exchange-swaps.html docs/foreign-exchange-single-legs.html
           name: Github Actions
           email: gitact@obp.ch
