@@ -15,28 +15,40 @@ jobs:
       #
 
       # Swiss Next Gen - XS2A
-      - name: redoc-cli test
+      - name: redoc-cli xs2a
         uses: seeebiii/redoc-cli-github-action@v9
         with:
           args: 'bundle swiss-ng-api.yaml -o docs/index.html'
 
-      # Swiss Next Gen - Bankable Assets
-      - name: redoc-cli test
-        uses: seeebiii/redoc-cli-github-action@v9
-        with:
-          args: 'bundle bankable-assets-api.yaml -o docs/bankable-assets.html'
-
-
       # Berlin Group
-      - name: redoc-cli test
+      - name: redoc-cli bg
         uses: seeebiii/redoc-cli-github-action@v9
         with:
           args: 'bundle swiss-ng-api/berlin-group-documentation/psd2-api.yaml -o docs/berlin-group.html'
 
+
+      # Swiss Next Gen - Bankable Assets (Securities Orders)
+      - name: redoc-cli so
+        uses: seeebiii/redoc-cli-github-action@v9
+        with:
+          args: 'bundle securities-orders.yaml -o docs/securities-orders.html'
+          
+      # Swiss Next Gen - Bankable Assets (Foreign Exchange S.L.)
+      - name: redoc-cli fx2
+        uses: seeebiii/redoc-cli-github-action@v9
+        with:
+          args: 'bundle foreign-exchange-single-legs.yaml -o docs/foreign-exchange-single-legs.html'
+
+      # Swiss Next Gen - Bankable Assets (Foreign Exchange S.L.)
+      - name: redoc-cli fx1
+        uses: seeebiii/redoc-cli-github-action@v9
+        with:
+          args: 'bundle foreign-exchange-swaps.yaml -o docs/foreign-exchange-swaps.html'
+
       # 
       # Push the result to github pages
       # 
-
+  
       - name: push
         uses: github-actions-x/commit@v2.7
         with:
@@ -44,6 +56,6 @@ jobs:
           push-branch: 'master'
           commit-message: 'Update Docs'
           force-add: 'true'
-          files: docs/index.html docs/berlin-group.html docs/bankable-assets.html
+          files: docs/index.html docs/berlin-group.html docs/securities-orders.html docs/foreign-exchange-single-legs.html docs/foreign-exchange-swaps.html
           name: Github Actions
           email: gitact@obp.ch
