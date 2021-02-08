@@ -48,7 +48,7 @@ jobs:
       # 
       # Push the result to github pages
       # 
-
+  
       - name: push
         uses: github-actions-x/commit@v2.7
         with:
@@ -56,6 +56,6 @@ jobs:
           push-branch: 'master'
           commit-message: 'Update Docs'
           force-add: 'true'
-          files: docs/index.html docs/berlin-group.html docs/bankable-assets.html
+          files: docs/index.html docs/berlin-group.html docs/securities-orders.html docs/foreign-exchange-single-legs.html docs/foreign-exchange-swaps.html
           name: Github Actions
           email: gitact@obp.ch
