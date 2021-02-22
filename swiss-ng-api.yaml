@@ -4458,7 +4458,7 @@ components:
             If the array is empty, also the arrays for accounts, additionalInformation sub attributes or balances shall be empty, if used.
           type: array
           items:
-            $ref: "#/components/schemas/accountReference"
+            $ref: "#/components/schemas/accountReference16-CH"
         additionalInformation:
           $ref: "#/components/schemas/additionalInformationAccess"
         availableAccounts:
@@ -4814,7 +4814,7 @@ components:
         creditorName:
           $ref: "#/components/schemas/creditorName"
         creditorAccount:
-          $ref: "#/components/schemas/accountReference"
+          $ref: "#/components/schemas/accountReference16-CH"
         creditorAgent:
           $ref: "#/components/schemas/bicfi"
         ultimateCreditor:
@@ -4822,7 +4822,7 @@ components:
         debtorName:
           $ref: "#/components/schemas/debtorName"
         debtorAccount:
-          $ref: "#/components/schemas/accountReference"
+          $ref: "#/components/schemas/accountReference16-CH"
         debtorAgent:
           $ref: "#/components/schemas/bicfi"
         ultimateDebtor:
@@ -5175,7 +5175,7 @@ components:
             This array can be empty.
           type: array
           items:
-            $ref: "#/components/schemas/accountReference"
+            $ref: "#/components/schemas/accountReference16-CH"
         trustedBeneficiaries:
           description: |
             Optional if supported by API provider.
@@ -5188,7 +5188,7 @@ components:
             This array can be empty.
           type: array
           items:
-            $ref: "#/components/schemas/accountReference"
+            $ref: "#/components/schemas/accountReference16-CH"
 
     amount:
       type: object
@@ -5337,7 +5337,7 @@ components:
         creditorName:
           $ref: "#/components/schemas/creditorName"
         creditorAccount:
-          $ref: "#/components/schemas/accountReference"
+          $ref: "#/components/schemas/accountReference16-CH"
         creditorAgent:
           $ref: "#/components/schemas/bicfi"
         ultimateCreditor:
@@ -5345,7 +5345,7 @@ components:
         debtorName:
           $ref: "#/components/schemas/debtorName"
         debtorAccount:
-          $ref: "#/components/schemas/accountReference"
+          $ref: "#/components/schemas/accountReference16-CH"
         debtorAgent:
           $ref: "#/components/schemas/bicfi"
         ultimateDebtor:
