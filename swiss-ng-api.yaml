@@ -11334,7 +11334,7 @@ components:
               - account
             properties:
               account:
-            $ref: "#/components/schemas/accountDetails"
+                $ref: "#/components/schemas/accountDetails"
           examples:
             "Regular Account":
               $ref: "#/components/examples/accountDetailsRegularAccount"
@@ -11357,7 +11357,7 @@ components:
               - cardAccount
             properties:
               cardAccount:
-            $ref: "#/components/schemas/cardAccountDetails"
+                $ref: "#/components/schemas/cardAccountDetails"
           examples:
             "Card Account":
               $ref: "#/components/examples/cardAccountDetailsExample"
