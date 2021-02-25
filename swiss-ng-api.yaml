@@ -2307,6 +2307,161 @@ paths:
       security:
       #####################################################
       # REMARKS ON SECURITY IN THIS OPENAPI FILE
+      #In this file only the basic security element to transport
+      # the bearer token of an an OAuth2 process, which has to
+      # be included inthe HTTP header ist described.
+      #
+      # WARNING:
+      # If you want to use this file for a productive implementation,
+      # it is recommandes to adjust the security schemes according to
+      # your system enviroments and security policies.
+      #####################################################
+        - {}
+        - BearerAuthOAuth: []
+
+      parameters:
+      #path
+        - $ref: "#/components/parameters/consentId_PATH"
+      #query # NO QUERY PARAMETER
+      #header
+          #common header parameter
+        - $ref: "#/components/parameters/X-Request-ID"
+          #header to support the signature function
+        - $ref: "#/components/parameters/Digest"
+        - $ref: "#/components/parameters/Signature"
+        - $ref: "#/components/parameters/TPP-Signature-Certificate"
+          #conditional elemention for AIS
+        - $ref: "#/components/parameters/PSU-IP-Address_conditionalForAis"
+          #optional additional PSU Information in header
+        - $ref: "#/components/parameters/PSU-IP-Port"
+        - $ref: "#/components/parameters/PSU-Accept"
+        - $ref: "#/components/parameters/PSU-Accept-Charset"
+        - $ref: "#/components/parameters/PSU-Accept-Encoding"
+        - $ref: "#/components/parameters/PSU-Accept-Language"
+        - $ref: "#/components/parameters/PSU-User-Agent"
+        - $ref: "#/components/parameters/PSU-Http-Method"
+        - $ref: "#/components/parameters/PSU-Device-ID"
+        - $ref: "#/components/parameters/PSU-Geo-Location"
+      #NO REQUEST BODY
+
+      responses:
+        '200':
+          $ref: "#/components/responses/OK_200_ConsentInformation"
+
+        '400':
+          $ref: "#/components/responses/BAD_REQUEST_400_AIS"
+        '401':
+          $ref: "#/components/responses/UNAUTHORIZED_401_AIS"
+        '403':
+          $ref: "#/components/responses/FORBIDDEN_403_AIS"
+        '404':
+          $ref: "#/components/responses/NOT_FOUND_404_AIS"
+        '405':
+          $ref: "#/components/responses/METHOD_NOT_ALLOWED_405_AIS"
+        '406':
+          $ref: "#/components/responses/NOT_ACCEPTABLE_406_AIS"
+        '408':
+          $ref: "#/components/responses/REQUEST_TIMEOUT_408_AIS"
+        '409':
+          $ref: "#/components/responses/CONFLICT_409_AIS"
+        '415':
+          $ref: "#/components/responses/UNSUPPORTED_MEDIA_TYPE_415_AIS"
+        '429':
+          $ref: "#/components/responses/TOO_MANY_REQUESTS_429_AIS"
+        '500':
+          $ref: "#/components/responses/INTERNAL_SERVER_ERROR_500_AIS"
+        '503':
+          $ref: "#/components/responses/SERVICE_UNAVAILABLE_503_AIS"
+
+
+    delete:
+      summary: Delete Consent
+      description: The TPP can delete an account information consent object if needed.
+      operationId: deleteConsent
+      tags:
+        - Account Information Service (AIS)
+
+      security:
+      #####################################################
+      # REMARKS ON SECURITY IN THIS OPENAPI FILE
+      #In this file only the basic security element to transport
+      # the bearer token of an an OAuth2 process, which has to
+      # be included inthe HTTP header ist described.
+      #
+      # WARNING:
+      # If you want to use this file for a productive implementation,
+      # it is recommandes to adjust the security schemes according to
+      # your system enviroments and security policies.
+      #####################################################
+        - {}
+        - BearerAuthOAuth: []
+
+      parameters:
+      #path
+        - $ref: "#/components/parameters/consentId_PATH"
+      #query # NO QUERY PARAMETER
+      #header
+          #common header parameter
+        - $ref: "#/components/parameters/X-Request-ID"
+          #header to support the signature function
+        - $ref: "#/components/parameters/Digest"
+        - $ref: "#/components/parameters/Signature"
+        - $ref: "#/components/parameters/TPP-Signature-Certificate"
+          #conditional elemention for AIS
+        - $ref: "#/components/parameters/PSU-IP-Address_conditionalForAis"
+          #optional additional PSU Information in header
+        - $ref: "#/components/parameters/PSU-IP-Port"
+        - $ref: "#/components/parameters/PSU-Accept"
+        - $ref: "#/components/parameters/PSU-Accept-Charset"
+        - $ref: "#/components/parameters/PSU-Accept-Encoding"
+        - $ref: "#/components/parameters/PSU-Accept-Language"
+        - $ref: "#/components/parameters/PSU-User-Agent"
+        - $ref: "#/components/parameters/PSU-Http-Method"
+        - $ref: "#/components/parameters/PSU-Device-ID"
+        - $ref: "#/components/parameters/PSU-Geo-Location"
+      #NO REQUEST BODY
+
+      responses:
+        '204':
+          $ref: "#/components/responses/NO_CONTENT_204_Consents"
+
+        '400':
+          $ref: "#/components/responses/BAD_REQUEST_400_AIS"
+        '401':
+          $ref: "#/components/responses/UNAUTHORIZED_401_AIS"
+        '403':
+          $ref: "#/components/responses/FORBIDDEN_403_AIS"
+        '404':
+          $ref: "#/components/responses/NOT_FOUND_404_AIS"
+        '405':
+          $ref: "#/components/responses/METHOD_NOT_ALLOWED_405_AIS"
+        '406':
+          $ref: "#/components/responses/NOT_ACCEPTABLE_406_AIS"
+        '408':
+          $ref: "#/components/responses/REQUEST_TIMEOUT_408_AIS"
+        '409':
+          $ref: "#/components/responses/CONFLICT_409_AIS"
+        '415':
+          $ref: "#/components/responses/UNSUPPORTED_MEDIA_TYPE_415_AIS"
+        '429':
+          $ref: "#/components/responses/TOO_MANY_REQUESTS_429_AIS"
+        '500':
+          $ref: "#/components/responses/INTERNAL_SERVER_ERROR_500_AIS"
+        '503':
+          $ref: "#/components/responses/SERVICE_UNAVAILABLE_503_AIS"
+
+
+  /v1/consents/{consentId}/status:
+    get:
+      summary: Consent status request
+      description: Read the status of an account information consent resource.
+      operationId: getConsentStatus
+      tags:
+        - Account Information Service (AIS)
+
+      security:
+      #####################################################
+      # REMARKS ON SECURITY IN THIS OPENAPI FILE
       # In this file only the basic security element to transport
       # the bearer token of an OAuth2 process, which has to 
       # be included in the HTTP header is described.
