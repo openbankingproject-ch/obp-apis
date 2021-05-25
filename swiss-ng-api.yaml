@@ -5977,6 +5977,11 @@ components:
         endToEndIdentification:
           type: string
           maxLength: 35
+#        instructionIdentification: # N.A. for all, but can be used by ASPSP if needed
+#          type: string
+#          maxLength: 35
+#        debtorName: # N.A. for all, but can be used by ASPSP if needed
+#          $ref: "#/components/schemas/debtorName"
         debtorAccount:
           $ref: "#/components/schemas/accountReference16-CH"
         debtorId: # N.A. for all, but can be used by ASPSP if needed
@@ -5997,8 +6002,8 @@ components:
           $ref: "#/components/schemas/accountReference16-CH"
         creditorAgent:
           $ref: "#/components/schemas/creditorAgent7-CH"
-#        creditorAgentName:
-#          $ref: "#/components/schemas/creditorAgentName"
+        creditorAgentName:
+          $ref: "#/components/schemas/creditorAgentName"
         creditorName:
           $ref: "#/components/schemas/creditorName"
         creditorId:
@@ -6017,13 +6022,15 @@ components:
           $ref: "#/components/schemas/chargeBearer"
         remittanceInformationUnstructured:
           $ref: "#/components/schemas/remittanceInformationUnstructured"
-        remittanceInformationUnstructuredArray:
-          $ref: "#/components/schemas/remittanceInformationUnstructuredArray"
+#       remittanceInformationUnstructuredArray:
+#         $ref: "#/components/schemas/remittanceInformationUnstructuredArray"
         remittanceInformationStructured: # N.A. for all, but can be used by ASPSP if needed
           $ref: "#/components/schemas/remittanceInformationStructured"
-        requestedExecutionDate: # N.A. for all, but can be used by ASPSP if needed
-          type: string
-          format: date
+#       remittanceInformationStructuredArray: # N.A. for all, but can be used by ASPSP if needed
+#         $ref: "#/components/schemas/remittanceInformationStructuredArray"
+#       requestedExecutionDate: # N.A. for all, but can be used by ASPSP if needed
+#         type: string
+#         format: date
         requestedExecutionTime: # N.A. for all, but can be used by ASPSP if needed
           type: string
           format: date-time
@@ -6134,6 +6141,8 @@ components:
         ultimateDebtor: # N.A. for all, but can be used by ASPSP if needed
           $ref: "#/components/schemas/ultimateDebtor"
         instructedAmount:
+          $ref: "#/components/schemas/amount"
+        equivalentAmount:
           $ref: "#/components/schemas/amount"
         transactionCurrency: # N.A. for all, but can be used by ASPSP if needed
           $ref: "#/components/schemas/currencyCode"
