@@ -5981,8 +5981,8 @@ components:
 #        instructionIdentification: # N.A. for all, but can be used by ASPSP if needed
 #          type: string
 #          maxLength: 35
-#        debtorName: # N.A. for all, but can be used by ASPSP if needed
-#          $ref: "#/components/schemas/debtorName"
+        debtorName: # N.A. for all, but can be used by ASPSP if needed
+          $ref: "#/components/schemas/debtorName"
         debtorAccount:
           $ref: "#/components/schemas/accountReference16-CH"
         debtorId: # N.A. for all, but can be used by ASPSP if needed
@@ -5994,6 +5994,8 @@ components:
         ultimateDebtor: # N.A. for all, but can be used by ASPSP if needed
           $ref: "#/components/schemas/ultimateDebtor"
         instructedAmount:
+          $ref: "#/components/schemas/amount"
+        equivalentAmount:
           $ref: "#/components/schemas/amount"
         transactionCurrency: # N.A. for all, but can be used by ASPSP if needed
           $ref: "#/components/schemas/currencyCode"
@@ -6029,12 +6031,12 @@ components:
           $ref: "#/components/schemas/remittanceInformationStructured"
 #       remittanceInformationStructuredArray: # N.A. for all, but can be used by ASPSP if needed
 #         $ref: "#/components/schemas/remittanceInformationStructuredArray"
-#       requestedExecutionDate: # N.A. for all, but can be used by ASPSP if needed
-#         type: string
-#         format: date
-        requestedExecutionTime: # N.A. for all, but can be used by ASPSP if needed
+        requestedExecutionDate: # N.A. for all, but can be used by ASPSP if needed
           type: string
-          format: date-time
+          format: date
+#       requestedExecutionTime: # N.A. for all, but can be used by ASPSP if needed
+#         type: string
+#         format: date-time
         intermediaryAgent:
           $ref: "#/components/schemas/bicfi"
 
