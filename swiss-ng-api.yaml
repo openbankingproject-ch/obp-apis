@@ -5989,8 +5989,6 @@ components:
           $ref: "#/components/schemas/debtorId"
         debtorAgent:
           $ref: "#/components/schemas/deptorAgent7-CH"
-        debtorName:
-          $ref: "#/components/schemas/debtorName"
         ultimateDebtor: # N.A. for all, but can be used by ASPSP if needed
           $ref: "#/components/schemas/ultimateDebtor"
         instructedAmount:
