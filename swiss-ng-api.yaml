@@ -5915,6 +5915,7 @@ components:
         <tr><td></td><td>Payment Type 1: ISR</td><td>Payment Type 3: IBAN/postal account and IID/BIC</td><td>Payment Type 3: QR-bill</td><td>Payment Type 4: Foreign currency</td><td>Payment Type 5: Foreign SEPA</td><td>Payment Type 6: Foreign</td></tr>
         <tr><td>CH Domestic Data Element</td><td>domestic-swiss-credit-transfers-isr</td><td>domestic-swiss-credit-transfers</td><td>domestic-swiss-credit-transfers-qr</td><td>domestic-swiss-foreign-credit-transfers</td><td>swiss-sepa-credit-transfers</td><td>swiss-cross-border-credit-transfers</td></tr>
         <tr><td>endToEndIdentification</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
+        <tr><td>instructionIdentification</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td></tr>
         <tr><td>debtorAccount (incl. type)</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
         <tr><td>debtorAgent</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>optional</td></tr>
         <tr><td>debtorName</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
@@ -5922,7 +5923,7 @@ components:
         <tr><td>ultimateDebtor</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td></tr>
         <tr><td>instructedAmount (incl. currency)</td><td>mandatory</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td></tr>
         <tr><td>equivalentAmount</td><td>n.a.</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td></tr>
-        <tr><td>currencyOfTransfer</td><td>n.a.</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td></tr>
+        <tr><td>transactionCurrency</td><td>n.a.</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td><td>dependent 1)</td></tr>
         <tr><td>exchangeRateInformation</td><td>n.a.</td><td>optional 2)</td><td>optional 2)</td><td>optional 2)</td><td>optional 2)</td><td>optional 2)</td></tr>
         <tr><td>creditorAccount</td><td>mandatory</td><td>mandatory</td><td>mandatory 8)</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
         <tr><td>creditorAgent</td><td>n.a.</td><td>dependent 4)</td><td>dependent 4)</td><td>dependent 4)</td><td>dependent 4)</td><td>dependent 4)</td></tr>
@@ -5934,12 +5935,14 @@ components:
         <tr><td>ultimateCreditor</td><td>n.a.</td><td>optional</td><td>n.a. (for future use)</td><td>optional</td><td>optional</td><td>optional</td></tr>
         <tr><td>chargeBearer</td><td>n.a.</td><td>optional</td><td>optional</td><td>optional</td><td>mandatory</td><td>optional</td></tr>
         <tr><td>purposeCode</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td><td>optional</td></tr>
-        <tr><td>remittanceInformationUnstructuredArray</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td></tr>
         <tr><td>serviceLevel</td><td>n.a.</td><td>optional</td><td>optional</td><td>optional</td><td>mandatory</td><td>optional</td></tr>
         <tr><td>remittanceInformationUnstructured</td><td>n.a.</td><td>optional</td><td>n.a.</td><td>optional</td><td>optional</td><td>optional</td></tr>
+        <tr><td>remittanceInformationUnstructuredArray</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td></tr>
         <tr><td>remittanceInformationStructured</td><td>mandatory</td><td>optional</td><td>mandatory 6)</td><td>optional</td><td>optional</td><td>optional</td></tr>
+        <tr><td>remittanceInformationStructuredArray</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td></tr>
         <tr><td>requestedExecutionDate</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td><td>mandatory</td></tr>
         <tr><td>requestedExecutionTime</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>n.a.</td></tr>
+        <tr><td>intermediaryAgent</td><td>n.a.</td><td>n.a.</td><td>n.a.</td><td>optional 2)</td><td>n.a.</td><td>optional 2)</td></tr>
         </table>
 
         Footnotes from the table:
@@ -5949,7 +5952,7 @@ components:
         4) Dependence on creditorAccount, see SIX Swiss Payments Standards implementation guidelines.
         5) Type 4(V3), 6(V2, V3): Must be present. Type 4(V2): May be present. Other species: May not be present.
         6) QR-reference, creditor reference or IPI reference
-        7) currencyOfTransfer is a subfield of equivalentAmount and may only be used if equivalentAmount is used instead of instructedAmount.
+        7) transactionCurrency is a subfield of equivalentAmount and may only be used if equivalentAmount is used instead of instructedAmount.
         8) QR-IBAN (CH/LI) must be present.
 
         IMPORTANT: In this API definition the following holds:
@@ -5977,17 +5980,22 @@ components:
         endToEndIdentification:
           type: string
           maxLength: 35
+#        instructionIdentification: # N.A. for all, but can be used by ASPSP if needed
+#          type: string
+#          maxLength: 35
+        debtorName: # N.A. for all, but can be used by ASPSP if needed
+          $ref: "#/components/schemas/debtorName"
         debtorAccount:
           $ref: "#/components/schemas/accountReference16-CH"
         debtorId: # N.A. for all, but can be used by ASPSP if needed
           $ref: "#/components/schemas/debtorId"
         debtorAgent:
           $ref: "#/components/schemas/deptorAgent7-CH"
-        debtorName:
-          $ref: "#/components/schemas/debtorName"
         ultimateDebtor: # N.A. for all, but can be used by ASPSP if needed
           $ref: "#/components/schemas/ultimateDebtor"
         instructedAmount:
+          $ref: "#/components/schemas/amount"
+        equivalentAmount:
           $ref: "#/components/schemas/amount"
         transactionCurrency: # N.A. for all, but can be used by ASPSP if needed
           $ref: "#/components/schemas/currencyCode"
@@ -5997,8 +6005,8 @@ components:
           $ref: "#/components/schemas/accountReference16-CH"
         creditorAgent:
           $ref: "#/components/schemas/creditorAgent7-CH"
-#        creditorAgentName:
-#          $ref: "#/components/schemas/creditorAgentName"
+        creditorAgentName:
+          $ref: "#/components/schemas/creditorAgentName"
         creditorName:
           $ref: "#/components/schemas/creditorName"
         creditorId:
@@ -6017,16 +6025,18 @@ components:
           $ref: "#/components/schemas/chargeBearer"
         remittanceInformationUnstructured:
           $ref: "#/components/schemas/remittanceInformationUnstructured"
-        remittanceInformationUnstructuredArray:
-          $ref: "#/components/schemas/remittanceInformationUnstructuredArray"
+#       remittanceInformationUnstructuredArray:
+#         $ref: "#/components/schemas/remittanceInformationUnstructuredArray"
         remittanceInformationStructured: # N.A. for all, but can be used by ASPSP if needed
           $ref: "#/components/schemas/remittanceInformationStructured"
+#       remittanceInformationStructuredArray: # N.A. for all, but can be used by ASPSP if needed
+#         $ref: "#/components/schemas/remittanceInformationStructuredArray"
         requestedExecutionDate: # N.A. for all, but can be used by ASPSP if needed
           type: string
           format: date
-        requestedExecutionTime: # N.A. for all, but can be used by ASPSP if needed
-          type: string
-          format: date-time
+#       requestedExecutionTime: # N.A. for all, but can be used by ASPSP if needed
+#         type: string
+#         format: date-time
         intermediaryAgent:
           $ref: "#/components/schemas/bicfi"
 
@@ -6134,6 +6144,8 @@ components:
         ultimateDebtor: # N.A. for all, but can be used by ASPSP if needed
           $ref: "#/components/schemas/ultimateDebtor"
         instructedAmount:
+          $ref: "#/components/schemas/amount"
+        equivalentAmount:
           $ref: "#/components/schemas/amount"
         transactionCurrency: # N.A. for all, but can be used by ASPSP if needed
           $ref: "#/components/schemas/currencyCode"
