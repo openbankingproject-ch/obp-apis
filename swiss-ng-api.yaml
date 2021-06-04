@@ -6282,42 +6282,72 @@ components:
         - debtorName
         - creditorAccount
         - creditorName
+        - requestedExecutionDate
         - startDate
         - frequency
       properties:
         endToEndIdentification:
           type: string
           maxLength: 35
+#        instructionIdentification: # N.A. for all, but can be used by ASPSP if needed
+#          type: string
+#          maxLength: 35
+        debtorName: # N.A. for all, but can be used by ASPSP if needed
+          $ref: "#/components/schemas/debtorName"
         debtorAccount:
           $ref: "#/components/schemas/accountReference16-CH"
-        ultimateDebtor: # N.A.
+        debtorId: # N.A. for all, but can be used by ASPSP if needed
+          $ref: "#/components/schemas/debtorId"
+        debtorAgent:
+          $ref: "#/components/schemas/deptorAgent7-CH"
+        ultimateDebtor: # N.A. for all, but can be used by ASPSP if needed
           $ref: "#/components/schemas/ultimateDebtor"
         instructedAmount:
           $ref: "#/components/schemas/amount"
+        equivalentAmount:
+          $ref: "#/components/schemas/amount"
+        transactionCurrency: # N.A. for all, but can be used by ASPSP if needed
+          $ref: "#/components/schemas/currencyCode"
+        exchangeRateInformation: # N.A. for all, but can be used by ASPSP if needed
+          $ref: "#/components/schemas/exchangeRateInformation1"
         creditorAccount:
           $ref: "#/components/schemas/accountReference16-CH"
         creditorAgent:
           $ref: "#/components/schemas/creditorAgent7-CH"
+        creditorAgentName:
+          $ref: "#/components/schemas/creditorAgentName"
         creditorName:
           $ref: "#/components/schemas/creditorName"
+        creditorId:
+          $ref: "#/components/schemas/creditorId"
         creditorAddress:
           $ref: "#/components/schemas/address"
-        ultimateCreditor: # N.A.
+        creditorNameAndAddress: # N.A. for all, but can be used by ASPSP if needed
+          $ref: "#/components/schemas/creditorNameAndAddress"
+        ultimateCreditor: # N.A. for all, but can be used by ASPSP if needed
           $ref: "#/components/schemas/ultimateCreditor"
-        purposeCode: # N.A.
+        purposeCode: # N.A. for all, but can be used by ASPSP if needed
           $ref: "#/components/schemas/purposeCode"
+        serviceLevel:
+          $ref: "#/components/schemas/externalServiceLevel1Code"
+        chargeBearer: #In some payment product N.A. in some Optional in some conditional
+          $ref: "#/components/schemas/chargeBearer"
         remittanceInformationUnstructured:
           $ref: "#/components/schemas/remittanceInformationUnstructured"
-        remittanceInformationUnstructuredArray:
-          $ref: "#/components/schemas/remittanceInformationUnstructuredArray"
-        remittanceInformationStructured:
+#       remittanceInformationUnstructuredArray:
+#         $ref: "#/components/schemas/remittanceInformationUnstructuredArray"
+        remittanceInformationStructured: # N.A. for all, but can be used by ASPSP if needed
           $ref: "#/components/schemas/remittanceInformationStructured"
-        requestedExecutionDate:
+#       remittanceInformationStructuredArray: # N.A. for all, but can be used by ASPSP if needed
+#         $ref: "#/components/schemas/remittanceInformationStructuredArray"
+        requestedExecutionDate: # N.A. for all, but can be used by ASPSP if needed
           type: string
           format: date
-        requestedExecutionTime: # N.A.
-          type: string
-          format: date-time
+#       requestedExecutionTime: # N.A. for all, but can be used by ASPSP if needed
+#         type: string
+#         format: date-time
+        intermediaryAgent:
+          $ref: "#/components/schemas/bicfi"
         #Additional Information for periodic payments
         startDate:
           $ref: "#/components/schemas/startDate"
