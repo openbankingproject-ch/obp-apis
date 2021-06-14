@@ -7,6 +7,10 @@ spezification:
 * the API as YAML: [/swiss-ng-api.yaml](https://github.com/openbankingproject-ch/obp-apis/raw/master/swiss-ng-api.yaml)
 [![Prüfungsstatus der Spezifikation](https://travis-ci.com/openbankingproject-ch/obp-apis.svg?branch=master "Prüfungsstatus der Spezifikation")](https://travis-ci.com/openbankingproject-ch/obp-apis)
 
+In the future and if requested, we will also adapt further elements of the Berlin Group (namely the [extended value-added services](https://www.berlin-group.org/nextgenpsd2-downloads) and the [openFinance API Framework](https://www.berlin-group.org/open-finance)). The basic prerequisite is a planned use in Switzerland. 
+Interested parties are invited to contact us.
+
+
 ## Swiss Domestic Payment Definitions
 
 The Swiss Domestic Payment Definitions are adapted from the [SIX Swiss Payment Standard](https://www.six-group.com/interbank-clearing/en/home/standardization/iso-payments/customer-bank/implementation-guidelines.html) and verified by our community. We will be happy to examine your suggestions for further development.

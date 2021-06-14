@@ -14,7 +14,11 @@ follows the [OpenAPI 3.0](https://github.com/OAI/OpenAPI-Specification/blob/mast
 spezification:
 * the API as HTML: [/docs](https://openbankingproject-ch.github.io/obp-apis)
 * the API as YAML: [/swiss-ng-api.yaml](https://github.com/openbankingproject-ch/obp-apis/raw/master/swiss-ng-api.yaml)
-[![Prüfungsstatus der Spezifikation](https://travis-ci.com/openbankingproject-ch/obp-apis.svg?branch=master "Prüfungsstatus der Spezifikation")](https://travis-ci.com/openbankingproject-ch/obp-apis)
+[![Prüfungsstatus der Spezifikation](https://travis-ci.com/openbankingproject-ch/obp-apis.svg?branch=master "Prüfungsstatus der Spezifikation")](https://travis-ci.com/openbankingproject-ch/obp-apis)  
+
+In the future and if requested, we will also adapt further elements of the Berlin Group (namely the [extended value-added services](https://www.berlin-group.org/nextgenpsd2-downloads) and the [openFinance API Framework](https://www.berlin-group.org/open-finance)). The basic prerequisite is a planned use in Switzerland. 
+Interested parties are invited to contact us.
+
 
 ## Bankable Assets API
 
