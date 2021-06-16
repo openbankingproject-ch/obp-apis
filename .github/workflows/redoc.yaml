@@ -63,10 +63,10 @@ jobs:
           args: 'bundle foreign-exchange-swaps.yaml -o docs/foreign-exchange-swaps.html'
 
       # 
-      # Push the result to github pages
-      # 
-  
+      # Publish to github pages, master only)
+      #   
       - name: push
+        if: ${{ github.ref == 'refs/heads/master' }}
         uses: github-actions-x/commit@v2.7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
