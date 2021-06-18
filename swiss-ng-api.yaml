@@ -4358,11 +4358,11 @@ components:
 #      pattern: "([a-zA-Z0-9.,;:'+-/()?*[]{}\\`�~ ]|[!\"#%&<>�=@_$�]|[����������������������������������������������])*"
       example: "90-100100-0"
 
-    deptorAgent7-CH:
+    debtorAgent7-CH:
       description: |
-        Reference to an deptorAgent by either
-          * BIC, of the deptor bank, or
-          * IID, of the deptor bank
+        Reference to an debtorAgent by either
+          * BIC, of the debtor bank, or
+          * IID, of the debtor bank
         adapted from ISO pain.001.001.03.ch.02 FinancialInstitutionIdentification7-CH_BicOrClrId
       type: object
       properties:
@@ -5990,7 +5990,7 @@ components:
         debtorId: # N.A. for all, but can be used by ASPSP if needed
           $ref: "#/components/schemas/debtorId"
         debtorAgent:
-          $ref: "#/components/schemas/deptorAgent7-CH"
+          $ref: "#/components/schemas/debtorAgent7-CH"
         ultimateDebtor: # N.A. for all, but can be used by ASPSP if needed
           $ref: "#/components/schemas/ultimateDebtor"
         instructedAmount:
@@ -6294,7 +6294,7 @@ components:
         debtorId: # N.A. for all, but can be used by ASPSP if needed
           $ref: "#/components/schemas/debtorId"
         debtorAgent:
-          $ref: "#/components/schemas/deptorAgent7-CH"
+          $ref: "#/components/schemas/debtorAgent7-CH"
         ultimateDebtor: # N.A. for all, but can be used by ASPSP if needed
           $ref: "#/components/schemas/ultimateDebtor"
         instructedAmount:
@@ -6375,7 +6375,7 @@ components:
         debtorAccount:
           $ref: "#/components/schemas/accountReference16-CH"
         debtorAgent:
-          $ref: "#/components/schemas/deptorAgent7-CH"
+          $ref: "#/components/schemas/debtorAgent7-CH"
 #        paymentInformationId:
 #          description: |
 #            Unique identification as assigned by the sending party to unambiguously identify this bulk payment.
