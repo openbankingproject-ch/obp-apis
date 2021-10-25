@@ -1,7 +1,13 @@
 name: Node CI
 
 # https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions
-on: [push]
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
 
 jobs:
   build_and_test:
@@ -26,9 +32,20 @@ jobs:
         with:
           args: 'bundle swiss-ng-api/berlin-group-documentation/psd2-api.yaml -o docs/berlin-group.html'
 
+      # Swiss Next Gen - ForEx-Swaps
+      - name: redoc-cli test
+        uses: seeebiii/redoc-cli-github-action@v9
+        with:
+          args: 'bundle foreign-exchange-swaps.yaml -o docs/foreign-exchange-swaps.html'
 
-      # Swiss Next Gen - Bankable Assets (Securities Orders)
-      - name: redoc-cli so
+      # Swiss Next Gen - ForEx-Swaps
+      - name: redoc-cli test
+        uses: seeebiii/redoc-cli-github-action@v9
+        with:
+          args: 'bundle foreign-exchange-single-legs.yaml -o docs/foreign-exchange-single-legs.html'
+
+      # Current Berlin Group specification
+      - name: redoc-cli test
         uses: seeebiii/redoc-cli-github-action@v9
         with:
           args: 'bundle securities-orders.yaml -o docs/securities-orders.html'
@@ -46,10 +63,10 @@ jobs:
           args: 'bundle foreign-exchange-swaps.yaml -o docs/foreign-exchange-swaps.html'
 
       # 
-      # Push the result to github pages
-      # 
-  
+      # Publish to github pages, master only)
+      #   
       - name: push
+        if: ${{ github.ref == 'refs/heads/master' }}
         uses: github-actions-x/commit@v2.7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
